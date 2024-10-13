@@ -1,3 +1,7 @@
+# starting
+
+## `git clone https://github.com/nour022/UniProjct_fullstack.git`
+
 # Create the angular client
 
 ### `docker build -t client .`
