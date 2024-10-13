@@ -1,8 +1,8 @@
 # Create the angular client
 
-## docker build -t client .
+### `docker build -t client .`
 
-## docker run -d -p 8080:80 client
+### `docker run -d -p 8080:80 client`
 
 #### "nicht notwendig !!" npx @angular/cli@17 new client
 
@@ -10,9 +10,9 @@
 
 # Create the nodeJs server
 
-## docker build -t server .
+### `docker build -t server .`
 
-## docker run -d -p 4545:4545 server:latest
+### `docker run -d -p 4545:4545 server:latest`
 
 #### "nicht notwendig !!" mkdir server ; cd server
 
