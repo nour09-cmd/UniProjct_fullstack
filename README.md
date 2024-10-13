@@ -1,23 +1,23 @@
 # Create the angular client
 
-### npx @angular/cli@17 new client
+## docker build -t client .
 
-### docker build -t client .
+## docker run -d -p 8080:80 client
 
-### docker run -d -p 8080:80 client
+#### "nicht notwendig !!" npx @angular/cli@17 new client
 
 ---
 
 # Create the nodeJs server
 
-### mkdir server ; cd server
+## docker build -t server .
 
-### npm init -y
+## docker run -d -p 4545:4545 server:latest
 
-### npm install typescript ts-node @types/node @types/express express
+#### "nicht notwendig !!" mkdir server ; cd server
 
-### npx tsc --init
+#### "nicht notwendig !!" npm init -y
 
-### docker build -t server .
+#### "nicht notwendig !!" npm install typescript ts-node @types/node @types/express express
 
-### docker run -d -p 4545:4545 server:latest
+#### "nicht notwendig !!" npx tsc --init
