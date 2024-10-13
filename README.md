@@ -14,10 +14,10 @@
 
 ### `docker run -d -p 4545:4545 server:latest`
 
-#### "nicht notwendig !!" mkdir server ; cd server
+#### "nicht notwendig !!" `mkdir server ; cd server`
 
-#### "nicht notwendig !!" npm init -y
+#### "nicht notwendig !!" `npm init -y`
 
-#### "nicht notwendig !!" npm install typescript ts-node @types/node @types/express express
+#### "nicht notwendig !!" `npm install typescript ts-node @types/node @types/express express`
 
-#### "nicht notwendig !!" npx tsc --init
+#### "nicht notwendig !!" `npx tsc --init`
