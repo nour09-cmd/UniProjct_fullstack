@@ -4,6 +4,8 @@
 
 # Create the angular client
 
+### `cd  client`
+
 ### `docker build -t client .`
 
 ### `docker run -d -p 8080:80 client`
@@ -13,6 +15,8 @@
 ---
 
 # Create the nodeJs server
+
+### `cd  server`
 
 ### `docker build -t server .`
 
