@@ -2,6 +2,10 @@
 
 ### npx @angular/cli@17 new client
 
+### docker build -t client .
+
+### docker run -d -p 8080:80 client
+
 ---
 
 # Create the nodeJs server
