@@ -4,11 +4,11 @@
 
 # Create the angular client
 
-### `cd  client`
+### "nicht notwendig !!" `cd  client`
 
-### `docker build -t client .`
+### "nicht notwendig !!" `docker build -t client .`
 
-### `docker run -d -p 8080:80 client`
+### "nicht notwendig !!" `docker run -d -p 8080:80 client`
 
 #### "nicht notwendig !!" npx @angular/cli@17 new client
 
@@ -16,11 +16,11 @@
 
 # Create the nodeJs server
 
-### `cd  server`
+### "nicht notwendig !!" `cd  server`
 
-### `docker build -t server .`
+### "nicht notwendig !!" `docker build -t server .`
 
-### `docker run -d -p 4545:4545 server:latest`
+### "nicht notwendig !!" `docker run -d -p 4545:4545 server:latest`
 
 #### "nicht notwendig !!" `mkdir server ; cd server`
 
@@ -29,3 +29,19 @@
 #### "nicht notwendig !!" `npm install typescript ts-node @types/node @types/express express`
 
 #### "nicht notwendig !!" `npx tsc --init`
+
+# MonogoDB on Docker && DBeaverEE
+
+### "nicht notwendig !!" `docker run -d -p 27017:27017 --name mongodb -v mongodb_volume:/data/db mongo:latest`
+
+# PostgreSQL on Docker && DBeaverEE
+
+### "nicht notwendig !!" `docker run -p 5432:5432 -d \ -e POSTGRES_PASSWORD=changeMy \ -e POSTGRES_USER=changeMy \ -e POSTGRES_DB=changeMy \ -v pgdata:/var/lib/postgresql/data \ postgres`
+
+### "nicht notwendig !!" to login `psql POSTGRES_DB -h localhost -U POSTGRES_USER`
+
+### "nicht notwendig !!" to login `docker exec -it CONTINERID psql -U POSTGRES_USER POSTGRES_DB`
+
+### to start the frond/backend ang monogodb und postgresSQL
+
+## just run `npm start` in UniProjct_fullstack
