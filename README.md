@@ -2,6 +2,10 @@
 
 ## `git clone https://github.com/nour022/UniProjct_fullstack.git`
 
+# to start the frond/backend ang monogodb und postgresSQL
+
+## just run `npm start` in UniProjct_fullstack
+
 # Create the angular client
 
 ### "nicht notwendig !!" `cd  client`
@@ -41,7 +45,3 @@
 ### "nicht notwendig !!" to login `psql POSTGRES_DB -h localhost -U POSTGRES_USER`
 
 ### "nicht notwendig !!" to login `docker exec -it CONTINERID psql -U POSTGRES_USER POSTGRES_DB`
-
-### to start the frond/backend ang monogodb und postgresSQL
-
-## just run `npm start` in UniProjct_fullstack
