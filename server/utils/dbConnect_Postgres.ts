@@ -1,5 +1,6 @@
 import { Pool } from "pg";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 class DBPostgresSqlConnection {
@@ -10,7 +11,7 @@ class DBPostgresSqlConnection {
     this.dbUri = process.env.DB_URIPOSTGRESQL || "";
 
     if (!this.dbUri || !this.dbUri.startsWith("postgresql://")) {
-      console.error('Invalid PostgreSQL URI."postgresql://".');
+      console.error('Invalid PostgreSQL URI. Must start with "postgresql://".');
       process.exit(1);
     }
 
