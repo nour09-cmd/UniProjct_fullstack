@@ -1,11 +1,10 @@
-FROM node:latest as build 
+FROM node:20 as build 
 
 WORKDIR /app
 COPY package*.json ./ 
+
+RUN npm install -g @angular/cli@17.3.2
 RUN npm ci
-
-RUN npm install -g @angular/cli
-
 COPY . .
 
 RUN npm run build --configuration=production

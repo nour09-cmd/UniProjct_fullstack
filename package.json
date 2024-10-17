@@ -4,12 +4,11 @@
   "description": "---",
   "main": "index.js",
   "scripts": {
-    "start": "start cmd /k \"docker run -p 5432:5432 -d  -e POSTGRES_PASSWORD=@Nour2001  -e POSTGRES_USER=nTeam  -e POSTGRES_DB=BarbarFinder  -v pgdata:/var/lib/postgresql/data  postgres\" && start cmd /k \"docker run -d -p 27017:27017 --name mongodb -v mongodb_volume:/data/db mongo:latest\" && start cmd /k \"docker build -t client ./client && docker run -d -p 8080:80 client\" && start cmd /k \"docker build -t server ./server && docker run -d -p 4545:4545 server\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "start cmd /k \"docker run -p 5432:5432 -d  -e POSTGRES_PASSWORD=@Nour2001  -e POSTGRES_USER=nTeam  -e POSTGRES_DB=BarbarFinder  -v pgdata:/var/lib/postgresql/data  postgres && exit\" && start cmd /k \"docker run -d -p 27017:27017 --name mongodb -v mongodb_volume:/data/db mongo:latest && exit\" && start cmd /k \"docker build -t client ./client && docker run -d -p 8080:80 client && exit\"&& start cmd /k \"docker build -t server ./server && docker run -d -p 4545:4545 server && exit\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serverdev": "start cmd /k \"docker build -t client ./client && docker run -d -p 8080:80 client && exit\"&& start cmd /k \"docker build -t server ./server && docker run -d -p 4545:4545 server && exit\""
   },
-  "devDependencies": {
-    "concurrently": "^7.0.0"
-  },
+  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"
