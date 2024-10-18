@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pagebenner</title>
+  </head>
+  <body style="margin: 0">
+    <div class="pagebenner">
+      <div class="title">
+        <img src="logo.png" alt="" />
+        <h2>[title]</h2>
+        <h4>[beschreibung]</h4>
+      </div>
+    </div>
+    <div class="continer">
+      <button class="btn-oursPageBlack">Senden</button>
+      <button class="btn-oursPageGold">Senden</button>
+    </div>
+  </body>
+</html>
+<style>
+  body {
+    background-color: #efefef;
+  }
+  .pagebenner {
+    background-color: #000;
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+    margin: 0;
+    background-image: url(pagebennerV.png);
+    height: 264px;
+    background-position: center;
+    background-position-y: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+  }
+  .title {
+    color: #fff;
+    margin: 10px 20px;
+  }
+  .title > h2 {
+    text-transform: uppercase;
+    size: 1rem;
+  }
+  .title > h4 {
+    size: 0.8rem;
+  }
+
+  .btn-oursPageBlack {
+    font-size: 1.1rem;
+    background-color: black;
+    background-image: url("btnBlack.png");
+    display: flex;
+    padding: 20px 80px;
+    text-transform: uppercase;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    font-weight: 900;
+    text-overflow: #fff;
+  }
+  .btn-oursPageGold {
+    font-size: 1.1rem;
+    border: none;
+    background-color: #dabe29;
+    background-image: url("btnGold.png");
+    display: flex;
+    padding: 20px 80px;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 900;
+    text-overflow: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+  }
+  .continer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .continer > * {
+    margin: 10px;
+  }
+</style>
