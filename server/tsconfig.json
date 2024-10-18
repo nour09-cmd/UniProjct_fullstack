@@ -2,10 +2,21 @@
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
-    "target": "es6",
+    "target": "ES6",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist/src"
+    "outDir": "dist/src",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "incremental": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./"
   },
-  "lib": ["es2015"]
+  "lib": ["es2015"],
+  "exclude": ["node_modules"]
 }

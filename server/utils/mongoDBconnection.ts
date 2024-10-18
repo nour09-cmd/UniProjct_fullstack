@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { DB_URIMONGODB } from "./conifg";
 
 export class DatabaseConnection {
   private dbUri: string;
 
   constructor() {
-    this.dbUri = process.env.DB_URI_MONGODB || "";
+    this.dbUri = DB_URIMONGODB || "";
     if (!this.dbUri) {
       console.error("Database URI not found in environment variables");
       process.exit(1);
