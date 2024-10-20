@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"example@example.com\",\r\n  \"password\": \"password123\",\r\n  \"vorname\": \"John\",\r\n  \"nachname\": \"Doe\",\r\n  \"handynummer\":\"12364654\",\r\n  \"geburtsdatum\":\"2000-10-10\",\r\n  \"rolle\":\"USER\",\r\n  \"adresse\": {\r\n    \"strasse\": \"Main St\",\r\n    \"ort\": \"City\",\r\n    \"plz\": \"12345\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"email\": \"test21@test.com\",\r\n  \"password\": \"<h1>test</h1>\",\r\n  \"vorname\": \"test\",\r\n  \"nachname\": \"Doe\",\r\n  \"handynummer\":\"017631449793\",\r\n  \"geburtsdatum\":\"01-01-2000\",\r\n  \"rolle\":\"USER\",\r\n  \"adresse\": {\r\n    \"strasse\": \"Haputstr\",\r\n    \"ort\": \"worms\",\r\n    \"plz\": \"67549\"\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,15 +24,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4545/api/singup",
-							"protocol": "http",
+							"raw": "{{url_ba}}/users/singup/",
 							"host": [
-								"localhost"
+								"{{url_ba}}"
 							],
-							"port": "4545",
 							"path": [
-								"api",
-								"singup"
+								"users",
+								"singup",
+								""
 							]
 						}
 					},
@@ -45,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"test3@example.com\",\r\n    \"password\": \"password123\"\r\n\r\n}",
+							"raw": "{\r\n \"email\": \"test1@test.com\",\r\n  \"password\": \"<h1>test</h1>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -53,12 +52,121 @@
 							}
 						},
 						"url": {
-							"raw": "{{url_ba}}/singin/",
+							"raw": "{{url_ba}}/users/singin/",
 							"host": [
 								"{{url_ba}}"
 							],
 							"path": [
+								"users",
 								"singin",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ladens",
+			"item": [
+				{
+					"name": "get all Ladenes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_ba}}/ladens/getladens/",
+							"host": [
+								"{{url_ba}}"
+							],
+							"path": [
+								"ladens",
+								"getladens",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Laden",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"barber_email\":\"test1@test.com\",\r\n    \"Laden_name\":\"nour\",\r\n    \"Laden_description\":\"Native dates: Uses existing native type. It doesn't extend core objects for safety's sake. Immutable & Pure: Built using pure functions and always returns a new date instance.\",\r\n        \"Laden_IMG\":[\"img1.png\",\"img1.png\"],\r\n        \"Laden_adress\":{\r\n        \"strasse\":\"Haputstr\", \"ort\":\"worms\", \"plz\":\"76870\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ba}}/ladens/getladens/",
+							"host": [
+								"{{url_ba}}"
+							],
+							"path": [
+								"ladens",
+								"getladens",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Laden",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"test1@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ba}}/ladens/getladens/",
+							"host": [
+								"{{url_ba}}"
+							],
+							"path": [
+								"ladens",
+								"getladens",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Laden",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"barber_email\":\"test1@test.com\",\r\n    \"data\":{\r\n    \"Laden_name\": \"<p>test eiditing</p><script>alert('Hello)</script>\",\r\n    \"Laden_description\": \"Native dates: Uses existing native type. It doesn't extend core objects for safety's sake. Immutable & Pure: Built using pure functions and always returns a new date instance.\",\r\n    \"Laden_IMG\": [\r\n        \"img4.png\",\r\n        \"img3.png\"\r\n    ],\r\n    \"Laden_adress\": {\r\n        \"strasse\": \"kirchgasser\",\r\n        \"plz\": \"76870\",\r\n        \"ort\": \"worms\"\r\n    }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ba}}/ladens/getladens/",
+							"host": [
+								"{{url_ba}}"
+							],
+							"path": [
+								"ladens",
+								"getladens",
 								""
 							]
 						}

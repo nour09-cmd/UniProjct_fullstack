@@ -40,4 +40,12 @@ export class User {
     default: "USER",
   })
   rolle: string;
+  @Column({ type: "varchar", length: 150, nullable: true })
+  verifyToken?: string;
+  @Column({ type: "varchar", length: 6, nullable: true })
+  verifyStatus?: boolean;
+  @Column({ type: "varchar", length: 150, nullable: true })
+  resetpasswordtoken?: string;
+  @Column({ type: "varchar", length: 6, nullable: true })
+  resetPasswordStatus?: boolean;
 }

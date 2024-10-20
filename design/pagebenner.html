@@ -17,9 +17,32 @@
       <button class="btn-oursPageBlack">Senden</button>
       <button class="btn-oursPageGold">Senden</button>
     </div>
+    <div class="linebox">
+      <div class="divLn"></div>
+      <h4 class="h4LN"><a href="#">[title]</a></h4>
+      <div class="divLn"></div>
+    </div>
   </body>
 </html>
 <style>
+  .linebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .h4LN {
+    margin: 20px;
+  }
+  .h4LN > a {
+    text-decoration: none;
+    color: #252525;
+    font-size: larger;
+  }
+  .divLn {
+    width: 150px;
+    height: 0px;
+    border: 3px solid #dabe29;
+  }
   body {
     background-color: #efefef;
   }
@@ -52,7 +75,7 @@
   .btn-oursPageBlack {
     font-size: 1.1rem;
     background-color: black;
-    background-image: url("btnBlack.png");
+    background-image: url("Vector\ 4.svg");
     display: flex;
     padding: 20px 80px;
     text-transform: uppercase;
@@ -62,7 +85,7 @@
     align-items: center;
     text-align: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     border-radius: 20px;
     font-weight: 900;

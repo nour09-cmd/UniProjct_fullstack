@@ -5,6 +5,7 @@ import { AppDataSource } from "../utils/data-source";
 
 const cors = require("cors");
 const userRoute = require("../routes/UserRouter");
+const LadensRoute = require("../routes/LadenRoute");
 
 dotenv.config();
 const app = express();
@@ -13,7 +14,9 @@ AppDataSource.initialize();
 app.use(express.json());
 app.use("*", cors());
 
-app.use("/api", userRoute);
+app.use("/api/users", userRoute);
+app.use("/api/ladens", LadensRoute);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, From our backend");
 });

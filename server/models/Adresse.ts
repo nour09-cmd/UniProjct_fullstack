@@ -12,5 +12,5 @@ export class Adresse {
   ort: string;
 
   @Column({ type: "int" })
-  plz: number;
+  plz: string;
 }
