@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"email\": \"test1@test.com\",\r\n  \"password\": \"<h1>test</h1>\"\r\n}",
+							"raw": "{\r\n  \"email\": \"test21@test.com\",\r\n  \"password\": \"<h1>test</h1>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,10 +71,178 @@
 			"name": "Ladens",
 			"item": [
 				{
+					"name": "CloseDays",
+					"item": [
+						{
+							"name": "getCloseDays",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"barberEmail\":\"test1@test.com\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/closedays/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"closedays",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createDay",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"date\":\"2025-10-10\",\"barberEmail\":\"test1@test.com\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/closedays/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"closedays",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteDay",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"closeDayId\":\"671acc386b356ae154f89153\",\"barberEmail\":\"test1@test.com\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/closedays/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"closedays",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "weekDays",
+					"item": [
+						{
+							"name": "New Request",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"barberemail\": \"test1@test.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/weekdays/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"weekdays",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"barberemail\": \"test1@test.com\",\r\n\r\n\"weekDays\":[ {\r\n        \"day\": \"Do\",\r\n        \"status\": \"sss\",\r\n        \"available_time_from\": \"09:00\",\r\n        \"available_time_to\": \"16:00\",\r\n        \"appointment_duration\": 30,\r\n        \"_id\": \"671453b80f781e8f7f8998ae\"\r\n    },\r\n{\r\n        \"day\": \"Fr\",\r\n        \"status\": \"open\",\r\n        \"available_time_from\": \"09:00\",\r\n        \"available_time_to\": \"13:00\",\r\n        \"appointment_duration\": 60,\r\n        \"_id\": \"671453b80f781e8f7f8998af\"\r\n    }\r\n]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/weekdays/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"weekdays",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "get all Ladenes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{url_ba}}/ladens/getladens/",
 							"host": [
@@ -167,6 +335,37 @@
 							"path": [
 								"ladens",
 								"getladens",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one laden ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"test1@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_ba}}/ladens/getOneladens/",
+							"host": [
+								"{{url_ba}}"
+							],
+							"path": [
+								"ladens",
+								"getOneladens",
 								""
 							]
 						}
