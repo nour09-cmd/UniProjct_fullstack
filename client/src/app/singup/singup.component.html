@@ -1,0 +1,55 @@
+<app-pagebenner
+  title="Sing Up"
+  discription="       Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+              dignissimos ad alias quaerat"
+></app-pagebenner>
+<div class="container">
+  <div
+    class="py-4 d-flex flex-column justify-content-center align-items-center formbox"
+  >
+    <form [formGroup]="loginForm">
+      <div class="form-group py-3">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Enter email"
+          formControlName="email"
+        />
+        <div
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+        >
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="form-group py-3">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+        >
+          the password must by more on 6 charagter
+        </div>
+      </div>
+      <ourBtnBlack label="Sing Up" (clicked)="onClicke()"></ourBtnBlack>
+    </form>
+  </div>
+
+  <a class="text-secondary my-10" href="login"
+    ><title-line titel="SingIn"></title-line
+  ></a>
+</div>

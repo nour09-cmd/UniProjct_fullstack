@@ -1,0 +1,13 @@
+.ourBtn {
+  background-color: #000;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 9px;
+  background-image: url("ourbtn.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
