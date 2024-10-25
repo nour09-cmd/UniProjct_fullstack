@@ -12,6 +12,8 @@ import { AddressDTO, UserRegisterDTO } from "./DTOs/RegisterDTO";
 import { validate } from "class-validator";
 import { Validierunges } from "../utils/ValidierungsClasse";
 import { UserLoginDTO } from "./DTOs/LoginDTO";
+import { IUserProfile, UserProfileModel } from "../models/UserAppointments";
+import DatabaseConnection from "../utils/mongoDBconnection";
 
 class UserLoginController {
   private userRepository = AppDataSource.getRepository(User);
@@ -65,8 +67,14 @@ class UserRegisterController {
   private userRepository = AppDataSource.getRepository(User);
   private adresseRepository = AppDataSource.getRepository(Adresse);
   private rolle: string;
+  private modelAppointmentUser: UserProfileModel;
+  private conn: DatabaseConnection;
+
   constructor() {
     this.rolle = Rolle.USER;
+    this.modelAppointmentUser = new UserProfileModel();
+    this.conn = new DatabaseConnection();
+    this.conn.connect();
   }
 
   createToken(email: string, name: string) {
@@ -162,10 +170,16 @@ class UserRegisterController {
 
       const name = `${vornames} ${nachnames}`;
       const token = this.createToken(emails, name);
-
+      const data: IUserProfile = {
+        user_email: emails,
+        Appointments: [],
+      };
+      const createProfileUser =
+        this.modelAppointmentUser.createUserProfile(data);
       return res.status(201).json({
         message: "User registered successfully",
         token,
+        createProfileUser,
       });
     } catch (error) {
       console.error("Error during registration:", error);

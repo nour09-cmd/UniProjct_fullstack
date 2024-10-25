@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
 import { ILaden, LadenModel } from "../models/Laden";
+import { Request, Response } from "express";
 import DatabaseConnection from "../utils/mongoDBconnection";
 import { CreateLadenDTO, GetLadenDTO } from "./DTOs/LadenDTO";
 import { plainToClass } from "class-transformer";
@@ -98,6 +98,7 @@ export class LadenController {
       week_days: WEEKDAYS,
       reserved_appointments: reserved_appointments,
       close_days: close_days,
+      priceListe: [],
     };
     const createLaden = await this.modelMonogo.createLaden(newLaden);
     if (createLaden) {

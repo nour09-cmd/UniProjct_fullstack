@@ -9,5 +9,5 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [Adresse, User],
-  // schema: "barber",
+  schema: "barber",
 });

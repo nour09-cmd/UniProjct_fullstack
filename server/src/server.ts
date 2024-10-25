@@ -6,6 +6,8 @@ import { AppDataSource } from "../utils/data-source";
 const cors = require("cors");
 const userRoute = require("../routes/UserRouter");
 const LadensRoute = require("../routes/LadenRoute");
+const LadensCloseDaysRoute = require("../routes/ClosedaysRouter");
+const LadensWeeksDaysRoute = require("../routes/WeeksDaysRouter");
 
 dotenv.config();
 const app = express();
@@ -16,6 +18,8 @@ app.use("*", cors());
 
 app.use("/api/users", userRoute);
 app.use("/api/ladens", LadensRoute);
+app.use("/api/ladens", LadensCloseDaysRoute);
+app.use("/api/ladens", LadensWeeksDaysRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, From our backend");

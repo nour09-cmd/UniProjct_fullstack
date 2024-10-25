@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
 
 // Interface Definitions
 interface IReviews {
@@ -44,6 +44,7 @@ export interface ILaden {
   week_days: IWeekdays[];
   reserved_appointments: IAppointment[];
   close_days: ICloseDays[];
+  priceListe: [];
 }
 
 // Schema Definitions
@@ -123,14 +124,13 @@ export class LadenModel {
       .exec();
   }
 
-  async getCloseDayBarberProfileByEmail(
-    barber_email: string
-  ): Promise<ICloseDays[] | null> {
-    const laden = await this.model
-      .findOne({ barber_email }, { close_days: 1 })
-      .lean()
-      .exec();
-    return laden ? laden.close_days : null;
+  // ---------------------------------------------------------
+}
+
+export class CloseDaysModel {
+  private model: Model<ILaden>;
+  constructor() {
+    this.model = mongoose.model<ILaden>("LadensProfile", ladenSchema);
   }
 
   async addCloseDayBarberProfileByEmail(
@@ -139,7 +139,7 @@ export class LadenModel {
   ): Promise<ILaden | null> {
     return this.model
       .findOneAndUpdate(
-        { barber_email },
+        { barber_email: barber_email },
         { $push: { close_days: closeDay } },
         { new: true }
       )
@@ -160,15 +160,12 @@ export class LadenModel {
       .lean()
       .exec();
   }
+}
 
-  async getWeekdaysTimeBarberProfileByEmail(
-    barber_email: string
-  ): Promise<IWeekdays[] | null> {
-    const laden = await this.model
-      .findOne({ barber_email }, { week_days: 1 })
-      .lean()
-      .exec();
-    return laden ? laden.week_days : null;
+export class WeeksDaysModel {
+  private model: Model<ILaden>;
+  constructor() {
+    this.model = mongoose.model<ILaden>("LadensProfile", ladenSchema);
   }
 
   async updateWeekdaysTimeBarberProfileByEmail(
@@ -184,7 +181,13 @@ export class LadenModel {
       .lean()
       .exec();
   }
+}
 
+export class AppointmentsModel {
+  private model: Model<ILaden>;
+  constructor() {
+    this.model = mongoose.model<ILaden>("LadensProfile", ladenSchema);
+  }
   async addAppointmentBarberProfileByEmail(
     barber_email: string,
     appointment: IAppointment
