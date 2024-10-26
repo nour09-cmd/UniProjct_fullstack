@@ -1,13 +1,24 @@
 .ourBtn {
-  background-color: #000;
-  color: #fff;
+
   text-transform: uppercase;
   font-weight: 500;
   padding: 10px 25px;
   border: none;
   border-radius: 9px;
-  background-image: url("ourbtn.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  
+}
+
+.black{
+  background-image: url("ourbtn.svg");
+  background-color: #000;
+  color: #fff;
+
+}
+.gold{
+  background-image: url("gold.svg");
+  background-color:  #DABE29;
+  color: #000;
 }

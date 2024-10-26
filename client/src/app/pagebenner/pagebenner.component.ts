@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './pagebenner.component.css',
 })
 export class PagebennerComponent {
-  @Input() title: string = 'title';
-  @Input() discription: string = 'discription';
+  @Input() title: string = 'crete neu password';
+  @Input() discription: string = 'discover amazing thing near around you';
 }
