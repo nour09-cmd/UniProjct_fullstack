@@ -3,11 +3,13 @@ import {
   UserLoginController,
   UserRegisterController,
 } from "../controller/UserController";
+import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
 
 const router = Router();
 
 const userLoginController = new UserLoginController();
 const userRegisterController = new UserRegisterController();
+const auth = new AuthentivateToken();
 
 router.route("/singin").post(async (req: Request, res: Response) => {
   try {
@@ -23,5 +25,16 @@ router.route("/singup").post(async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
+router
+  .route("/getUserData")
+  .get(
+    auth.authenticateToken.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await userLoginController.getUserData(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  );
 module.exports = router;

@@ -20,7 +20,15 @@ class UserLoginController {
   async getUser(email: string) {
     return this.userRepository.findOne({ where: { email } });
   }
-
+  async getUserData(req: Request, res: Response) {
+    const emails = req["user"]["email"];
+    const user = await this.getUser(emails);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { vorname, nachname, email, handynummer } = user;
+    return res.status(200).json({ vorname, nachname, email, handynummer });
+  }
   createToken(email: string, name: string) {
     const token = jwt.sign({ name, email }, SECRET_KEY!, {
       expiresIn: "5h",
