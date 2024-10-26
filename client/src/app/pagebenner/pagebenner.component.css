@@ -1,15 +1,32 @@
 .pageBanner {
-  background-image: url(Frame\ 79.svg);
+  background-image: url('back.svg');
+  color: white;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #252525;
-  background-position: center;
-  color: white;
-  padding-bottom: 105px;
-  border-bottom-left-radius: 351px 56px;
-  border-bottom-right-radius: 351px 56px;
+  position: relative; 
+  height: 70vh
 }
 
-.logo > img {
-  width: 150px;
+.logo  {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
+
+.detilesBox{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  background-position: left;
+  padding-top: 25%;
+}
+
