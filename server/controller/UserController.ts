@@ -8,12 +8,11 @@ import { AppDataSource } from "../utils/data-source";
 import { User } from "../models/User";
 import { Adresse } from "../models/Adresse";
 import { plainToClass } from "class-transformer";
-import { AddressDTO, UserRegisterDTO } from "./DTOs/RegisterDTO";
+import { AddressDTO, UserRegisterDTO } from "../DTOs/RegisterDTO";
 import { validate } from "class-validator";
 import { Validierunges } from "../utils/ValidierungsClasse";
-import { UserLoginDTO } from "./DTOs/LoginDTO";
+import { UserLoginDTO } from "../DTOs/LoginDTO";
 import { IUserProfile, UserProfileModel } from "../models/UserAppointments";
-import DatabaseConnection from "../utils/mongoDBconnection";
 
 class UserLoginController {
   private userRepository = AppDataSource.getRepository(User);
@@ -36,7 +35,7 @@ class UserLoginController {
       if (errors.length > 0) {
         return res.status(400).json({ message: "Validation failed", errors });
       }
-      const { email, password } = req.body;
+      const { email, password } = userDTO;
       const validierungesData = new Validierunges([email, password]);
       const arrData = await validierungesData.filterHtmlScrpitsSQL();
       const [emails, passwords] = arrData;
@@ -68,13 +67,10 @@ class UserRegisterController {
   private adresseRepository = AppDataSource.getRepository(Adresse);
   private rolle: string;
   private modelAppointmentUser: UserProfileModel;
-  private conn: DatabaseConnection;
 
   constructor() {
     this.rolle = Rolle.USER;
     this.modelAppointmentUser = new UserProfileModel();
-    this.conn = new DatabaseConnection();
-    this.conn.connect();
   }
 
   createToken(email: string, name: string) {
@@ -95,11 +91,6 @@ class UserRegisterController {
       if (errors.length > 0) {
         return res.status(400).json({ message: "Validation failed", errors });
       }
-      const adressDTO = plainToClass(AddressDTO, req.body.adresse);
-      const aerrors = await validate(adressDTO);
-      if (aerrors.length > 0) {
-        return res.status(400).json({ message: "Validation failed", aerrors });
-      }
       const {
         email,
         password,
@@ -107,10 +98,10 @@ class UserRegisterController {
         nachname,
         handynummer,
         geburtsdatum,
-        adresse,
-      } = req.body;
-      const { strasse, ort, plz } = adresse || {};
-
+        address,
+      } = userDTO;
+      const { strasse, ort, plz } = address || {};
+      // Kann auch weg !!!
       const validierungesData = new Validierunges([
         email,
         password,

@@ -1,12 +1,4 @@
-import {
-  IsString,
-  IsEmail,
-  IsNotEmpty,
-  IsArray,
-  IsPostalCode,
-  IsDateString,
-  IsNumberString,
-} from "class-validator";
+import { IsString, IsEmail, IsNotEmpty, IsDateString } from "class-validator";
 
 export class GetLadenDTO {
   @IsEmail()
@@ -17,17 +9,14 @@ export class GetLadenDTO {
 export class CreateAppointmentDTO {
   @IsEmail()
   @IsNotEmpty()
-  user_email: string;
-  @IsEmail()
-  @IsNotEmpty()
-  barber_eamil: string;
+  barber_email: string;
   @IsString()
   @IsNotEmpty()
   name: string;
   @IsDateString()
   @IsNotEmpty()
   date: Date;
-  @IsNumberString()
+  @IsString()
   @IsNotEmpty()
   time: string;
 }

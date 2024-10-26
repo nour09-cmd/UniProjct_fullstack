@@ -8,6 +8,8 @@ const userRoute = require("../routes/UserRouter");
 const LadensRoute = require("../routes/LadenRoute");
 const LadensCloseDaysRoute = require("../routes/ClosedaysRouter");
 const LadensWeeksDaysRoute = require("../routes/WeeksDaysRouter");
+const AppointmentsRoute = require("../routes/AppointmentRouter");
+const PriceListRoute = require("../routes/PriceListeRouter");
 
 dotenv.config();
 const app = express();
@@ -20,6 +22,8 @@ app.use("/api/users", userRoute);
 app.use("/api/ladens", LadensRoute);
 app.use("/api/ladens", LadensCloseDaysRoute);
 app.use("/api/ladens", LadensWeeksDaysRoute);
+app.use("/api/ladens", AppointmentsRoute);
+app.use("/api/ladens", PriceListRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, From our backend");
