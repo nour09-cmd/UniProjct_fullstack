@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"test21@test.com\",\r\n  \"password\": \"<h1>test</h1>\",\r\n  \"vorname\": \"test\",\r\n  \"nachname\": \"Doe\",\r\n  \"handynummer\":\"017631449793\",\r\n  \"geburtsdatum\":\"01-01-2000\",\r\n  \"rolle\":\"USER\",\r\n  \"adresse\": {\r\n    \"strasse\": \"Haputstr\",\r\n    \"ort\": \"worms\",\r\n    \"plz\": \"67549\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"email\": \"admin@nour.com\",\r\n  \"password\": \"<h1>test</h1>\",\r\n  \"vorname\": \"max\",\r\n  \"nachname\": \"muster\",\r\n  \"handynummer\":\"017631449793\",\r\n  \"geburtsdatum\":\"01-01-2000\",\r\n  \"rolle\":\"BARBER\",\r\n  \"address\": {\r\n    \"strasse\": \"Haputstr\",\r\n    \"ort\": \"worms\",\r\n    \"plz\": \"67549\"\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"test21@test.com\",\r\n  \"password\": \"<h1>test</h1>\"\r\n}",
+							"raw": "{\r\n  \"email\": \"admin@nour.com\",\r\n  \"password\": \"<h1>test</h1>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,10 +80,16 @@
 							},
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"barberEmail\":\"test1@test.com\"}",
+									"raw": "{\"email\":\"admin@nour.com\"}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -108,7 +114,13 @@
 							"name": "createDay",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\"date\":\"2025-10-10\",\"barberEmail\":\"test1@test.com\"}",
@@ -136,10 +148,16 @@
 							"name": "deleteDay",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"closeDayId\":\"671acc386b356ae154f89153\",\"barberEmail\":\"test1@test.com\"}",
+									"raw": "{\"closeDayId\":\"671d0b8f032de643881d4d7f\",\"barberEmail\":\"test1@test.com\"}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -172,10 +190,16 @@
 							},
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"barberemail\": \"test1@test.com\"\r\n}",
+									"raw": "{\r\n    \"email\": \"nour@nour.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -200,10 +224,16 @@
 							"name": "update",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"barberemail\": \"test1@test.com\",\r\n\r\n\"weekDays\":[ {\r\n        \"day\": \"Do\",\r\n        \"status\": \"sss\",\r\n        \"available_time_from\": \"09:00\",\r\n        \"available_time_to\": \"16:00\",\r\n        \"appointment_duration\": 30,\r\n        \"_id\": \"671453b80f781e8f7f8998ae\"\r\n    },\r\n{\r\n        \"day\": \"Fr\",\r\n        \"status\": \"open\",\r\n        \"available_time_from\": \"09:00\",\r\n        \"available_time_to\": \"13:00\",\r\n        \"appointment_duration\": 60,\r\n        \"_id\": \"671453b80f781e8f7f8998af\"\r\n    }\r\n]\r\n}",
+									"raw": "{\r\n\"barberemail\": \"nour@nour.com\",\r\n\"weekDays\":\r\n[{\r\n    \"day\": \"Mo\",\r\n    \"status\": \"open\",\r\n    \"available_time_from\": \"09:30\",\r\n    \"available_time_to\": \"16:00\",\r\n    \"appointment_duration\": 60\r\n  },\r\n  {\r\n    \"day\": \"Di\",\r\n    \"status\": \"close\",\r\n    \"available_time_from\": \"09:00\",\r\n    \"available_time_to\": \"12:00\",\r\n    \"appointment_duration\": 60\r\n  },\r\n  {\r\n    \"day\": \"Mi\",\r\n    \"status\": \"open\",\r\n    \"available_time_from\": \"09:00\",\r\n    \"available_time_to\": \"16:00\",\r\n    \"appointment_duration\": 60\r\n  },\r\n  {\r\n    \"day\": \"Do\",\r\n    \"status\": \"open\",\r\n    \"available_time_from\": \"09:00\",\r\n    \"available_time_to\": \"16:00\",\r\n    \"appointment_duration\": 60\r\n  },\r\n  {\r\n    \"day\": \"Fr\",\r\n    \"status\": \"open\",\r\n    \"available_time_from\": \"09:00\",\r\n    \"available_time_to\": \"13:00\",\r\n    \"appointment_duration\": 60\r\n  },\r\n  {\r\n    \"day\": \"Sa\",\r\n    \"status\": \"close\",\r\n    \"available_time_from\": \"09:00\",\r\n    \"available_time_to\": \"09:00\",\r\n    \"appointment_duration\": 60\r\n  },\r\n  {\r\n    \"day\": \"So\",\r\n    \"status\": \"close--\",\r\n    \"available_time_from\": \"09:00\",\r\n    \"available_time_to\": \"09:00\",\r\n    \"appointment_duration\": 0\r\n  }]\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -227,13 +257,310 @@
 					]
 				},
 				{
+					"name": "Appointments",
+					"item": [
+						{
+							"name": "getAppointmentLaden",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"nour@nour.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/getAppointmentLaden/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"getAppointmentLaden",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAppointmentUser",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/getAppointmentUser/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"getAppointmentUser",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createAppointment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"barber_email\":\"nour@nour.com\",\r\n    \"name\":\"mr x\",\r\n    \"date\":\"2025-04-02\",\r\n    \"time\":\"18:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/Appointment/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"Appointment",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteApo",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_email\":\"test120@test.com\",\r\n    \"barber_email\":\"test120@test.com\",\r\n    \"apoId\":\"671d19ae04e7d24953077a33\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/Appointment/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"Appointment",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PriceList",
+					"item": [
+						{
+							"name": "getPriceList",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"nour@nour.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/PriceList/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"PriceList",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createPriceList",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWF4IG11c3RlciIsImVtYWlsIjoibm91ckBub3VyLmNvbSIsImlhdCI6MTcyOTk3MDQ4MywiZXhwIjoxNzI5OTg4NDgzfQ.otYlVL5HwSxHGXa-EQ4gB1sXO9_T9D51fA7oSryhWQk",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"nour@nour.com\",\r\n    \"category\":\"haar cut for man\",\r\n    \"sales\":[\r\n        {\r\n            \"name\":\"1 cut haar\",\r\n            \"price\":15,\r\n            \"descriptions\":\"dsaf das fae  fase fasd fehtadfawd\",\r\n            \"img\":\"head.png\"\r\n        },  {\r\n            \"name\":\"2 cut haar\",\r\n            \"price\":15,\r\n            \"descriptions\":\"dsaf das fae  fase fasd fehtadfawd\",\r\n            \"img\":\"head.png\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/PriceList/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"PriceList",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"listId\":\"671d41ad196ddd3c9da4fb61\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/PriceList/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"PriceList",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{toke}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"listId\":\"671d41c3196ddd3c9da4fb67\",\r\n    \"category\":\"haar cut for man\",\r\n    \"sales\":[\r\n        {\r\n            \"name\":\"0 cut haar\",\r\n            \"price\":15,\r\n            \"descriptions\":\"dsaf das fae  fase fasd fehtadfawd\",\r\n            \"img\":\"head.png\"\r\n        },  {\r\n            \"name\":\"100 cut haar\",\r\n            \"price\":15,\r\n            \"descriptions\":\"dsaf das fae  fase fasd fehtadfawd\",\r\n            \"img\":\"head.png\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_ba}}/ladens/PriceList/",
+									"host": [
+										"{{url_ba}}"
+									],
+									"path": [
+										"ladens",
+										"PriceList",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "get all Ladenes",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{toke}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -261,10 +588,16 @@
 					"name": "create Laden",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{toke}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"barber_email\":\"test1@test.com\",\r\n    \"Laden_name\":\"nour\",\r\n    \"Laden_description\":\"Native dates: Uses existing native type. It doesn't extend core objects for safety's sake. Immutable & Pure: Built using pure functions and always returns a new date instance.\",\r\n        \"Laden_IMG\":[\"img1.png\",\"img1.png\"],\r\n        \"Laden_adress\":{\r\n        \"strasse\":\"Haputstr\", \"ort\":\"worms\", \"plz\":\"76870\"\r\n        }\r\n}",
+							"raw": "{\r\n \r\n    \"Laden_name\":\"test\",\r\n    \"Laden_description\":\"Native dates: Uses existing native type. It doesn't extend core objects for safety's sake. Immutable & Pure: Built using pure functions and always returns a new date instance.\",\r\n        \"Laden_IMG\":[\"img1.png\",\"img1.png\"],\r\n        \"Laden_adress\":{\r\n        \"strasse\":\"Haputstr\", \"ort\":\"worms\", \"plz\":\"76870\"\r\n        },\r\n        \"priceListe\":[\r\n                {\r\n                \"category\":\"haar cut for man\",\r\n                \"sales\":[{\r\n                    \"name\":\"cut\",\r\n                    \"price\":15,\r\n                    \"descriptions\":\"s existing native type. It doesn't e\",\r\n                    \"img\":\"none\"\r\n\r\n                }]\r\n            },    {\r\n                \"category\":\"haar cut for kind\",\r\n                \"sales\":[{\r\n                    \"name\":\"cut\",\r\n                    \"price\":10,\r\n                    \"descriptions\":\"s existing native type. It doesn't e\",\r\n                    \"img\":\"none\"\r\n\r\n                }]\r\n            }\r\n        ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,7 +622,13 @@
 					"name": "delete Laden",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{toke}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"email\":\"test1@test.com\"\r\n}",
@@ -317,10 +656,16 @@
 					"name": "update Laden",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{toke}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"barber_email\":\"test1@test.com\",\r\n    \"data\":{\r\n    \"Laden_name\": \"<p>test eiditing</p><script>alert('Hello)</script>\",\r\n    \"Laden_description\": \"Native dates: Uses existing native type. It doesn't extend core objects for safety's sake. Immutable & Pure: Built using pure functions and always returns a new date instance.\",\r\n    \"Laden_IMG\": [\r\n        \"img4.png\",\r\n        \"img3.png\"\r\n    ],\r\n    \"Laden_adress\": {\r\n        \"strasse\": \"kirchgasser\",\r\n        \"plz\": \"76870\",\r\n        \"ort\": \"worms\"\r\n    }\r\n    }\r\n}",
+							"raw": "{\r\n    \"data\":{\r\n    \"Laden_name\": \"<p>test eiditing</p><script>alert('Hello)</script>\",\r\n    \"Laden_description\": \"Native dates: Uses existing native type. It doesn't extend core objects for safety's sake. Immutable & Pure: Built using pure functions and always returns a new date instance.\",\r\n    \"Laden_IMG\": [\r\n        \"img4.png\",\r\n        \"img3.png\"\r\n    ],\r\n    \"Laden_adress\": {\r\n        \"strasse\": \"kirchgasser\",\r\n        \"plz\": \"76870\",\r\n        \"ort\": \"worms\"\r\n    }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,10 +693,16 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{toke}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"test1@test.com\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@nour.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
