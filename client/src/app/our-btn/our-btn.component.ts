@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'ourBtnBlack',
+  selector: 'ourBtn',
   standalone: true,
   imports: [],
   templateUrl: './our-btn.component.html',
@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class OurBTNComponent {
   @Input() label: string = 'label';
+  @Input() classes!: string;
   @Output() clicked = new EventEmitter<void>();
   handelClick(): void {
     this.clicked.emit();
