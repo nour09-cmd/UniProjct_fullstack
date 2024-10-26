@@ -1,0 +1,91 @@
+.spinner {
+    background-image: url("../../assets/design/wallpaper/bg.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #252525;
+    width: 100%;
+    height: 100vh;
+    
+}
+
+.logo {    
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: grid;
+    place-items: center; 
+    height: 98vh;
+    position: relative;
+  }
+  
+  .logo  a{
+    background-image: url("../../assets/design/man/man.svg");    
+    position: absolute; 
+    transform: translate(-50%, -50%); 
+    padding: 70px 70px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    width: 80pt;  
+    height: 77pt;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .grid {    
+    background-size: contain;  
+    background-repeat: no-repeat;
+    display: flex; 
+    width: 100%; 
+    height: 100pt;
+    padding: 100px; 
+    position: fixed; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+  }
+  .upperGrid {
+    background-image: url("../../assets/design/grid/Uben_strich.svg");  
+    background-position: left;
+    top: 0; 
+    left: 0;  
+  }
+  .lowerGrid {
+    background-image: url("../../assets/design/grid/Unten_strich.svg");    
+    background-position: right; 
+    bottom: 0; 
+    right: 0;  
+  }
+  
+  .logoText {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: left; 
+    padding-top: 22em;  
+    color: white;
+    z-index: 1;
+  }
+  
+  .logoText .welcomeLogoText {
+    margin-bottom: 0;
+  }
