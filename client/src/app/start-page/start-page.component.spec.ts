@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OurBtnGoldComponent } from './our-btn-gold.component';
+import { StartPageComponent } from './start-page.component';
 
-describe('OurBtnGoldComponent', () => {
-  let component: OurBtnGoldComponent;
-  let fixture: ComponentFixture<OurBtnGoldComponent>;
+describe('StartPageComponent', () => {
+  let component: StartPageComponent;
+  let fixture: ComponentFixture<StartPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OurBtnGoldComponent]
+      imports: [StartPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(OurBtnGoldComponent);
+    fixture = TestBed.createComponent(StartPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
