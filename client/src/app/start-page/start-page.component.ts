@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { PagebennerComponent } from "../pagebenner/pagebenner.component";
 import { OurBTNComponent } from '../our-btn/our-btn.component';
 
@@ -26,4 +26,5 @@ export class StartPageComponent {
     this.router.navigate(['/login']);
   }
 
+  
 }

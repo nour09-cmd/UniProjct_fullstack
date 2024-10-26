@@ -16,6 +16,7 @@ export const routes: Routes = [
   { path: 'changePass', component: ChangePassComponent },
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'start', component: StartPageComponent }
+
 ];
 
 @NgModule({
