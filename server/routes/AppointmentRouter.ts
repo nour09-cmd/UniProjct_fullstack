@@ -1,47 +1,51 @@
-import { Request, Response, Router } from "express";
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
-import { PriceListController } from "../controller/PriceListeController";
-const router = Router();
-const priceListController = new PriceListController();
+import { AppointmentController } from "../controller/AppointmentController";
+import { Request, Response, Router } from "express";
 
+const router = Router();
+const appointmentController = new AppointmentController();
 const auth = new AuthentivateToken();
 router
-  .route("/PriceList")
+  .route("/getAppointmentUser")
   .get(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
-        await priceListController.getPriceList(req, res);
+        await appointmentController.getAppointmentUser(req, res);
       } catch (error) {
         res.status(500).json({ message: "Internal server error" });
       }
     }
-  )
-  .post(
-    auth.authenticateTokenBarber.bind(auth),
+  );
+router
+  .route("/getAppointmentLaden") // TODO fix the value response !!
+  .get(
+    auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
-        await priceListController.createPriceList(req, res);
+        await appointmentController.getAppointmentLaden(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  );
+router
+  .route("/Appointment")
+  .post(
+    auth.authenticateToken.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await appointmentController.createAppointment(req, res);
       } catch (error) {
         res.status(500).json({ message: "Internal server error" });
       }
     }
   )
   .delete(
-    auth.authenticateTokenBarber.bind(auth),
+    auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
-        await priceListController.deletePriceList(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-      }
-    }
-  )
-  .put(
-    auth.authenticateTokenBarber.bind(auth),
-    async (req: Request, res: Response) => {
-      try {
-        await priceListController.updatePriceList(req, res);
+        await appointmentController.deleteAppointment(req, res);
       } catch (error) {
         res.status(500).json({ message: "Internal server error" });
       }

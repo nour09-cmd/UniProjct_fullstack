@@ -1,23 +1,31 @@
 import { Request, Response, Router } from "express";
 import { WeekDaysController } from "../controller/WeekDaysController";
+import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
 const router = Router();
 const weekDaysController = new WeekDaysController();
+const auth = new AuthentivateToken();
 
 router
   .route("/weekdays")
-  .get(async (req: Request, res: Response) => {
-    try {
-      await weekDaysController.getWeeksDays(req, res);
-    } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
+  .get(
+    auth.authenticateToken.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await weekDaysController.getWeeksDays(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
     }
-  })
-  .put(async (req: Request, res: Response) => {
-    try {
-      await weekDaysController.updateWeeksDays(req, res);
-    } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
+  )
+  .put(
+    auth.authenticateTokenBarber.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await weekDaysController.updateWeeksDays(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
     }
-  });
+  );
 
 module.exports = router;

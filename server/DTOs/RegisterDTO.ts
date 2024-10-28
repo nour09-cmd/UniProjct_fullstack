@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import {
   IsString,
   IsEmail,
@@ -5,7 +6,23 @@ import {
   IsPhoneNumber,
   IsPostalCode,
   Length,
+  ValidateNested,
 } from "class-validator";
+
+export class AddressDTO {
+  @IsString()
+  @IsNotEmpty()
+  strasse: string;
+
+  @IsString()
+  @IsNotEmpty()
+  ort: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsPostalCode("DE")
+  plz: string;
+}
 
 export class UserRegisterDTO {
   @IsString()
@@ -33,19 +50,8 @@ export class UserRegisterDTO {
   @IsString()
   @IsNotEmpty()
   geburtsdatum: string;
-}
-
-export class AddressDTO {
-  @IsString()
+  @ValidateNested()
+  @Type(() => AddressDTO)
   @IsNotEmpty()
-  strasse: string;
-
-  @IsString()
-  @IsNotEmpty()
-  ort: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @IsPostalCode("DE")
-  plz: string;
+  address: AddressDTO;
 }
