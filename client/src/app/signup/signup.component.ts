@@ -11,7 +11,7 @@ import {
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-singup',
+  selector: 'app-signup',
   standalone: true,
   imports: [
     PagebennerComponent,
@@ -20,10 +20,10 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
   ],
-  templateUrl: './singup.component.html',
-  styleUrl: './singup.component.css',
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.css',
 })
-export class SingupComponent {
+export class SignupComponent {
   loginForm: FormGroup;
   router: any;
   constructor(private fb: FormBuilder) {
@@ -37,14 +37,14 @@ export class SingupComponent {
       const { email, password } = this.loginForm.value;
       console.log({ email, password });
     }
-    console.log('click singUp');
+    console.log('click signUp');
   }
   @Input() title: string = 'crete neu password';
   @Input() discription: string = 'discover amazing thing near around you';
   
   onSignUp(): void {
     console.log('Sign Up clicked');
-    this.router.navigate(['/singup']);
+    this.router.navigate(['/signup']);
   }
 
   onSignIn(): void {
