@@ -1,32 +1,39 @@
-.pageBanner {
-  background-image: url('back.svg');
-  color: white;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative; 
-  height: 70vh
-}
-
-.logo  {
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+.fullscreen-svg {
+  width: 150%;
   position: absolute;
-  top: 50%; 
-  left: 50%;
+  top: -6%;
+  left: 60.79%;
   transform: translate(-50%, -50%);
-
+  position:fixed;
 }
 
-.detilesBox{
+.detilesBox {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  width: 100%;
+  width: 210px;
   background-position: left;
-  padding-top: 25%;
+  color: white;
+  left: 20%;
+  padding-top: 12%;    
+  padding-left: 14px;
+  position:fixed;
+  position: relative;
+ 
 }
+
+
+
+.title {
+  font-weight: bold;
+  margin: 0;
+ 
+}
+
+.desc {  
+  
+  font-style: italic;
+  font-size: smaller;
+}
+
+
 

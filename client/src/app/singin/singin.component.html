@@ -1,10 +1,18 @@
-<app-pagebenner
-  title=""
-  discription=""
-></app-pagebenner>
-<div class="container">
-  <ourBtn label="Sing In" classes="black" (clicked)="onClicke()"></ourBtn>
-  <a class="text-secondary" href="singup"
-    ><title-line titel="SingUp"></title-line
-  ></a>
+
+<app-pagebenner></app-pagebenner>
+<div class="container ">
+  <div class="py-4 d-flex flex-column justify-content-center align-items-center formbox">
+    <form>
+      <div class="form-group py-3">
+        <input type="Name" id="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Full Name" formControlName="email" />
+      </div>
+      <div class="form-group py-3">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password"/>
+      </div>
+      <Unsere-Buton label="SIGN IN" classes="gold" (clicked)="onClicke()"></Unsere-Buton>
+    </form>
+  </div>
+  <a class="text-secondary my-10" href="singup"><title-line titel="SUIN UP"></title-line></a>
 </div>
+

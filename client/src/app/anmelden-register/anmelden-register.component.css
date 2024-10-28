@@ -9,5 +9,19 @@
   .container {
     max-width: 800px; 
     padding-top: 68px;
-    
+
+  }
+
+  .eins{
+    margin: 30px;
+    padding: 10px;
+  }
+
+  .zwei{
+    margin: 30px;
+    padding: 10px;
+  }
+
+  .form-control{
+    background-color: #e4e4e4;
   }

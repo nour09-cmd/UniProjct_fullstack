@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { OurBTNComponent } from "../our-btn/our-btn.component";
+import { UnsereButtonComponent } from "../unsere-button/unsere-button.component";
 import { PagebennerComponent } from "../pagebenner/pagebenner.component";
+import { TitleLineComponent } from "../title-line/title-line.component";
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [OurBTNComponent, PagebennerComponent],
+  imports: [UnsereButtonComponent, PagebennerComponent, TitleLineComponent],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.css'
 })
 export class ResetPasswordComponent {
+onClicke() {
+throw new Error('Method not implemented.');
+}
 
 }

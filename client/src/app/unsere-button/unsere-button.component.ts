@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'ourBtn',
+  selector: 'Unsere-Buton',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './our-btn.component.html',
-  styleUrl: './our-btn.component.css',
+  templateUrl: './unsere-button.component.html',
+  styleUrl: './unsere-button.component.css',
 })
-export class OurBTNComponent {
+export class UnsereButtonComponent {
   @Input() label: string = 'Recover Password';
   @Input() classes!: string;
   @Output() clicked = new EventEmitter<void>();

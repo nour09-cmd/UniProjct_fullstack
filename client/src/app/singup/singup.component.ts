@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PagebennerComponent } from '../pagebenner/pagebenner.component';
-import { OurBTNComponent } from '../our-btn/our-btn.component';
+import { UnsereButtonComponent } from '../unsere-button/unsere-button.component';
 import { TitleLineComponent } from '../title-line/title-line.component';
 import {
   FormBuilder,
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     PagebennerComponent,
-    OurBTNComponent,
+    UnsereButtonComponent,
     TitleLineComponent,
     ReactiveFormsModule,
     CommonModule,
@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SingupComponent {
   loginForm: FormGroup;
+  router: any;
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,5 +38,17 @@ export class SingupComponent {
       console.log({ email, password });
     }
     console.log('click singUp');
+  }
+  @Input() title: string = 'crete neu password';
+  @Input() discription: string = 'discover amazing thing near around you';
+  
+  onSignUp(): void {
+    console.log('Sign Up clicked');
+    this.router.navigate(['/singup']);
+  }
+
+  onSignIn(): void {
+    console.log('Sign In clicked');
+    this.router.navigate(['/login']);
   }
 }

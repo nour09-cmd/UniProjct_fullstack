@@ -1,0 +1,13 @@
+.formbox {
+  border-radius: 8px;
+  background: #e4e4e4;
+  box-shadow: 0px 0px 0px #ffffff, -20px 33px 60px #a3a3a3;
+  margin: 20px;
+}
+
+ 
+.container {
+  max-width: 800px; 
+  padding-top: 68px;
+  
+}

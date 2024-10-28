@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OurBTNComponent } from './our-btn.component';
+import { StartPageComponent } from './start-page.component';
 
-describe('OurBTNComponent', () => {
-  let component: OurBTNComponent;
-  let fixture: ComponentFixture<OurBTNComponent>;
+describe('StartPageComponent', () => {
+  let component: StartPageComponent;
+  let fixture: ComponentFixture<StartPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OurBTNComponent]
+      imports: [StartPageComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(OurBTNComponent);
+    
+    fixture = TestBed.createComponent(StartPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
