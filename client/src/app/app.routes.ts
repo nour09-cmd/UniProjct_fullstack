@@ -7,6 +7,8 @@ import { WillkommenComponent } from './willkommen/willkommen.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { AnmeldenRegisterComponent } from './anmelden-register/anmelden-register.component';
+import { ResponsiveCardComponent } from './responsive-card/responsive-card.component';
+import path from 'path';
 
 
 
@@ -17,7 +19,9 @@ export const routes: Routes = [
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
-  { path: 'anmelden-register', component: AnmeldenRegisterComponent }
+  { path: 'anmelden-register', component: AnmeldenRegisterComponent },
+  {path : 'desktop_mobile', component: ResponsiveCardComponent}
+
   
 ];
 
