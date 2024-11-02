@@ -9,6 +9,7 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
 import { AnmeldenRegisterComponent } from './anmelden-register/anmelden-register.component';
 import { ResponsiveCardComponent } from './responsive-card/responsive-card.component';
 import path from 'path';
+import { RecoverPassComponent } from './recover-pass/recover-pass.component';
 
 
 
@@ -20,7 +21,8 @@ export const routes: Routes = [
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-  {path : 'desktop_mobile', component: ResponsiveCardComponent}
+  {path : 'desktop_mobile', component: ResponsiveCardComponent},
+  {path : 'recoverPass', component: RecoverPassComponent}
 
   
 ];
