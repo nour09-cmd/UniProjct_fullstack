@@ -9,3 +9,9 @@ export class UserLoginDTO {
   @IsNotEmpty()
   password: string;
 }
+
+export class ResetPasswordDTO {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+}
