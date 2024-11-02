@@ -15,12 +15,12 @@ import path from 'path';
 export const routes: Routes = [
   { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'Signup', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-  {path : 'desktop_mobile', component: ResponsiveCardComponent}
+  { path : 'desktop_mobile', component: ResponsiveCardComponent}
 
   
 ];
