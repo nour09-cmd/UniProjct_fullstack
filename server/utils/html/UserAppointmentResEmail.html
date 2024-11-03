@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terminbestätigung</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .button {
+        display: inline-block;
+        background-color: #4285f4;
+        color: #ffffff;
+        padding: 15px 25px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .footer {
+        text-align: center;
+        color: #777777;
+        font-size: 12px;
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Ihr Termin wurde erfolgreich gebucht</h2>
+      </div>
+      <p>Hallo ${},</p>
+      <p>Ihr Termin wurde erfolgreich gebucht! Hier sind die Details:</p>
+      <ul>
+        <li><strong>Barber:</strong> ${}</li>
+        <li><strong>Datum:</strong> ${}</li>
+        <li><strong>Uhrzeit:</strong> ${}</li>
+        <li><strong>Telefonnummer:</strong> ${}</li>
+        <li><strong>Uhrzeit:</strong> ${}</li>
+        <li><strong>Adresse:</strong> ${}</li>
+      </ul>
+      <p>
+        Um diesen Termin nicht zu verpassen, können Sie ihn direkt zu Ihrem
+        Google Kalender hinzufügen:
+      </p>
+      <p style="text-align: center">
+        <a href="${}" class="button">Zum Google Kalender hinzufügen</a>
+      </p>
+      <p>
+        Falls Sie den Termin ändern oder absagen möchten, können Sie uns gerne
+        kontaktieren. <a href="${}">Support</a>
+      </p>
+      <div class="footer">
+        <p>&copy; ${} ${}. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Termin vom Nutzer storniert</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .footer {
+        text-align: center;
+        color: #777777;
+        font-size: 12px;
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Ein Termin wurde vom Nutzer storniert</h2>
+      </div>
+      <p>Hallo ${},</p>
+      <p>Der folgende Termin wurde vom Nutzer abgesagt:</p>
+      <ul>
+        <li><strong>Kunde:</strong> ${}</li>
+        <li><strong>Datum:</strong> ${}</li>
+        <li><strong>Uhrzeit:</strong> ${}</li>
+      </ul>
+      <p>
+        Falls Sie den Nutzer bezüglich eines neuen Termins kontaktieren möchten,
+        können Sie dies gerne tun.
+      </p>
+      <div class="footer">
+        <p>&copy; ${} ${}. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </body>
+</html>

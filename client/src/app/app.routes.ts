@@ -16,14 +16,18 @@ import path from 'path';
 export const routes: Routes = [
   { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'Signup', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
+<<<<<<< HEAD
   { path : 'desktop_mobile', component: ResponsiveCardComponent},
   { path: 'profile', component: ProfileComponent },
 
+=======
+  { path : 'desktop_mobile', component: ResponsiveCardComponent}
+>>>>>>> 237d28cec2cf447fcd42764208196ca78d96853e
 
   
 ];
