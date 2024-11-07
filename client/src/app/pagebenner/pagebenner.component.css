@@ -1,39 +1,79 @@
-.fullscreen-svg {
-  width: 150%;
+
+body {
+  margin: 0;
+}
+.krise {
+  background: #252525;
+  background-image: url(./Line.svg), url(./LLine.svg);
+  background-repeat: no-repeat;
+  background-position: calc(100% - -39vw) bottom, -37vw bottom;
+  background-size: 100% 27%, 100% 27%;
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+  border-radius: 20vh;
   position: absolute;
-  top: -6%;
-  left: 60.79%;
-  transform: translate(-50%, -50%);
-  position:fixed;
+  top: -73vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
+  z-index: -6;
+}
+.krise > div > svg {
+  width: 100%;
+  height: 100%;
 }
 
-.detilesBox {
+.logo {
   display: flex;
   flex-direction: column;
-  width: 210px;
-  background-position: left;
+  padding: 65px 125px;
   color: white;
-  left: 20%;
-  padding-top: 12%;    
-  padding-left: 14px;
-  position:fixed;
-  position: relative;
+  font-size: 1rem;
+  justify-content: end;
  
-}
-
-
-
-.title {
-  font-weight: bold;
-  margin: 0;
- 
-}
-
-.desc {  
   
-  font-style: italic;
-  font-size: smaller;
+  
+}
+.logo > h1 {
+
+  font-size: 1.5rem;
+  margin-left: -40%;
+ 
+ 
+  
+}
+.logo > p {
+  font-size: 15px;
+  margin-left: -40%;
+
+  
+}
+.logoImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  /* background-image: url('../../assets/design/Mitte.png'); */
+  
 }
 
+@media screen and (width< 750px) {
+  .krise > div > svg {
+    width: 100%;
+    height: 200px;
+  }
+}
+.logo > h1{
+  font-size: 1rem;
+  margin-left: 3px;
+}
+.logo > p{
+  margin-left: 3px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-
+}

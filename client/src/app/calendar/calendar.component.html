@@ -1,0 +1,22 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        
+        <div class="d-flex align-items-center ms-3 stars-container mb-3 mb-md-0">
+          <i
+            *ngFor="let star of stars; let i = index"
+            class="bi fs-4 star-box-shadow"
+            [class.bi-star-fill]="i < rating"
+            [class.bi-star]="i >= rating"
+            [class.text-warning]="i < rating"
+            (click)="setRating(i + 1)"
+          >
+          </i>
+          <div class="ms-2 mt-2">| {{ rating }}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
