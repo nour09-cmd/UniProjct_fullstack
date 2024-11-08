@@ -1,12 +1,11 @@
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'>
 <app-pagebenner title="ENTER OTP" discription="Discover Amazing Thing Near Around You"></app-pagebenner>
-<div class="container ">
+<div class="container">
   <div class="row justify-content-center rowUpd">
-      <div class="col-5 col-md-6 col-lg-4 formbox" style="min-width: 400px;">
-        <div class="card bg-white mb-5 mt-5 border-0">
-          <div class="card-body p-5 text-center ">
-            <h4>Verify</h4>
-            <p>Your code was sent to you via email</p>
+    <div class="col-5 col-md-6 col-lg-4 formbox" style="min-width: 400px;">
+      <div class="card bg-white mb-5 mt-5 border-0">
+        <div class="card-body p-5 text-center ">
+          <h4>Verify</h4>
+          <p>Your code was sent to you via email</p>
 
             <div class="input-otp">
             <ng-otp-input  (onInputChange)="onOtpChange($event)" [config]="{length:4}" style="font-size: 12px;"></ng-otp-input>
@@ -26,7 +25,23 @@
 
     <a class="text-secondary my-10" href="signup"><title-line titel="Back to home"></title-line></a>
   </div>
-  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- <div class="container ">
   <div class="py-4 d-flex flex-column justify-content-center align-items-center formbox">
     <form>
