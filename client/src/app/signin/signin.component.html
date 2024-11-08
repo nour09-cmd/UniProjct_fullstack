@@ -1,18 +1,32 @@
 
 <app-pagebenner></app-pagebenner>
-<div class="container ">
+<div class="container">
   <div class="py-4 d-flex flex-column justify-content-center align-items-center formbox">
     <form>
-      <div class="form-group py-3">
-        <input type="Name" id="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          placeholder="Full Name" formControlName="email" />
+      <!-- Eingabefeld für Vollständiger Name mit dem vorherigen Icon -->
+      <div class="form-group py-3 position-relative">
+        <div class="input-wrapper">
+          <input type="text" id="name" class="form-control" placeholder="Vollständiger Name" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="input-icon">
+            <path d="M18 18.7083C18 17.0886 16.8283 15 15 15H9C7.17172 15 6 17.0886 6 18.7083M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12ZM15 9C15 10.6569 13.6569 12 12 12C10.3431 12 9 10.6569 9 9C9 7.34315 10.3431 6 12 6C13.6569 6 15 7.34315 15 9Z" stroke="#001A72" stroke-width="1.5"/>
+          </svg>
+        </div>
       </div>
-      <div class="form-group py-3">
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password"/>
+
+      <!-- Eingabefeld für Passwort mit dem neuen Icon -->
+      <div class="form-group py-3 position-relative">
+        <div class="input-wrapper">
+          <input [type]="hide ? 'password' : 'text'" id="password" class="form-control" placeholder="Passwort" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="input-icon" (click)="hide = !hide">
+            <path d="M12 5C5.63636 5 2 12 2 12C2 12 5.63636 19 12 19C18.3636 19 22 12 22 12C22 12 18.3636 5 12 5Z" stroke="#001A72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#001A72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
-      <Unsere-Buton label="SIGN IN" classes="gold" (clicked)="onClicke()"></Unsere-Buton>
+      
+
+      <Unsere-Buton label="SING IN" classes="black" (clicked)="onClicke()"></Unsere-Buton>
     </form>
   </div>
-  <a class="text-secondary my-10" href="signup"><title-line titel="SUIN UP"></title-line></a>
+  <a class="text-secondary my-10" href="signup"><title-line titel="Back Home"></title-line></a>
 </div>
-

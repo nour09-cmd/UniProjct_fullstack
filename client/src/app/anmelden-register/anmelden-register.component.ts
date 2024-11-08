@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PagebennerComponent } from '../pagebenner/pagebenner.component';
 import { UnsereButtonComponent } from '../unsere-button/unsere-button.component';
 import { TitleLineComponent } from '../title-line/title-line.component';
+
 import {  Router } from '@angular/router';
 
 @Component({

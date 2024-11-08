@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PagebennerComponent } from '../pagebenner/pagebenner.component';
 
 import { TitleLineComponent } from '../title-line/title-line.component';
@@ -15,4 +15,7 @@ export class SigninComponent {
   onClicke(): void {
     console.log('click singIn');
   }
+  @Input() title: string = 'crete neu password';
+  @Input() discription: string = 'discover amazing thing near around you';
+  hide = true;
 }

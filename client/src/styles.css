@@ -7,9 +7,13 @@ body {
   font-family: 'Montserrat', sans-serif;
   
 }
-.box-shadow-card{
-  border-radius: 8px;
-  background: #e4e4e4;
-  box-shadow: 0px 0px 0px #ffffff, -20px 33px 60px #a3a3a3;
+
+.formbox {
+  border-radius: 27px;
+  background: var(--Schemes-On-Primary, #FFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   margin: 20px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

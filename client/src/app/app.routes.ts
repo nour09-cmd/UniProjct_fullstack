@@ -15,7 +15,7 @@ import path from 'path';
 export const routes: Routes = [
   { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'Signup', component: SignupComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
