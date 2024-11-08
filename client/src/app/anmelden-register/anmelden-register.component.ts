@@ -1,20 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { PagebennerComponent } from '../pagebenner/pagebenner.component';
 import { UnsereButtonComponent } from '../unsere-button/unsere-button.component';
-import { TitleLineComponent } from '../title-line/title-line.component';
-
 import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-anmelden-register',
   standalone: true,
-  imports: [PagebennerComponent, UnsereButtonComponent, TitleLineComponent],
+  imports: [PagebennerComponent, UnsereButtonComponent],
   templateUrl: './anmelden-register.component.html',
   styleUrls: ['./anmelden-register.component.css'],
 })
 export class AnmeldenRegisterComponent {
-  @Input() title: string = ' ';
-  @Input() discription: string = ' ';
+  readonly title = input<string>(' ');
+  readonly discription = input<string>(' ');
 
   constructor(private router: Router) {}
   onSignUp(): void {

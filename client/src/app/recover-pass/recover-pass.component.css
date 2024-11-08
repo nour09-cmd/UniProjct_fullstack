@@ -1,13 +1,8 @@
-.formbox {
-    border-radius: 8px;
-    box-shadow: 0px 0px 0px #ffffff, -20px 33px 60px #a3a3a3;
-    margin: 20px;
-  }
-  
+
    
   .container {
-    max-width: 800px; 
-    padding-top: 68px;
+    max-width: 811px; 
+    padding-top: 170px;
     
   }
   /* .rowUpd{
@@ -48,3 +43,7 @@
     color: black;
     text-decoration: none;
   }
+
+
+
+  
