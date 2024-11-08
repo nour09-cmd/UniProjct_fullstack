@@ -26,14 +26,7 @@ export const routes: Routes = [
   { path : 'desktop_mobile', component: ResponsiveCardComponent},
   { path: 'profile', component: ProfileComponent },
   {path:  'recover', component: RecoverPassComponent },
-  {path:  'dashoard', component: SidebarDashboardComponent }
-
-
-
-
-
-
-
+  {path:  'dashoard', component: SidebarDashboardComponent },
   
 ];
 
