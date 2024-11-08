@@ -37,4 +37,26 @@ router
       }
     }
   );
+router.route("/resetPassword").post(async (req: Request, res: Response) => {
+  try {
+    await userLoginController.resetPassword(req, res);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+router.route("/changePassword").post(async (req: Request, res: Response) => {
+  try {
+    await userLoginController.changePassword(req, res);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+router.route("/VerifyEmail").get(async (req: Request, res: Response) => {
+  try {
+    await userLoginController.VerifyEmail(req, res);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 module.exports = router;

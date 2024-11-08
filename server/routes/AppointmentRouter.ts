@@ -40,12 +40,27 @@ router
         res.status(500).json({ message: "Internal server error" });
       }
     }
-  )
+  );
+
+router
+  .route("/AppointmentVonUser")
   .delete(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
-        await appointmentController.deleteAppointment(req, res);
+        await appointmentController.deleteAppointmentVonUser(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  );
+router
+  .route("/AppointmentVonBarber")
+  .delete(
+    auth.authenticateTokenBarber.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await appointmentController.deleteAppointmentVonBarber(req, res);
       } catch (error) {
         res.status(500).json({ message: "Internal server error" });
       }

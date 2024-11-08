@@ -1,0 +1,21 @@
+
+.logo{
+    width: 56px;
+    margin-bottom: 10px;
+
+}
+.logo-cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.sidebar-col{
+    background-color:#252525 ;
+}
+li> a{
+    color: white;
+}
+li > a > i{
+    color: #DABE29;
+}

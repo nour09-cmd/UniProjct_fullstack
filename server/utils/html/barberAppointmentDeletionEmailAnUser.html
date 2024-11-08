@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Termin abgesagt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 8px;
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .footer {
+        text-align: center;
+        color: #777777;
+        font-size: 12px;
+        padding-top: 20px;
+      }
+      .button {
+        display: inline-block;
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Ihr Termin wurde abgesagt</h2>
+      </div>
+      <p>Hallo ${},</p>
+      <p>
+        Ihr Termin bei ${} am ${} um ${} wurde leider vom Barber abgesagt. Wir
+        bedauern die Unannehmlichkeiten und hoffen, Ihnen bald einen neuen
+        Termin anbieten zu können.
+      </p>
+      <p>
+        Sie können jederzeit einen neuen Termin buchen oder sich bei Fragen an
+        uns wenden.
+      </p>
+      <p style="text-align: center">
+        <a href="${}" class="button">Neuen Termin buchen</a>
+      </p>
+      <div class="footer">
+        <p>&copy; ${} ${}. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </body>
+</html>

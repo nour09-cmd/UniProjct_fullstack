@@ -26,7 +26,11 @@
              
             ],
             "styles": [
+<<<<<<< HEAD
               "src/custom-theme.scss",
+=======
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+>>>>>>> 4b0abee89c0f967a614bdfe01621036ae3760d02
               "src/styles.css"
             ],
             "scripts": [],
@@ -92,6 +96,7 @@
               
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
