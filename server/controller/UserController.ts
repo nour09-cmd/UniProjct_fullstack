@@ -253,6 +253,7 @@ class UserRegisterController {
       //
       const emailToken = crypto.randomBytes(64).toString("hex");
       const newUser = this.userRepository.create({
+        image: req.body.image || "",
         email: emails,
         password: hashedPassword,
         vorname: vornames,
@@ -280,7 +281,6 @@ class UserRegisterController {
         emails,
         {
           email: emails,
-          password: hashedPassword,
           name: vornames + " " + nachnames,
           rolle: this.rolle,
           adresse: savedAddressId,

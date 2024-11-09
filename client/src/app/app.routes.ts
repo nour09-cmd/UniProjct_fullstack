@@ -13,37 +13,22 @@ import path from 'path';
 import { RecoverPassComponent } from './recover-pass/recover-pass.component';
 import { SidebarDashboardComponent } from './sidebar-dashboard/sidebar-dashboard.component';
 
-
-
 export const routes: Routes = [
   { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'Signup', component: SignupComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-  { path : 'desktop_mobile', component: ResponsiveCardComponent},
+  { path: 'desktop_mobile', component: ResponsiveCardComponent },
   { path: 'profile', component: ProfileComponent },
-  {path:  'recover', component: RecoverPassComponent },
-  {path:  'dashoard', component: SidebarDashboardComponent }
-
-
-
-
-
-
-
-  
+  { path: 'recover', component: RecoverPassComponent },
+  { path: 'dashoard', component: SidebarDashboardComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-  
-
-}
-
-
+export class AppRoutingModule {}

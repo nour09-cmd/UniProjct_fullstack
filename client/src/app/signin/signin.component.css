@@ -1,13 +1,67 @@
-.formbox {
-  border-radius: 8px;
-  background: #e4e4e4;
-  box-shadow: 0px 0px 0px #ffffff, -20px 33px 60px #a3a3a3;
-  margin: 20px;
-}
 
  
 .container {
   max-width: 811px; 
   padding-top: 170px;
   
+}
+.form-control{
+  display: flex;
+  padding: 13px 256px 13px 12px;
+  align-items: center;
+  gap: 10px;
+  margin: 0px;
+  border-radius: 8px;
+  background: #E8E7E7;
+  padding-left: 35px; 
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
+
+@media screen and (max-width: 560px) {
+  .container {
+    width: 80%;
+  }
+
+  .formbox {
+    padding: 1.5rem;
+  }
+  .form-control{
+    padding: 23px 127px 11px 41px;
+  }
+}
+
+/* Stile für Smartphones und sehr kleine Bildschirme */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 95%;
+  }
+
+  .formbox {
+    padding: 1rem;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-icon {
+    margin-top: 0.5rem;
+  }
+  .form-control{
+    padding: 23px 127px 11px 41px;
+  }
 }
