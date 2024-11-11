@@ -15,7 +15,15 @@ export class LadenController {
   }
   async getLadens(req: Request, res: Response) {
     const ladens = await this.modelMonogo.findByBarberes();
-    return res.status(200).json({ ...ladens });
+    const newDAten = ladens.map((ladenData) => {
+      ladenData.barber_email = "";
+      ladenData.start_Abo_Date = "";
+      ladenData.end_Abo_Date = "";
+      ladenData.week_days = [];
+      ladenData.reserved_appointments = [];
+      ladenData.close_days = [];
+    });
+    return res.status(200).json({ ...newDAten });
   }
   async getLadenByEmail(req: Request, res: Response) {
     const getLadenDTO = plainToClass(GetLadenDTO, req.body);
@@ -28,6 +36,8 @@ export class LadenController {
     if (!ladenData) {
       return res.status(400).json({ message: "ladenData not Fund" });
     }
+    ladenData.start_Abo_Date = "";
+    ladenData.end_Abo_Date = "";
     return res.status(200).json({ ...ladenData });
   }
   async createLaden(req: Request, res: Response) {
