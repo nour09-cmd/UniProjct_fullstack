@@ -29,6 +29,8 @@ export class User {
 
   @Column({ type: "date" })
   geburtsdatum: Date;
+  @Column({ type: "varchar", nullable: true })
+  image: string;
 
   @ManyToOne(() => Adresse, { nullable: true, onDelete: "SET NULL" })
   @JoinColumn({ name: "adresse_id" })
