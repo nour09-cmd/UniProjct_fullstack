@@ -1,6 +1,8 @@
 import store from './store';
 import { Injectable } from '@angular/core';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,4 +16,5 @@ export class StoreService {
   subcribe(listener: any) {
     store.subscribe(listener);
   }
+  
 }
