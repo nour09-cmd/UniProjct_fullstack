@@ -53,7 +53,9 @@ import { Router } from '@angular/router';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  signUPForm: FormGroup;
+
+
+  
   constructor(private fb: FormBuilder, private _router: Router) {
     this.signUPForm = this.fb.group({
       image: ['', [Validators.required, Validators.required]],
@@ -68,21 +70,16 @@ export class SignupComponent {
       plz: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
-  onSubmit() {
-    throw new Error('Method not implemented.');
-  }
 
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
-  matcher = new ErrorStateMatcher();
-
-  errorStateMatcher: ErrorStateMatcher | undefined;
+  signUPForm: FormGroup;
+  selectedImage: any;
   imagePreview: any;
-  fileName: any;
-  hide: any;
+  hide: boolean = true;
 
   onClicke() {
     console.log(this.signUPForm.value);
@@ -91,13 +88,30 @@ export class SignupComponent {
   @Input() title: string = 'crete neu password';
   @Input() discription: string = 'discover amazing thing near around you';
 
-  selectedFileName: string | null = null;
-  onFileSelected(event: Event): void {
+  
+
+  onDateiAuswahl(event: Event): void {
     const input = event.target as HTMLInputElement;
+  
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      // Hier können Sie die ausgewählte Datei weiterverarbeiten
-      console.log('Ausgewählte Datei:', file);
+  
+      // Validierung: Nur Bilddateien erlauben
+      if (!file.type.startsWith('image/')) {
+        console.error('Bitte nur Bilddateien auswählen!');
+        return;
+      }
+  
+      this.selectedImage = file;
+  
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result; // Speichert die Bildvorschau als Base64
+      };
+      reader.readAsDataURL(file);
+  
+      console.log('Ausgewählte Datei:', file.name);
     }
   }
+  
 }
