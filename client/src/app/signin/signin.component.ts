@@ -1,18 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PagebennerComponent } from '../pagebenner/pagebenner.component';
 
 import { TitleLineComponent } from '../title-line/title-line.component';
 import { UnsereButtonComponent } from '../unsere-button/unsere-button.component';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
+import { StoreService } from '../redux/store.service';
+import { logIn } from '../redux/features/User/UserSlice';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [PagebennerComponent,UnsereButtonComponent, TitleLineComponent],
+  imports: [
+    PagebennerComponent,
+    UnsereButtonComponent,
+    TitleLineComponent,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css',
 })
 export class SigninComponent {
-  onClicke(): void {
-    console.log('click singIn');
+  userData: any;
+  loading: boolean = true;
+
+  loginForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private storeService: StoreService,
+    private _router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  @Input() title: string = 'create neu password';
+  @Input() discription: string = 'discover amazing thing near around you';
+  hide = true;
+  async onClicke() {
+    if (this.loginForm.value) {
+      const userData = this.loginForm.value;
+      await this.storeService.dispatch(logIn(userData));
+      this._router.navigate(['/']);
+    }
   }
 }

@@ -10,35 +10,25 @@ import { AnmeldenRegisterComponent } from './anmelden-register/anmelden-register
 import { ResponsiveCardComponent } from './responsive-card/responsive-card.component';
 import { ProfileComponent } from './profile/profile.component';
 import path from 'path';
-
-
+import { RecoverPassComponent } from './recover-pass/recover-pass.component';
+import { SidebarDashboardComponent } from './sidebar-dashboard/sidebar-dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'Signup', component: SignupComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-<<<<<<< HEAD
-  { path : 'desktop_mobile', component: ResponsiveCardComponent},
+  { path: 'desktop_mobile', component: ResponsiveCardComponent },
   { path: 'profile', component: ProfileComponent },
-
-=======
-  { path : 'desktop_mobile', component: ResponsiveCardComponent}
->>>>>>> 237d28cec2cf447fcd42764208196ca78d96853e
-
-  
+  { path: 'recover', component: RecoverPassComponent },
+  { path: 'dashoard', component: SidebarDashboardComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-  
-
-}
-
-
+export class AppRoutingModule {}

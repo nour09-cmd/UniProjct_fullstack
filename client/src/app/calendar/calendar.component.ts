@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'app-calendar',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  imports: [ CommonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
