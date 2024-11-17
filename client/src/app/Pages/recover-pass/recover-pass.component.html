@@ -1,0 +1,61 @@
+<app-pagebenner title="ENTER OTP" discription="Discover Amazing Thing Near Around You"></app-pagebenner>
+<div class="container">
+  <div class="row justify-content-center rowUpd">
+    <div class="col-10 col-md-8 col-lg-8 formbox" style="min-width: 352px;">
+      <div class="card bg-white mb-5 mt-5 border-0">
+        <div class="card-body p-5 text-center ">
+          <form [formGroup]="otpForm">
+          <h4>Verify</h4>
+          <p>Your code was sent to you via email</p>
+          
+            <div class="input-otp">
+            <ng-otp-input  (onInputChange)="onOtpChange($event)" [config]="{length:4}" style="font-size: 12px;"></ng-otp-input>
+            </div>
+            
+
+            <Unsere-Buton label="Recover password" classes="black" (clicked)="onClicke()">></Unsere-Buton>
+
+            <p class="resend text-muted mb-0 py-3">
+              hast du keine code erhalten?<a href=""> send Code </a>
+            </p>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+
+    <a class="text-secondary my-10" href="signup"><title-line titel="Back to home"></title-line></a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container ">
+  <div class="py-4 d-flex flex-column justify-content-center align-items-center formbox">
+    <form>
+      <div class="form-group py-3">
+        <input type="Name" id="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Full Name" formControlName="email" />
+      </div>
+      <div class="form-group py-3">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password"/>
+      </div>
+      <Unsere-Buton label="Recover password" classes="black" (clicked)="onClicke()"></Unsere-Buton>
+    </form>
+  </div>
+  <a class="text-secondary my-10" href="signup"><title-line titel="SUIN UP"></title-line></a>
+</div> -->

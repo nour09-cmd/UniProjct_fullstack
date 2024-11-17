@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col col-md-3 col-xl-2 px-sm-2 px-0  sidebar-col">
+            <div class=" align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <div class="d-flex align-items-center pt-4 px-3">
+                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"> <span class="fs-6 d-none d-sm-inline name-title-style">BARBER FINDER</span></a>
+                     <img class="logo ms-2" src="..\assets\logo.svg" alt="Logo">
+                    </div>
+                    <div class="container w-100 py-3">
+                                <div class="d-flex flex-column justify-content-center align-items-center logo-cont">
+                                    <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                    class="rounded-circle" style="width: 75px; height: 75px; object-fit: cover;" alt="example placeholder" />
+                                    <p class=" d-flex align-items-center fs-6 d-none d-sm-inline py-3">Full Name</p>
+                                </div>    
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-calendar-event px-1"></i> <span class="ms-1 d-none d-sm-inline">Appointments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-clock-history px-1"></i> <span class="ms-1 d-none d-sm-inline">Working days</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-cup-hot-fill px-1"></i> <span class="ms-1 d-none d-sm-inline">Close Days</span></a>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <i class="fs-4 bi-house-gear px-1"></i> <span class="ms-1 d-none d-sm-inline">Laden Profile</span></a>
+                        
+                    </li>
+                    <li>
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-cash-coin px-1"></i> <span class="ms-1 d-none d-sm-inline">Price Liste</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle ">
+                            <i class="fs-4 bi-people px-1"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+        </div>
+        </div>
+        <div class="col py-3">
+            <!-- <app-apponitment-dashboard></app-apponitment-dashboard> -->
+            <app-working-days></app-working-days>
+        </div>
+    </div>
+</div>
