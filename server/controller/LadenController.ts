@@ -15,15 +15,15 @@ export class LadenController {
   }
   async getLadens(req: Request, res: Response) {
     const ladens = await this.modelMonogo.findByBarberes();
-    const newDAten = ladens.map((ladenData) => {
-      ladenData.barber_email = "";
-      ladenData.start_Abo_Date = "";
-      ladenData.end_Abo_Date = "";
-      ladenData.week_days = [];
-      ladenData.reserved_appointments = [];
-      ladenData.close_days = [];
-    });
-    return res.status(200).json({ ...newDAten });
+    // const newDAten = ladens.map((ladenData) => {
+    //   ladenData.barber_email = "";
+    //   ladenData.start_Abo_Date = "";
+    //   ladenData.end_Abo_Date = "";
+    //   ladenData.week_days = [];
+    //   ladenData.reserved_appointments = [];
+    //   ladenData.close_days = [];
+    // });
+    return res.status(200).json({ ...ladens });
   }
   async getLadenByEmail(req: Request, res: Response) {
     const getLadenDTO = plainToClass(GetLadenDTO, req.body);

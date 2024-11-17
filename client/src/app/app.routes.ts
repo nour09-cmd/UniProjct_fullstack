@@ -1,28 +1,28 @@
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { PagebennerComponent } from './pagebenner/pagebenner.component';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
-import { WillkommenComponent } from './willkommen/willkommen.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { NgModule, OnInit } from '@angular/core';
+import { PagebennerComponent } from './Components/pagebenner/pagebenner.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
-import { AnmeldenRegisterComponent } from './anmelden-register/anmelden-register.component';
-import { ResponsiveCardComponent } from './responsive-card/responsive-card.component';
-import { ProfileComponent } from './profile/profile.component';
-import path from 'path';
-import { RecoverPassComponent } from './recover-pass/recover-pass.component';
-import { SidebarDashboardComponent } from './sidebar-dashboard/sidebar-dashboard.component';
+import { ResponsiveCardComponent } from './Pages/responsive-card/responsive-card.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
+import { RecoverPassComponent } from './Pages/recover-pass/recover-pass.component';
+import { SidebarDashboardComponent } from './Dashboard/sidebar-dashboard/sidebar-dashboard.component';
+import { AnmeldenRegisterComponent } from './Pages/anmelden-register/anmelden-register.component';
+import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
+import { SigninComponent } from './Pages/signin/signin.component';
+import { SignupComponent } from './Pages/signup/signup.component';
 
 export const routes: Routes = [
-  { path: '', component: WillkommenComponent },
+  // { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-  { path: 'desktop_mobile', component: ResponsiveCardComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: '', component: ResponsiveCardComponent },
+  // { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:email', component: ProfileComponent },
+
   { path: 'recover', component: RecoverPassComponent },
   { path: 'dashoard', component: SidebarDashboardComponent },
 ];
