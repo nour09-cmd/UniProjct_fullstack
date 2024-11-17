@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import UserSlice from './features/User/UserSlice';
+
 const store: any = configureStore({
   reducer: {
     user: UserSlice,
-
     // Laden ->
     // - LadenProfiles
     // - LadenProfile
