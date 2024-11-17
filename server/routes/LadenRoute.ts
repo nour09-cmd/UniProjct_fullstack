@@ -5,22 +5,20 @@ const router = Router();
 const ladenController = new LadenController();
 const auth = new AuthentivateToken();
 
-router
-  .route("/getOneladens")
-  .get(
-    auth.authenticateToken.bind(auth),
-    async (req: Request, res: Response) => {
-      try {
-        await ladenController.getLadenByEmail(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-      }
+router.route("/getOneladens").get(
+  // auth.authenticateToken.bind(auth),
+  async (req: Request, res: Response) => {
+    try {
+      await ladenController.getLadenByEmail(req, res);
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
     }
-  );
+  }
+);
 router
   .route("/getladens")
   .get(
-    auth.authenticateToken.bind(auth),
+    // auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
         await ladenController.getLadens(req, res);
