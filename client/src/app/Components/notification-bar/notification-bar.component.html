@@ -1,0 +1,11 @@
+<!-- <div *ngIf="isVisible" [class]="'vis' +' '+ type" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div> -->
+
+<div [class]="'n_box' +' '+ type" data-auto-dismiss role="alert">
+    <span id="alertMsg">{{message}}</span>
+    <button class="close" id="btns" aria-label="close" data-dismiss="alert">&times;</button>
+</div>
