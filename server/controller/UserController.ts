@@ -36,8 +36,10 @@ class UserLoginController {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const { vorname, nachname, email, handynummer } = user;
-    return res.status(200).json({ vorname, nachname, email, handynummer });
+    const { vorname, nachname, email, handynummer, image } = user;
+    return res
+      .status(200)
+      .json({ vorname, nachname, email, handynummer, image });
   }
   createToken(email: string, name: string) {
     const token = jwt.sign({ name, email }, SECRET_KEY!, {
@@ -177,7 +179,7 @@ class UserRegisterController {
   private modelAppointmentUser: UserProfileModel;
   private emailS: EmailService;
   constructor() {
-    this.rolle = Rolle.USER;
+    this.rolle = Rolle.BARBER;
     this.modelAppointmentUser = new UserProfileModel();
     this.emailS = new EmailService();
   }

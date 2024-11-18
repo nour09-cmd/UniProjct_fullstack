@@ -14,7 +14,7 @@ import { SignupComponent } from './Pages/signup/signup.component';
 export const routes: Routes = [
   // { path: '', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'register', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },

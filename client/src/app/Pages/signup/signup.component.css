@@ -102,3 +102,10 @@ mat-error {
     width: 100%;
   }
 }
+mat-icon {
+  font-family: 'Material Icons' !important;
+}
+
+
+
+/* ----------------------------------------------------- */
