@@ -6,15 +6,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-calendar',
+  selector: 'app-star-rating',
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [ CommonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  templateUrl: './star-rating.component.html',
+  styleUrls: ['./star-rating.component.css']
 })
-export class CalendarComponent {
+export class StarRatingComponent {
   private readonly _currentYear = new Date().getFullYear();
   readonly minDate = new Date(this._currentYear - 20, 0, 1);
   readonly maxDate = new Date(this._currentYear + 1, 11, 31);

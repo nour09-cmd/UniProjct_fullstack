@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarDesktopComponent } from '../../Components/navbar-desktop/navbar-desktop.component';
 import { NavbarMobileComponent } from '../../Components/navbar-mobile/navbar-mobile.component';
 import { SlideShowComponent } from '../../Components/slide-show/slide-show.component';
-import { CalendarComponent } from '../../calendar/calendar.component';
+import { StarRatingComponent } from '../../star-rating/star-rating.component';
 import { OpeningHoursComponent } from '../../opening-hours/opening-hours.component';
 import { MapComponent } from '../../Components/map/map.component';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../../redux/store.service';
 import { getOneLaden } from '../../redux/features/Laden/LadenSlice';
+import { CalendarComponent } from "../../Components/calendar/calendar.component";
 
 @Component({
   selector: 'app-profile',
@@ -16,10 +17,11 @@ import { getOneLaden } from '../../redux/features/Laden/LadenSlice';
     NavbarDesktopComponent,
     NavbarMobileComponent,
     SlideShowComponent,
-    CalendarComponent,
+    StarRatingComponent,
     OpeningHoursComponent,
     MapComponent,
-  ],
+    CalendarComponent,
+],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
   template: `<app-map [mapUrl]="storeMapUrl"></app-map>`,
