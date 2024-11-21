@@ -6,10 +6,9 @@
   <app-navbar-mobile />
 
   <div class="container mt-5">
-    <div class="row g-3">
-      <div class="col-12 col-md-6 col-lg-4">
+    <div class="row g-5 ">
+      <div class=" col-lg-4 col-md-6 col-sm-12 "  *ngFor="let item of ladenDaten | keyvalue; let i = index" >
         <app-cards
-          *ngFor="let item of ladenDaten | keyvalue; let i = index"
           [Name]="ladenDaten[i].Laden_name"
           [description]="ladenDaten[i].Laden_description"
           [id]="ladenDaten[i].barber_email"
