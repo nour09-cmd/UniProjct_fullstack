@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { WillkommenComponent } from '../../Components/willkommen/willkommen.component';
 
 @Component({
-  selector: 'app-responsive-card',
+  selector: 'app-home-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -17,10 +17,10 @@ import { WillkommenComponent } from '../../Components/willkommen/willkommen.comp
     CardsComponent,
     WillkommenComponent,
   ],
-  templateUrl: './responsive-card.component.html',
-  styleUrl: './responsive-card.component.css',
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.css',
 })
-export class ResponsiveCardComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   ladenDaten: any;
   loading: boolean = true;
   constructor(private storeService: StoreService) {}
