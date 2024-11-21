@@ -1,0 +1,18 @@
+{
+  "name": "@mrx/barbar-finder",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "author": "Nour022 -> Nour Gaser",
+  "license": "ISC",
+  "description": ""
+}
