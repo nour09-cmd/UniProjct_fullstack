@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { BASEURL } from '../../../utils/config';
+import { BASEURL, TOKEN } from '../../../utils/config';
 
 const initialState: any = {
   singUpError: [],
@@ -46,7 +46,7 @@ export const getUserData: any = createAsyncThunk(
   '/getUserData',
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = TOKEN();
       const res: any = await axios.get(`${BASEURL}/users/getUserData/`, {
         headers: {
           authorization: token,
@@ -86,24 +86,24 @@ const UserSlice = createSlice({
         state.errors = action.payload;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
-        state.loading = false;
         state.userData = action.payload;
+        state.loading = false;
         state.errors = '';
       })
       .addCase(getUserData.rejected, (state, action) => {
-        state.loading = false;
         state.errors = action.payload;
+        state.loading = false;
       })
       .addCase(singUp.fulfilled, (state, action) => {
         console.log('SingUp Rejected Action:', action);
-        state.loading = false;
         state.singUpError = action.payload || [];
+        state.loading = false;
         state.errors = action.payload?.message || 'Sign-up failed';
       })
       .addCase(singUp.rejected, (state, action) => {
         console.log('SingUp Rejected Action:', action);
-        state.loading = false;
         state.singUpError = action.payload.errors || [];
+        state.loading = false;
         state.errors = action.payload?.message || 'Sign-up failed';
       });
   },

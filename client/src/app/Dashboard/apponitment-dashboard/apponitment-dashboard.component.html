@@ -37,22 +37,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let item of appoData| keyvalue; let i = index">
                     <td class="w-25">
                         <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid rounded-circle" alt="Sheep">
                     </td>
-                    <td>Amer Alloush</td>
-                    <td>20.12-2000</td>
-                    <td>0175243235678</td>
+                    <td>{{appoData[i].user[0].name}}</td>
+                    <td>{{formatDate(appoData[i].date) + " : "+ appoData[i].time}}</td>
+                    <td>{{appoData[i].user[0].handynummer}}</td>
+                    <td><button (click)="deletAPPO(appoData[i]._id,appoData[i].user[0].email,i)">delete</button></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td class="w-25">
                         <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid rounded-circle " alt="Sheep">
                     </td>
                     <td>Amer Alloush</td>
                     <td>20.12-2000</td>
                     <td>0175243235678</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>   
           </div>

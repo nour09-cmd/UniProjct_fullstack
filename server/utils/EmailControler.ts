@@ -871,9 +871,7 @@ export class EmailService {
               </div>
             </div>
           </body>
-        </html>
-
-    `;
+        </html>`;
     await this.sendEmail(ladenData.barber_email, to, other.subject, htmlLayout);
     return true;
   }

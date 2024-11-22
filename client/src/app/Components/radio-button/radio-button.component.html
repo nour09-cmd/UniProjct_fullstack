@@ -1,0 +1,24 @@
+
+<div>
+    <label>
+      <input
+        type="radio"
+        name="filter"
+        [(ngModel)]="selectedFilter"
+        [value]="'showAll'"
+        (change)="onSelectionChange()"
+      />
+      Show All Appointments
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="filter"
+        [(ngModel)]="selectedFilter"
+        [value]="'deleteAppointment'"
+        (change)="onSelectionChange()"
+      />
+      Delete Appointment
+    </label>
+  </div>
+  
