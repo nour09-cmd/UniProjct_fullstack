@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResponsiveCardComponent } from './responsive-card.component';
+import { HomePageComponent } from './home-page.component';
 
-describe('ResponsiveCardComponent', () => {
-  let component: ResponsiveCardComponent;
-  let fixture: ComponentFixture<ResponsiveCardComponent>;
+describe('HomePageComponent', () => {
+  let component: HomePageComponent;
+  let fixture: ComponentFixture<HomePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResponsiveCardComponent]
+      imports: [HomePageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ResponsiveCardComponent);
+    fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

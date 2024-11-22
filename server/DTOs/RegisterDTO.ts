@@ -45,8 +45,6 @@ export class UserRegisterDTO {
   @IsNotEmpty()
   handynummer: string;
 
-  //   @IsDateString()
-  //   @IsNotEmpty()
   @IsString()
   @IsNotEmpty()
   geburtsdatum: string;

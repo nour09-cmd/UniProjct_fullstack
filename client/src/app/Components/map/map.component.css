@@ -8,3 +8,13 @@
     background-repeat: no-repeat;
   }
   
+
+  @media (max-width: 576px) {
+    .map-container {
+      aspect-ratio: auto; /* Remove fixed ratio for very small screens */
+    }
+  }
+
+  .location-header h3 {
+    font-family: 'Roboto', sans-serif;
+  }

@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule, OnInit } from '@angular/core';
 import { PagebennerComponent } from './Components/pagebenner/pagebenner.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
-import { ResponsiveCardComponent } from './Pages/responsive-card/responsive-card.component';
+import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { RecoverPassComponent } from './Pages/recover-pass/recover-pass.component';
 import { SidebarDashboardComponent } from './Dashboard/sidebar-dashboard/sidebar-dashboard.component';
@@ -19,7 +19,7 @@ export const routes: Routes = [
   { path: 'rest', component: ResetPasswordComponent },
   { path: 'changepass', component: ChangePassComponent },
   { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-  { path: '', component: ResponsiveCardComponent },
+  { path: '', component: HomePageComponent },
   // { path: 'profile', component: ProfileComponent },
   { path: 'profile/:email', component: ProfileComponent },
 
