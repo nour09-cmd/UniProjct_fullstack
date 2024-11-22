@@ -8,9 +8,12 @@
           <mat-calendar
             #calendar
             [minDate]="minDate"
+            [maxDate]="maxDate"
             [(selected)]="selectedDate"
             (selectedChange)="dateChanged($event)"
           ></mat-calendar>
+          <p *ngIf="selectedDate">Selected Date: {{ selectedDate | date }}</p>
+          <p *ngIf="!selectedDate">No valid date selected.</p>
           <Unsere-Buton label="SAVE" classes="black"></Unsere-Buton>
         </div>
       </div>

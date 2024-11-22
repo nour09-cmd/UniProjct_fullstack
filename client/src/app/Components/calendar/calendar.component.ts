@@ -21,7 +21,7 @@ import { UnsereButtonComponent } from "../unsere-button/unsere-button.component"
     MatDatepickerModule,
     MatNativeDateModule,
     UnsereButtonComponent
-],
+  ],
 })
 export class CalendarComponent {
   @ViewChild('calendar') calendar: MatCalendar<Date> | undefined;
@@ -29,19 +29,20 @@ export class CalendarComponent {
   selectedDate: Date | null = null;
 
   minDate: Date;
+  maxDate: Date;
 
   constructor(private dateAdapter: DateAdapter<Date>) {
     this.minDate = this.dateAdapter.today();
+    this.maxDate = new Date(this.minDate.getFullYear(), this.minDate.getMonth() + 1, this.minDate.getDate());
   }
 
   dateChanged(selectedDate: Date) {
-    if (this.isSameOrAfter(selectedDate, this.minDate)) {
+    if (this.isSameOrAfter(selectedDate, this.minDate) && this.isSameOrBefore(selectedDate, this.maxDate)) {
       this.selectedDate = selectedDate;
     } else {
       this.selectedDate = null;
     }
   }
-
 
   private isSameOrAfter(date1: Date, date2: Date): boolean {
     const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
@@ -49,4 +50,9 @@ export class CalendarComponent {
     return d1.getTime() >= d2.getTime();
   }
 
+  private isSameOrBefore(date1: Date, date2: Date): boolean {
+    const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+    return d1.getTime() <= d2.getTime();
+  }
 }
