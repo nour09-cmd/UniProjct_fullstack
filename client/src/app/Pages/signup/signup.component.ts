@@ -59,7 +59,7 @@ import { NotificationBarComponent } from '../../Components/notification-bar/noti
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent implements OnChanges {
+export class SignupComponent {
   loading: boolean = true;
   singUpErorr: any = [];
   passwdchecker: Boolean = false;
@@ -79,11 +79,11 @@ export class SignupComponent implements OnChanges {
     private _router: Router,
     private storeService: StoreService
   ) {
-    const token = localStorage.getItem('token') || '';
+    // const token = localStorage.getItem('token') || '';
 
-    if (token || token != '') {
-      this._router.navigate(['/']);
-    }
+    // if (token || token != '') {
+    //   this._router.navigate(['/']);
+    // }
     this.signUPForm = this.fb.group({
       image: ['', Validators.required], // The image will store Base64 string
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -187,15 +187,11 @@ export class SignupComponent implements OnChanges {
       if (this.singUpErorr.length > 0) {
         console.error('Signup Errors:', this.singUpErorr);
       }
-      this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
+      }, 2500);
     } catch (error) {
       console.error('Error during form submission:', error);
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['singUpErorr']) {
-      this.loading = false;
     }
   }
 }

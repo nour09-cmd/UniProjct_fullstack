@@ -38,13 +38,13 @@ const LadenSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllData.fulfilled, (state, action) => {
-        state.loading = false;
         state.LadensDaten = action.payload;
+        state.loading = false;
         state.errors = '';
       })
       .addCase(getOneLaden.fulfilled, (state, action) => {
-        state.loading = false;
         state.getOneLaden = action.payload;
+        state.loading = false;
         state.errors = '';
       });
   },

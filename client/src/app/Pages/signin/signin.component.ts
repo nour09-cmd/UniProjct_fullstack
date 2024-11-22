@@ -37,11 +37,11 @@ export class SigninComponent {
     private storeService: StoreService,
     private _router: Router
   ) {
-    const token = localStorage.getItem('token') || '';
+    // const token = localStorage.getItem('token') || '';
 
-    if (token || token != '') {
-      this._router.navigate(['/']);
-    }
+    // if (token || token != '') {
+    //   this._router.navigate(['/']);
+    // }
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],

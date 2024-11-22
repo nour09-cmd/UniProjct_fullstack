@@ -1,0 +1,69 @@
+<div class="container formbox">
+  <form
+    class="row g-3 my-3 mx-3"
+    [formGroup]="addressForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="col-md-6">
+      <label for="street" class="form-label">Straße:</label>
+      <input
+        type="text"
+        id="street"
+        formControlName="street"
+        class="form-control"
+        placeholder="Straße eingeben"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="houseNumber" class="form-label">Hausnummer:</label>
+      <input
+        type="text"
+        id="houseNumber"
+        formControlName="houseNumber"
+        class="form-control"
+        placeholder="Hausnummer eingeben"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="postalCode" class="form-label">PLZ:</label>
+      <input
+        type="text"
+        id="postalCode"
+        formControlName="postalCode"
+        class="form-control"
+        placeholder="12345"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="city" class="form-label">Ort:</label>
+      <input
+        type="text"
+        id="city"
+        formControlName="city"
+        class="form-control"
+        placeholder="Ort eingeben"
+      />
+    </div>
+  </form>
+</div>
+
+<!-- <button class="button-21" type="submit" [disabled]="addressForm.invalid">
+      Submit
+    </button> -->
+<!-- 
+  <p><strong>Aktuelle Adresse:</strong></p>
+  <p>
+    Straße: {{ addressForm.value.street }}, Hausnummer:
+    {{ addressForm.value.houseNumber }}
+  </p>
+  <p>
+    PLZ: {{ addressForm.value.postalCode }}, Ort: {{ addressForm.value.city }}
+  </p>
+</div> -->
+<Unsere-Buton
+  classes="black"
+  label="submit"
+  (clicked)="onSubmit()"
+></Unsere-Buton>

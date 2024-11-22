@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApponitmentDashboardComponent } from '../apponitment-dashboard/apponitment-dashboard.component';
 import { WorkingDaysComponent } from '../working-days/working-days.component';
+import { ClosedaysComponent } from '../closedays/closedays.component';
+import { StoreService } from '../../redux/store.service';
+import { getUserData } from '../../redux/features/User/UserSlice';
+import { LadenProfileComponent } from '../laden-profile/laden-profile.component';
 
 @Component({
   selector: 'app-sidebar-dashboard',
@@ -8,9 +12,20 @@ import { WorkingDaysComponent } from '../working-days/working-days.component';
   imports: [
     WorkingDaysComponent,
     ApponitmentDashboardComponent,
-    WorkingDaysComponent,
+    ClosedaysComponent,
+    LadenProfileComponent,
   ],
   templateUrl: './sidebar-dashboard.component.html',
   styleUrl: './sidebar-dashboard.component.css',
 })
-export class SidebarDashboardComponent {}
+export class SidebarDashboardComponent implements OnInit {
+  _userData: any = [];
+  constructor(private storeService: StoreService) {}
+  ngOnInit(): void {
+    this.storeService.subcribe(() => {
+      const stateUser = this.storeService.getState().user;
+      this._userData = stateUser.userData;
+    });
+    this.storeService.dispatch(getUserData());
+  }
+}

@@ -1,0 +1,30 @@
+.title-dacshboard {
+    color: #000;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .container-table {
+  
+    padding: 2rem 0rem;
+  }
+  /* Optionale Anpassungen */
+ul li span {
+    font-size: 16px; /* Größe des Textes */
+  }
+  
+  ul li a {
+    font-size: 18px; /* Größe des Links */
+  }
+  
+  button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .formbox{
+    margin: 0px;
+    padding: 20px;
+  }

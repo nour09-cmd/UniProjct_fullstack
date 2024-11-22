@@ -1,0 +1,81 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="col">
+      <p class="title-dacshboard">Laden Profile</p>
+    </div>
+  </div>
+  <div class="container">
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="my-3">
+      <div class="my-2 form-group form-control-lg">
+        <label for="exampleFormControlTextarea1 my-3 ">Laden Details :</label>
+        <input
+          class="form-control form-control-lg my-3"
+          type="text"
+          placeholder="Name the Store"
+        />
+
+        <textarea
+          class="form-control my-3"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          placeholder="Describtion"
+        ></textarea>
+        <label for="exampleFormControlTextarea1 my-3 "
+          >Add Laden Images (Max 3 images) :</label
+        >
+        <div class="container formbox">
+          <div class="container my-4">
+            <div
+              class="d-flex align-items-center justify-content-around border-bottom border-secondary"
+            >
+              <div
+                class="py-2 rounded-top border-secondary w-25 d-flex justify-content-center border border-bottom-0"
+              >
+                <p>Add image</p>
+              </div>
+              <button
+                class="btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center"
+                (click)="fileInput.click()"
+                [disabled]="isUploadDisabled()"
+              >
+                <span class="mb-0">+</span>
+              </button>
+              <input
+                type="file"
+                #fileInput
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                class="d-none"
+              />
+            </div>
+          </div>
+
+          <ul class="list-unstyled mt-3">
+            <li
+              *ngFor="
+                let fileControl of uploadedFilesArray.controls;
+                let i = index
+              "
+              class="d-flex justify-content-between align-items-center border-bottom py-2"
+            >
+              <span class="text-muted">• {{ fileControl.value.name }}</span>
+              <p
+                class="text-primary text-decoration-none"
+                (click)="removeFile(i)"
+              >
+                <button
+                  class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <span class="h5 mb-0">--</span>
+                </button>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <label for="exampleFormControlTextarea1 my-3 ">Laden Addres :</label>
+      <app-addresse-input></app-addresse-input>
+    </form>
+  </div>
+</div>
