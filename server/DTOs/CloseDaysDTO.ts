@@ -5,7 +5,7 @@ export class CloseDaysDTO {
   @IsNotEmpty()
   date: string;
   // // TODO after middelware remove the email !!!!
-  // @IsEmail()
-  // @IsNotEmpty()
-  // barberEmail: string;
+  @IsEmail()
+  @IsNotEmpty()
+  barberEmail: string;
 }
