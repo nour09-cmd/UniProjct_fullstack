@@ -20,6 +20,7 @@ router.route("/singin").post(async (req: Request, res: Response) => {
 });
 router.route("/singup").post(async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     await userRegisterController.signUp(req, res);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });

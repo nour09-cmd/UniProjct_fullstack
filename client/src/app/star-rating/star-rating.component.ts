@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,10 +15,11 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./star-rating.component.css']
 })
 export class StarRatingComponent {
+  @Input() ratingArr!:any;
   private readonly _currentYear = new Date().getFullYear();
   readonly minDate = new Date(this._currentYear - 20, 0, 1);
   readonly maxDate = new Date(this._currentYear + 1, 11, 31);
-
+  
   stars = Array(5).fill(0);
   rating = 0;  
 

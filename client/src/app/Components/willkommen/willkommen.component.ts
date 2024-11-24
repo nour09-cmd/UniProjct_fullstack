@@ -10,4 +10,18 @@ import { StoreService } from '../../redux/store.service';
   templateUrl: './willkommen.component.html',
   styleUrl: './willkommen.component.css',
 })
-export class WillkommenComponent {}
+export class WillkommenComponent implements OnInit {
+  userData: any;
+  loading: boolean = true;
+
+  constructor(private storeService: StoreService) {}
+  ngOnInit(): void {
+    this.loading = false;
+    this.storeService.subcribe(() => {
+      const state = this.storeService.getState().user;
+      this.userData = state.userData;
+      this.loading = state.loading;
+    });
+    this.storeService.dispatch(getUserData());
+  }
+}

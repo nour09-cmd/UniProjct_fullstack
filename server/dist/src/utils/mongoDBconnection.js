@@ -14,11 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatabaseConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+const conifg_1 = require("./conifg");
 class DatabaseConnection {
     constructor() {
-        this.dbUri = process.env.DB_URI_MONGODB || "";
+        this.dbUri = conifg_1.DB_URIMONGODB || "";
         if (!this.dbUri) {
             console.error("Database URI not found in environment variables");
             process.exit(1);
@@ -29,6 +28,18 @@ class DatabaseConnection {
             try {
                 const conn = yield mongoose_1.default.connect(this.dbUri);
                 console.log(`Database Connected: ${conn.connection.host}`);
+            }
+            catch (err) {
+                console.error(`Database Error: ${err.message}`);
+                process.exit(1);
+            }
+        });
+    }
+    disconnect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield mongoose_1.default.disconnect();
+                console.log(`Database disconnect`);
             }
             catch (err) {
                 console.error(`Database Error: ${err.message}`);

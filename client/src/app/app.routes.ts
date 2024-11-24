@@ -10,9 +10,10 @@ import { AnmeldenRegisterComponent } from './Pages/anmelden-register/anmelden-re
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
+import { WillkommenComponent } from './Components/willkommen/willkommen.component';
 
 export const routes: Routes = [
-  // { path: '', component: WillkommenComponent },
+  // { path: 'spinner', component: WillkommenComponent },
   { path: 'login', component: SigninComponent },
   { path: 'register', component: SignupComponent },
   { path: 'pagebenner', component: PagebennerComponent },
@@ -24,7 +25,7 @@ export const routes: Routes = [
   { path: 'profile/:email', component: ProfileComponent },
 
   { path: 'recover', component: RecoverPassComponent },
-  { path: 'dashoard', component: SidebarDashboardComponent },
+  { path: 'dashboard', component: SidebarDashboardComponent },
 ];
 
 @NgModule({
