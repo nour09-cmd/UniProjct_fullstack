@@ -37,5 +37,8 @@
     "typeorm": "^0.3.20",
     "typescript": "^5.6.3",
     "typescript-class-validator": "^0.0.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14"
   }
 }
