@@ -1,0 +1,36 @@
+div {
+    display: flex;
+
+    flex-wrap: wrap;
+    gap: 13px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  label {
+    font-size: 16px;
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  input[type='radio'] {
+    accent-color: #DABE29;
+    width: 20px;
+    height: 20px;
+  }
+  
+  label:hover {
+    color: #252525;
+  }
+  
+  input[type='radio']:focus-visible {
+    outline: 2px solid #252525;
+    outline-offset: 2px;
+  }
+  

@@ -1,18 +1,38 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-radio-button',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './radio-button.component.html',
   styleUrl: './radio-button.component.css',
 })
 export class RadioButtonComponent {
-  @Input() selectedFilter: string = ''; // Aktuell ausgewählter Filter, wird von der übergeordneten Komponente gesetzt
-  @Output() filterChange: EventEmitter<string> = new EventEmitter<string>(); // Gibt die Auswahl weiter
+  @Input() options: { label: string; value: string }[] = [];
+  @Input() selectedValue: string | null = null;
+  @Output() valueChange = new EventEmitter<string>();
 
-  onSelectionChange() {
-    this.filterChange.emit(this.selectedFilter); // Sendet die Auswahl nach außen
+  onSelectionChange(value: string): void {
+    this.valueChange.emit(value);
   }
 }

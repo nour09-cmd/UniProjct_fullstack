@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -36,7 +36,12 @@ import { RadioButtonComponent } from '../../Components/radio-button/radio-button
 })
 export class ClosedaysComponent {
   searchForm: FormGroup;
-  selectedFilter: string = '';
+  radioOptions = [
+    { label: 'Show All Appointments', value: 'showAll' },
+    { label: 'Delete Appointment', value: 'deleteAppointment' },
+  ];
+  selectedFilter: string = 'showAll';
+
   selectedDate: Date | null = null;
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({

@@ -10,14 +10,12 @@
   
     padding: 2rem 0rem;
   }
-  /* Optionale Anpassungen */
+  
 ul li span {
-    font-size: 16px; /* Größe des Textes */
+    font-size: 9px; 
   }
   
-  ul li a {
-    font-size: 18px; /* Größe des Links */
-  }
+  
   
   button {
     width: 40px;
@@ -28,3 +26,4 @@ ul li span {
     margin: 0px;
     padding: 20px;
   }
+  

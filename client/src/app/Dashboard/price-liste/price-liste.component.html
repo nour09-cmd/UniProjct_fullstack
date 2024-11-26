@@ -1,0 +1,136 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="col">
+      <p class="title-dacshboard">Price Liste</p>
+    </div>
+  </div>
+
+  <div class="radio-btn d-flex justify-content-start mx-4">
+    <app-radio-button
+      [options]="radioOptions"
+      [selectedValue]="selectedFilter"
+      (valueChange)="onFilterChange($event)"
+    >
+    </app-radio-button>
+  </div>
+
+  <div
+    *ngIf="selectedFilter === 'showAll'"
+    class="formbox d-flex justify-content-center align-items-start my-4 py-3 px-3"
+  >
+    <div
+      *ngFor="let category of groupedItems | keyvalue"
+      class="category-box w-100 px-2 py-3"
+    >
+      <h3>{{ category.key }} :</h3>
+      <div
+        *ngFor="let item of category.value"
+        class="formatPricenName w-100 px-2 border-bottom py-3 d-flex justify-content-between flex-nowrap"
+      >
+        • {{ item.name }} : <span class="price">{{ item.price }} € </span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="selectedFilter === 'addList'"
+    class="d-flex justify-content-center align-items-start my-4 py-3 px-3"
+  >
+    <form [formGroup]="priceListForm" (ngSubmit)="addItem()" class="w-100">
+      <div class="mb-3 w-100">
+        <label for="category" class="form-label">Kategorie</label>
+        <app-dropdown-btn
+          [options]="CategoryOptions"
+          placeholder="Category auswählen"
+          controlName="category"
+          [control]="priceListForm"
+        >
+        </app-dropdown-btn>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Item-Name</label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          placeholder="Item-Name eingeben"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Preis (€)</label>
+        <input
+          id="price"
+          type="number"
+          class="form-control"
+          formControlName="price"
+          placeholder="Preis eingeben"
+          step="0.01"
+          required
+        />
+      </div>
+
+      <div>
+        <div class="my-4">
+          <div
+            class="d-flex align-items-center justify-content-around border-bottom border-secondary rounded-bottom w-100"
+          >
+            <div
+              class="py-2 px-3 rounded-top border-secondary w-25 d-flex justify-content-center align-items-center border border-bottom-0"
+            >
+              <p class="m-0">Name</p>
+            </div>
+            <div
+              class="py-2 px-3 rounded-top border-secondary w-25 d-flex justify-content-center align-items-center border border-bottom-0"
+            >
+              <p class="m-0">Price</p>
+            </div>
+
+            <button
+              class="my-2 btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center"
+              (click)="addItem()"
+            >
+              <span class="mb-0">+</span>
+            </button>
+          </div>
+        </div>
+
+        <ul class="list-unstyled mt-3">
+          <li
+            *ngFor="let category of groupedItems | keyvalue"
+            class="d-flex flex-column mb-4"
+          >
+            <h1 class="text-secondary">{{ category.key }} :</h1>
+            <ul>
+              <li
+                *ngFor="let item of category.value"
+                class="d-flex justify-content-around align-items-center border-bottom py-2 px-3 rounded-bottom w-100"
+              >
+                <div
+                  class="text-muted d-flex justify-content-center align-items-center w-25 py-2 px-5 category-list"
+                >
+                  {{ item.name }}
+                </div>
+                <div
+                  class="text-muted d-flex justify-content-center align-items-center w-50 category-list"
+                >
+                  {{ item.price }} €
+                </div>
+
+                <button
+                  class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
+                  (click)="deleteItem(item)"
+                >
+                  <span class="h5 mb-0">-</span>
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>

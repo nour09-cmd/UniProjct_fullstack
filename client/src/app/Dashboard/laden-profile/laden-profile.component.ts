@@ -84,23 +84,3 @@ export class LadenProfileComponent {
     console.log('Uploaded Files:', this.uploadedFilesArray.value);
   }
 }
-
-/* onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files.length > 0) {
-      for (let i = 0; i < input.files.length; i++) {
-        const file = input.files[i];
-
-        if (this.uploadedFiles.length < 3) {
-          this.uploadedFiles.push(file);
-          console.log(this.uploadedFiles);
-        }
-      }
-    }
-  }
-
-  removeFile(index: number): void {
-    this.uploadedFiles.splice(index, 1);
-  }
-} */

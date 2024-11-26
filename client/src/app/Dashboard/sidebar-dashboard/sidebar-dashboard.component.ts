@@ -5,6 +5,7 @@ import { ClosedaysComponent } from '../closedays/closedays.component';
 import { StoreService } from '../../redux/store.service';
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { LadenProfileComponent } from '../laden-profile/laden-profile.component';
+import { PriceListeComponent } from '../price-liste/price-liste.component';
 
 @Component({
   selector: 'app-sidebar-dashboard',
@@ -14,6 +15,7 @@ import { LadenProfileComponent } from '../laden-profile/laden-profile.component'
     ApponitmentDashboardComponent,
     ClosedaysComponent,
     LadenProfileComponent,
+    PriceListeComponent,
   ],
   templateUrl: './sidebar-dashboard.component.html',
   styleUrl: './sidebar-dashboard.component.css',

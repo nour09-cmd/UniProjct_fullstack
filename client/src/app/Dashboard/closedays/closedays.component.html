@@ -1,82 +1,83 @@
 <div class="container p-4">
-    <div class="row">
-      <div class="col">
-        <p class="title-dacshboard">Apponimet</p>
-      </div>
-      <form class="col-4 form-group" [formGroup]="searchForm">
-        <div >
-          <mat-form-field>
-            <mat-label>Date</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              placeholder="srarch for an Appontimet"
-              formControlName="date"
-              (dateChange)="onDateChange($event)"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </form>
+  <div class="row">
+    <div class="col">
+      <p class="title-dacshboard">Apponimet</p>
     </div>
-    <div class="radio-btn">
-      <app-radio-button  
-       [selectedFilter]="selectedFilter"
-      (filterChange)="onFilterChange($event)">
-      </app-radio-button>
+    <form class="col-4 form-group" [formGroup]="searchForm">
+      <div>
+        <mat-form-field>
+          <mat-label>Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="srarch for an Appontimet"
+            formControlName="date"
+            (dateChange)="onDateChange($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div class="radio-btn d-flex justify-content-start">
+    <app-radio-button
+      [options]="radioOptions"
+      [selectedValue]="selectedFilter"
+      (valueChange)="onFilterChange($event)"
+    ></app-radio-button>
+  </div>
 
-  </div >
-
- 
+  <div *ngIf="selectedFilter === 'deleteAppointment'">
+    <div class="container-table">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Day</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>20-12-2000</td>
+                  <td><button>Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngIf="selectedFilter === 'showAll'">
-  <div class="container-table">  
-    <div class="container">
+    <div class="container-table">
+      <div class="container">
         <div class="row">
           <div class="col-12">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Day</th>
-                    <th scope="col">Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>20-12-2000</td>
-                    <td><button>Delete</button></td>
-                  </tr>
-                </tbody>
-              </table>   
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="d-flex justify-content-center" scope="col">
+                    Action : Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="d-flex justify-content-center">20-12-2000</td>
+                </tr>
+              </tbody>
+            </table>
+            <button>save</button>
           </div>
         </div>
       </div>
+    </div>
   </div>
-</div>
-<div *ngIf="selectedFilter === 'deleteAppointment'">
-  <div class="container-table">  
-    <div class="container">
-        <div class="row">
-          <div class="col-12">
-              <table class="table ">
-                <thead>
-                  <tr>
-                    <th class="d-flex justify-content-center " scope="col">Action : Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="d-flex justify-content-center ">20-12-2000</td>
-                  </tr>
-                </tbody>
-              </table> 
-              <button>save</button>  
-          </div>
-        </div>
-      </div>
-  </div>
-</div>
 </div>
