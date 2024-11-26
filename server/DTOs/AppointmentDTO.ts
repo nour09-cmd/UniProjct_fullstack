@@ -13,7 +13,7 @@ export class CreateAppointmentDTO {
   @IsString()
   @IsNotEmpty()
   name: string;
-  @IsDateString()
+  @IsString()
   @IsNotEmpty()
   date: Date;
   @IsString()

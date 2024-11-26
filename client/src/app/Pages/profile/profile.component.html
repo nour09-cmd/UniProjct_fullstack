@@ -19,7 +19,12 @@
 </div>
 
 <hr class="another-custom-hr" />
-<app-calendar />
+<app-calendar
+  [weeksDays]="ladenDaten.week_days"
+  [reserved_appointments]="ladenDaten.reserved_appointments"
+  [closeDays]="ladenDaten.close_days"
+  [barberEmail]="ladenDaten.barber_email"
+/>
 
 <app-opening-hours [workingHour]="ladenDaten.week_days" />
 

@@ -8,7 +8,7 @@ import { GetLadenDTO } from "../DTOs/LadenDTO";
 import { EmailService } from "../utils/EmailControler";
 import { AppDataSource } from "../utils/data-source";
 import { User } from "../models/User";
-import { format } from "date-fns";
+import { add, format, formatDate, parse } from "date-fns";
 
 export class AppointmentController {
   private userRepository = AppDataSource.getRepository(User);
@@ -53,8 +53,10 @@ export class AppointmentController {
     if (errors.length > 0) {
       return res.status(400).json({ message: "Validation failed", errors });
     }
-    const { name, date, time, barber_email } = req.body;
+    const { name, date, time, barber_email } = createLadenDTO;
     const user_email = req["user"]["email"];
+    const dateNG = new Date(date);
+    const updatedDate = add(dateNG, { days: 1 });
 
     const appointment =
       await this.modelAppointmentLaden.addAppointmentBarberProfileByEmail(
@@ -62,7 +64,7 @@ export class AppointmentController {
         {
           user_email,
           name,
-          date,
+          date: updatedDate,
           time,
           status: true,
         }
@@ -83,9 +85,9 @@ export class AppointmentController {
       where: { email: user_email },
     });
     const ladenData = await this.modelMonogo.findByBarberEmail(barber_email);
-    const dt = date + "T" + time + ":00";
-    const dates = format(new Date(dt), "yyyyMMdd'T'HHmmss");
-    console.log(dates);
+    const dt = updatedDate + "T" + time + ":00";
+    const dates = parse(dt, "yyyyMMdd'T'HHmmss", new Date());
+
     const googleKalnderLink = `https://calendar.google.com/calendar/u/0/r/eventedit?text=${
       ladenData?.Laden_name
     }&dates=${dates}&details=${
@@ -95,7 +97,7 @@ export class AppointmentController {
     this.emailS.UserAppointmentResEmailAnUser(user_email, ladenData, userData, {
       subject: "Termin wurde erfolgreich gebucht",
       apo: {
-        date,
+        date: updatedDate,
         time,
       },
       googleKalnderLink,
@@ -107,7 +109,7 @@ export class AppointmentController {
       {
         subject: "Neuer Termin bei Ihnen gebucht",
         apo: {
-          date,
+          date: updatedDate,
           time,
         },
         googleKalnderLink,
@@ -116,7 +118,6 @@ export class AppointmentController {
     return res.status(200).json({ status: true, ...appointment });
   }
   async deleteAppointmentVonBarber(req: Request, res: Response) {
-    // TODO create a DTOs
     const { barber_email, user_email, apoId, apoData } = req.body;
     const userData = await this.userRepository.findOne({
       where: { email: user_email },
