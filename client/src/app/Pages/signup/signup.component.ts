@@ -33,6 +33,7 @@ import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-but
 import { StoreService } from '../../redux/store.service';
 import { singUp } from '../../redux/features/User/UserSlice';
 import { NotificationBarComponent } from '../../Components/notification-bar/notification-bar.component';
+import axios from 'axios';
 
 @Component({
   selector: 'app-signup',
@@ -116,12 +117,11 @@ export class SignupComponent {
 
       const reader = new FileReader();
       reader.onload = () => {
-        const base64String = reader.result as string;
+        const base64String = reader.result;
         this.imagePreview = base64String; // For previewing the image
         this.signUPForm.patchValue({ image: base64String }); // Update the form control with the Base64 string
       };
       reader.readAsDataURL(file);
-
       console.log('Ausgewählte Datei:', file.name);
     }
   }
@@ -147,19 +147,19 @@ export class SignupComponent {
     if (!constraints) return [];
     return Object.values(constraints);
   }
-  async onClicke() {
+  async onClick() {
     const isFilled = this.isFormNotEmpty(this.signUPForm);
 
-    if (!isFilled) {
-      // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
-      alert('Please fill out all required fields.');
-      return;
-    }
+    // if (!isFilled) {
+    //   // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
+    //   alert('Please fill out all required fields.');
+    //   return;
+    // }
 
-    if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
-      alert('Die Passwörter stimmen nicht überein');
-      return;
-    }
+    // if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
+    //   alert('Die Passwörter stimmen nicht überein');
+    //   return;
+    // }
 
     const data: any = {
       image: this.signUPForm.value.image,
@@ -178,7 +178,10 @@ export class SignupComponent {
 
     try {
       await this.storeService.dispatch(singUp(data));
-
+      await axios.post('http://localhost:3030/img', {
+        img: this.signUPForm.value.image,
+        text: 'aha',
+      });
       // Update the error state immediately after the dispatch completes
       const state = this.storeService.getState().user;
       this.singUpErorr = state.singUpError || [];

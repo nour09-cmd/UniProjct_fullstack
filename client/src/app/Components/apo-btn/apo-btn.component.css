@@ -1,0 +1,25 @@
+.btn_apo {
+  padding: 12px;
+  width: 185px;
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+}
+.btn_apo_1 {
+  background: #000000;
+  color: #fff;
+}
+.btn_apo_1:hover {
+  background: #dabe29;
+  color: black;
+}
+.btn_apo_2 {
+  background: #dabe29;
+  color: #000000;
+}
+input.btn_apo_2:hover {
+  background: #000000;
+  color: #fff;
+}

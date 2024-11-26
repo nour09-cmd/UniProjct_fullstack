@@ -30,14 +30,14 @@ router
     }
   );
 router
-  .route("/Appointment")
+  .route("/appointment")
   .post(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
         await appointmentController.createAppointment(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Internal 123 server error" });
       }
     }
   );

@@ -3,15 +3,44 @@
     <div class="col-12 col-sm-10 col-md-8 col-lg-6 text-center">
       <div>
         <div>
-          <h2 class="fs-2 ">Pick up an appointment</h2>
+          <h2 class="fs-2">Pick up an appointment</h2>
           <h3 class="fs-3 mt-5">Calendar</h3>
           <mat-calendar
             #calendar
             [minDate]="minDate"
+            [maxDate]="maxDate"
             [(selected)]="selectedDate"
             (selectedChange)="dateChanged($event)"
+            [dateFilter]="checkAvailableDays"
           ></mat-calendar>
-          <Unsere-Buton label="SAVE" classes="black"></Unsere-Buton>
+          <p *ngIf="!selectedDate">Bitte wählen Sie das gleiche Datum aus.</p>
+          <div class="time-box" *ngIf="hide">
+            <app-apo-btn
+              *ngFor="let item of times; let i = index"
+              [value]="item"
+              [classs]="'btn_apo_' + ((i % 2) + 1)"
+              (clicked)="handelClick(item)"
+            ></app-apo-btn>
+          </div>
+          <p *ngIf="selectedDate && selectedTime && isAngemeldet">
+            Selected Date: {{ selectedDate }} at Time: {{ selectedTime }}
+          </p>
+          <Unsere-Buton
+            label="SAVE"
+            classes="black"
+            *ngIf="selectedDate && selectedTime && isAngemeldet"
+            (clicked)="handleSelectedTime()"
+          ></Unsere-Buton>
+          <p *ngIf="selectedDate && selectedTime && !isAngemeldet">
+            um diese termin zu reavieren sie müssen erste mal her anmelden bitte
+            Selected Date: {{ selectedDate }} at Time: {{ selectedTime }}
+          </p>
+          <Unsere-Buton
+            label="Login"
+            classes="black"
+            *ngIf="selectedDate && selectedTime && !isAngemeldet"
+            (clicked)="goToLogin()"
+          ></Unsere-Buton>
         </div>
       </div>
     </div>

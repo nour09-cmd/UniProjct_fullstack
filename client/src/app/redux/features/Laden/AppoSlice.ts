@@ -53,6 +53,29 @@ export const getAppos: any = createAsyncThunk(
   }
 );
 
+export const createAppos: any = createAsyncThunk(
+  '/createAppos',
+  async (apoData: any) => {
+    try {
+      const { barber_email, date, name, time } = apoData;
+
+      const token = await TOKEN();
+
+      const res = await axios.post(
+        `${BASEURL}/ladens/appointment/`,
+        { ...apoData },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 const AppoSlice = createSlice({
   name: 'appo',
   initialState,
@@ -68,6 +91,10 @@ const AppoSlice = createSlice({
         //TODO change the apo state.appos = action.payload;
         state.loading = false;
         state.errors = '';
+      })
+      .addCase(createAppos.fulfilled, (state, action) => {
+        state.loading = false;
+        state.errors = action.payload;
       });
   },
 });

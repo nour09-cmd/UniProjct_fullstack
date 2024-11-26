@@ -21,7 +21,6 @@ export const getOneLaden: any = createAsyncThunk(
   '/getOneLaden',
   async (email: any) => {
     try {
-      console.log(email);
       const res = await axios.post(`${BASEURL}/ladens/getOneladens/`, email);
       return res.data;
     } catch (err) {

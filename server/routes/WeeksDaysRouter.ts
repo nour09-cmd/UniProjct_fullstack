@@ -7,7 +7,7 @@ const auth = new AuthentivateToken();
 
 router
   .route("/weekdays")
-  .get(
+  .post(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {

@@ -22,16 +22,14 @@ export class CloseDaysController {
       return res.status(400).json({ message: "Validation failed", errors });
     }
 
-    const laden = await this.modelLaden.findByBarberEmail(
-      createLadenDTO.barberEmail
-    );
+    const laden = await this.modelLaden.findByBarberEmail(req["user"]["email"]);
     if (!laden) {
       return res.status(400).json({ message: "Laden Not Found" });
     }
 
     const createdDay =
       await this.modelCloseDays.addCloseDayBarberProfileByEmail(
-        createLadenDTO.barberEmail,
+        req["user"]["email"],
         { date: new Date(createLadenDTO.date) }
       );
     return res

@@ -12,4 +12,5 @@ export class CardsComponent {
   @Input() description: string = 'Description';
   @Input() image: string = 'assets/card_img.svg';
   @Input() id: string = '56161';
+
 }

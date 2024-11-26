@@ -14,6 +14,7 @@ import { Validierunges } from "../utils/ValidierungsClasse";
 import { ResetPasswordDTO, UserLoginDTO } from "../DTOs/LoginDTO";
 import { IUserProfile, UserProfileModel } from "../models/UserAppointments";
 import { EmailService } from "../utils/EmailControler";
+// import { ImageUploads } from "../utils/UploadImages";
 
 class UserLoginController {
   private userRepository = AppDataSource.getRepository(User);
@@ -175,6 +176,7 @@ class UserLoginController {
 class UserRegisterController {
   private userRepository = AppDataSource.getRepository(User);
   private adresseRepository = AppDataSource.getRepository(Adresse);
+  // private imageUpload: ImageUploads;
   private rolle: string;
   private modelAppointmentUser: UserProfileModel;
   private emailS: EmailService;
@@ -182,6 +184,7 @@ class UserRegisterController {
     this.rolle = Rolle.BARBER;
     this.modelAppointmentUser = new UserProfileModel();
     this.emailS = new EmailService();
+    // this.imageUpload = new ImageUploads();
   }
 
   createToken(email: string, name: string) {
@@ -243,7 +246,6 @@ class UserRegisterController {
         return res.status(409).json({ error: "User already exists" });
       }
 
-      // const hashedPassword = password;
       const hashedPassword = await bcrypt.hash(passwords, 10);
 
       const newAddress = this.adresseRepository.create({
@@ -254,6 +256,7 @@ class UserRegisterController {
       const savedAddressId = await this.adresseRepository.save(newAddress);
       //
       const emailToken = crypto.randomBytes(64).toString("hex");
+
       const newUser = this.userRepository.create({
         image: req.body.image || "",
         email: emails,
@@ -288,10 +291,6 @@ class UserRegisterController {
           adresse: savedAddressId,
           handynummer: handynummers,
           geburtsdatum: geburtsdatums,
-          verifyToken: emailToken,
-          verifyStatus: false,
-          resetpasswordtoken: "null",
-          resetPasswordStatus: false,
         },
         {
           subject: "Bitte bestätigen Sie Ihre E-Mail-Adresse",
