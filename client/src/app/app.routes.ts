@@ -11,6 +11,7 @@ import { ResetPasswordComponent } from './Pages/reset-password/reset-password.co
 import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { WillkommenComponent } from './Components/willkommen/willkommen.component';
+import { PriceListComponent } from './Components/price-list/price-list.component';
 
 export const routes: Routes = [
   // { path: 'spinner', component: WillkommenComponent },

@@ -8,7 +8,8 @@ import { MapComponent } from '../../Components/map/map.component';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../../redux/store.service';
 import { getOneLaden } from '../../redux/features/Laden/LadenSlice';
-import { CalendarComponent } from "../../Components/calendar/calendar.component";
+import { CalendarComponent } from '../../Components/calendar/calendar.component';
+import { PriceListComponent } from '../../Components/price-list/price-list.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,8 @@ import { CalendarComponent } from "../../Components/calendar/calendar.component"
     OpeningHoursComponent,
     MapComponent,
     CalendarComponent,
-],
+    PriceListComponent,
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
   template: `<app-map [mapUrl]="storeMapUrl"></app-map>`,

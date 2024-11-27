@@ -3,3 +3,7 @@ export const BASEURL = 'http://localhost:4545/api'; // bei deploay env ist wicht
 export const TOKEN = () => {
   return localStorage.getItem('token') || '';
 };
+
+export const logOut = () => {
+  localStorage.removeItem('token');
+};

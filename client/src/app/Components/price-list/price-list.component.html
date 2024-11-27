@@ -1,0 +1,22 @@
+<div class="container py-3">
+  <div class="row box_shadow">
+    <div class="card bg-dark text-white p-3 d-flex justify-content-center">
+      <div>
+        <h3 class="fs-2 fw-bold" style="color: #a5953f">PREISE LISTE</h3>
+        <div class="container px-5" *ngFor="let item of list; let i = index">
+          <p class="fs-4 fw-bold" style="color: #d2b92e">
+            {{ item.category }}:
+          </p>
+          <ul class="category_list">
+            <li
+              class="listItem"
+              *ngFor="let items of item.sales; let i = index"
+            >
+              {{ items.name }} ({{ items.price }}€)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
