@@ -15,7 +15,7 @@
 }
 
 .black{
-  background-image: url("ourbtn.svg");
+  background-image: url("/assets/black.svg");
   background-color: #000;
   color: #fff;
   border-radius: 9px;
@@ -24,7 +24,7 @@
 
 }
 .gold{
-  background-image: url("gold.svg");
+  background-image: url("/assets/gold.svg");
   background-color:  #DABE29;
   color: #000;
   border-radius: 9px;

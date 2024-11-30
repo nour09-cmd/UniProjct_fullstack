@@ -4,7 +4,7 @@
     <div class="col-10 col-md-8 col-lg-8 formbox" style="min-width: 352px;">
       <div class="card bg-white mb-5 mt-5 border-0">
         <div class="card-body p-5 text-center ">
-          <form [formGroup]="otpForm">
+          <form [formGroup]="otpForm" (submit)="onClicke()">
           <h4>Verify</h4>
           <p>Your code was sent to you via email</p>
           
@@ -12,8 +12,7 @@
             <ng-otp-input  (onInputChange)="onOtpChange($event)" [config]="{length:4}" style="font-size: 12px;"></ng-otp-input>
             </div>
             
-
-            <Unsere-Buton label="Recover password" classes="black" (clicked)="onClicke()">></Unsere-Buton>
+            <input type="submit" class="ourBtn black w-100"  value="Recover password">
 
             <p class="resend text-muted mb-0 py-3">
               hast du keine code erhalten?<a href=""> send Code </a>

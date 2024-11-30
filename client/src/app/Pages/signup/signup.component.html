@@ -14,7 +14,7 @@
 <div>
   <div class="container">
     <div class="formbox">
-      <form [formGroup]="signUPForm">
+      <form [formGroup]="signUPForm" (submit)="onSubmit()" >
         <div class="form-group">
           <div class="bild-upload" (click)="bildEingabe.click()">
             <input
@@ -193,16 +193,15 @@
             />
           </mat-form-field>
         </div>
-
-        <Unsere-Buton
-          label="SING UP"
-          classes="gold"
-          (clicked)="onClick()"
-        ></Unsere-Buton>
+        
+        
+    
+        <input type="submit" class="ourBtn gold w-100"  value="SIGN UP">
       </form>
+   
     </div>
   </div>
 </div>
 <a class="text-secondary my-10" href="login"
-  ><title-line titel="SING IN"></title-line
+  ><title-line titel="SIGN IN"></title-line
 ></a>

@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
 
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
-import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-button.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { CommonModule } from '@angular/common';
 import {
@@ -21,7 +20,6 @@ import { StoreService } from '../../redux/store.service';
   imports: [
     NgOtpInputModule,
     PagebennerComponent,
-    UnsereButtonComponent,
     TitleLineComponent,
     ReactiveFormsModule,
     CommonModule,

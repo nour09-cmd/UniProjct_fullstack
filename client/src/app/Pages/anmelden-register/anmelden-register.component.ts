@@ -2,12 +2,11 @@ import { Component, input } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
-import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-button.component';
 
 @Component({
   selector: 'app-anmelden-register',
   standalone: true,
-  imports: [PagebennerComponent, UnsereButtonComponent],
+  imports: [PagebennerComponent],
   templateUrl: './anmelden-register.component.html',
   styleUrls: ['./anmelden-register.component.css'],
 })

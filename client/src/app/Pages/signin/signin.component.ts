@@ -12,7 +12,6 @@ import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.comp
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
 import { logIn } from '../../redux/features/User/UserSlice';
 import { StoreService } from '../../redux/store.service';
-import { OurBtnBlackComponent } from "../../Components/our-btn-black/our-btn-black.component";
 
 @Component({
   selector: 'app-signin',
@@ -21,8 +20,7 @@ import { OurBtnBlackComponent } from "../../Components/our-btn-black/our-btn-bla
     PagebennerComponent,
     TitleLineComponent,
     ReactiveFormsModule,
-    CommonModule,
-    OurBtnBlackComponent
+    CommonModule
 ],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css',
@@ -37,11 +35,11 @@ export class SigninComponent {
     private storeService: StoreService,
     private _router: Router
   ) {
-    // const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem('token') || '';
 
-    // if (token || token != '') {
-    //   this._router.navigate(['/']);
-    // }
+    if (token || token != '') {
+      this._router.navigate(['/']);
+    }
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],

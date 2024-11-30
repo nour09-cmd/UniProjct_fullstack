@@ -29,7 +29,6 @@ import {
 import { Router } from '@angular/router';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
-import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-button.component';
 import { StoreService } from '../../redux/store.service';
 import { singUp } from '../../redux/features/User/UserSlice';
 import { NotificationBarComponent } from '../../Components/notification-bar/notification-bar.component';
@@ -40,7 +39,6 @@ import axios from 'axios';
   standalone: true,
   imports: [
     PagebennerComponent,
-    UnsereButtonComponent,
     TitleLineComponent,
     CommonModule,
     MatDatepickerModule,
@@ -54,7 +52,7 @@ import axios from 'axios';
     ReactiveFormsModule,
     CommonModule,
     NotificationBarComponent,
-  ],
+],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './signup.component.html',
@@ -80,11 +78,11 @@ export class SignupComponent {
     private _router: Router,
     private storeService: StoreService
   ) {
-    // const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem('token') || '';
 
-    // if (token || token != '') {
-    //   this._router.navigate(['/']);
-    // }
+    if (token || token != '') {
+      this._router.navigate(['/']);
+    }
     this.signUPForm = this.fb.group({
       image: ['', Validators.required], // The image will store Base64 string
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -147,19 +145,19 @@ export class SignupComponent {
     if (!constraints) return [];
     return Object.values(constraints);
   }
-  async onClick() {
+  async onSubmit() {
     const isFilled = this.isFormNotEmpty(this.signUPForm);
 
-    // if (!isFilled) {
-    //   // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
-    //   alert('Please fill out all required fields.');
-    //   return;
-    // }
+    if (!isFilled) {
+      // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
+      alert('Please fill out all required fields.');
+      return;
+    }
 
-    // if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
-    //   alert('Die Passwörter stimmen nicht überein');
-    //   return;
-    // }
+    if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
+      alert('Die Passwörter stimmen nicht überein');
+      return;
+    }
 
     const data: any = {
       image: this.signUPForm.value.image,
