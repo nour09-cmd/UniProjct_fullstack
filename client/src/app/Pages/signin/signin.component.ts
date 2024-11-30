@@ -10,20 +10,20 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
-import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-button.component';
 import { logIn } from '../../redux/features/User/UserSlice';
 import { StoreService } from '../../redux/store.service';
+import { OurBtnBlackComponent } from "../../Components/our-btn-black/our-btn-black.component";
 
 @Component({
   selector: 'app-signin',
   standalone: true,
   imports: [
     PagebennerComponent,
-    UnsereButtonComponent,
     TitleLineComponent,
     ReactiveFormsModule,
     CommonModule,
-  ],
+    OurBtnBlackComponent
+],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css',
 })
@@ -51,7 +51,7 @@ export class SigninComponent {
   @Input() title: string = 'create neu password';
   @Input() discription: string = 'discover amazing thing near around you';
   hide = true;
-  async onClicke() {
+  async onSubmit() {
     if (this.loginForm.value) {
       const userData = this.loginForm.value;
       await this.storeService.dispatch(logIn(userData));
