@@ -52,7 +52,7 @@ import axios from 'axios';
     ReactiveFormsModule,
     CommonModule,
     NotificationBarComponent,
-],
+  ],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './signup.component.html',
@@ -176,15 +176,8 @@ export class SignupComponent {
 
     try {
       await this.storeService.dispatch(singUp(data));
-      await axios.post('http://localhost:3030/img', {
-        img: this.signUPForm.value.image,
-        text: 'aha',
-      });
-      // Update the error state immediately after the dispatch completes
       const state = this.storeService.getState().user;
       this.singUpErorr = state.singUpError || [];
-
-      // Log errors if any
       if (this.singUpErorr.length > 0) {
         console.error('Signup Errors:', this.singUpErorr);
       }

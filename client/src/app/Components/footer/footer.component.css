@@ -1,0 +1,53 @@
+.footer {
+  display: grid;
+  grid-template-areas:
+    "- - - massege"
+    "IN IN IN IN";
+}
+.massegeBox {
+  grid-area: massege;
+  position: relative;
+  top: 78px;
+  background-image: url(./massage.svg);
+  width: 221px;
+  height: 123px;
+  padding: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnMasseg {
+  position: relative;
+  top: -13px;
+  text-decoration: none;
+  color: white;
+  background-color: #d3b200;
+  padding: 7px 29px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  border-radius: 7px;
+}
+.innerFooter {
+  grid-area: IN;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 246px;
+  background-color: #252525;
+}
+.innerFooter > * {
+  color: #ffffff;
+}
+.innerFooter > * > a {
+  text-decoration: none;
+  color: #ffffff;
+}
+@media screen and (width < 992px) {
+  .mobileBox {
+    height: 448px;
+  }
+}

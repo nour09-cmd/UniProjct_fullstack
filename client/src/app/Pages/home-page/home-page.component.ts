@@ -6,6 +6,7 @@ import { StoreService } from '../../redux/store.service';
 import { getAllData } from '../../redux/features/Laden/LadenSlice';
 import { CommonModule } from '@angular/common';
 import { WillkommenComponent } from '../../Components/willkommen/willkommen.component';
+import { FooterComponent } from '../../Components/footer/footer.component';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +17,7 @@ import { WillkommenComponent } from '../../Components/willkommen/willkommen.comp
     NavbarMobileComponent,
     CardsComponent,
     WillkommenComponent,
+    FooterComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',

@@ -12,6 +12,7 @@ import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { WillkommenComponent } from './Components/willkommen/willkommen.component';
 import { PriceListComponent } from './Components/price-list/price-list.component';
+import { SeiBarberPageComponent } from './Pages/sei-barber-page/sei-barber-page.component';
 
 export const routes: Routes = [
   // { path: 'spinner', component: WillkommenComponent },
@@ -27,6 +28,7 @@ export const routes: Routes = [
 
   { path: 'recover', component: RecoverPassComponent },
   { path: 'dashboard', component: SidebarDashboardComponent },
+  { path: 'seibarber', component: SeiBarberPageComponent },
 ];
 
 @NgModule({

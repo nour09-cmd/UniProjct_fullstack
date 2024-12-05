@@ -28,7 +28,7 @@ router
     }
   )
   .post(
-    auth.authenticateTokenBarber.bind(auth),
+    auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
         await ladenController.createLaden(req, res);
