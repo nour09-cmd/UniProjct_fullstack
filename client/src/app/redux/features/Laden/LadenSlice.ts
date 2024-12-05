@@ -1,6 +1,6 @@
 import axios from 'axios'; // for API Req  [POST=create, GET, PUT, DELETE]
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { BASEURL } from '../../../utils/config';
+import { BASEURL, TOKEN } from '../../../utils/config';
 
 const initialState: any = {
   loading: true,
@@ -28,6 +28,21 @@ export const getOneLaden: any = createAsyncThunk(
     }
   }
 );
+export const createLaden: any = createAsyncThunk(
+  '/createLaden',
+  async (data: any) => {
+    try {
+      const res = await axios.post(`${BASEURL}/ladens/getladens/`, data, {
+        headers: {
+          Authorization: `${TOKEN()}`,
+        },
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 const LadenSlice = createSlice({
   name: 'laden',
   initialState,
@@ -42,6 +57,11 @@ const LadenSlice = createSlice({
         state.errors = '';
       })
       .addCase(getOneLaden.fulfilled, (state, action) => {
+        state.getOneLaden = action.payload;
+        state.loading = false;
+        state.errors = '';
+      })
+      .addCase(createLaden.fulfilled, (state, action) => {
         state.getOneLaden = action.payload;
         state.loading = false;
         state.errors = '';

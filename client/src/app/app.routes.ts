@@ -12,6 +12,7 @@ import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { WillkommenComponent } from './Components/willkommen/willkommen.component';
 import { PriceListComponent } from './Components/price-list/price-list.component';
+<<<<<<< HEAD
 import { ApponitmentDashboardComponent } from './Dashboard/apponitment-dashboard/apponitment-dashboard.component';
 import { WorkingDaysComponent } from './Dashboard/working-days/working-days.component';
 import { ClosedaysComponent } from './Dashboard/closedays/closedays.component';
@@ -22,6 +23,9 @@ import { LadenProfilePageComponent } from './Pages/Dashboard/laden-profile-page/
 import { ClosedaysPageComponent } from './Pages/Dashboard/closedays-page/closedays-page.component';
 import { WeekdaysPageComponent } from './Pages/Dashboard/weekdays-page/weekdays-page.component';
 import { AppointmentPageComponent } from './Pages/Dashboard/appointment-page/appointment-page.component';
+=======
+import { SeiBarberPageComponent } from './Pages/sei-barber-page/sei-barber-page.component';
+>>>>>>> 0581701c84e888bac01c5ac3433d55a517c8cbc3
 
 export const routes: Routes = [
   // { path: 'spinner', component: WillkommenComponent },
@@ -36,12 +40,17 @@ export const routes: Routes = [
   { path: 'profile/:email', component: ProfileComponent },
 
   { path: 'recover', component: RecoverPassComponent },
+<<<<<<< HEAD
   { path: 'appointment', component: AppointmentPageComponent },
   { path: 'working-days', component: WeekdaysPageComponent },
   { path: 'closed-days', component: ClosedaysPageComponent },
   { path: 'laden-profile', component: LadenProfilePageComponent },
   { path: 'price-list', component: PriseListPageComponent },
   { path: '', redirectTo: '/appointment', pathMatch: 'full' },
+=======
+  { path: 'dashboard', component: SidebarDashboardComponent },
+  { path: 'seibarber', component: SeiBarberPageComponent },
+>>>>>>> 0581701c84e888bac01c5ac3433d55a517c8cbc3
 ];
 
 @NgModule({

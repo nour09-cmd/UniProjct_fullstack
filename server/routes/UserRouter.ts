@@ -11,6 +11,18 @@ const userLoginController = new UserLoginController();
 const userRegisterController = new UserRegisterController();
 const auth = new AuthentivateToken();
 
+router
+  .route("/rollerChecker")
+  .get(
+    auth.authenticateToken.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await userLoginController.checkRoller(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  );
 router.route("/singin").post(async (req: Request, res: Response) => {
   try {
     await userLoginController.login(req, res);

@@ -3,18 +3,23 @@ import { Request, Response } from "express";
 import { CreateLadenDTO, GetLadenDTO } from "../DTOs/LadenDTO";
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import { AddressDTO } from "../DTOs/RegisterDTO";
+// import { AddressDTO } from "../DTOs/RegisterDTO";
 import WEEKDAYS from "../utils/defultWeekDays";
 import { format } from "date-fns";
 import { Validierunges } from "../utils/ValidierungsClasse";
+import { User } from "../models/User";
+import { AppDataSource } from "../utils/data-source";
+import { Rolle } from "../models/Rolle";
 
 export class LadenController {
   private modelMonogo: LadenModel;
+  private userRepository = AppDataSource.getRepository(User);
   constructor() {
     this.modelMonogo = new LadenModel();
   }
   async getLadens(req: Request, res: Response) {
     const ladens = await this.modelMonogo.findByBarberes();
+
     // const newDAten = ladens.map((ladenData) => {
     //   ladenData.barber_email = "";
     //   ladenData.start_Abo_Date = "";
@@ -39,6 +44,10 @@ export class LadenController {
     ladenData.start_Abo_Date = "";
     ladenData.end_Abo_Date = "";
     return res.status(200).json({ ...ladenData });
+  }
+
+  async getUser(email: string) {
+    return this.userRepository.findOne({ where: { email } });
   }
   async createLaden(req: Request, res: Response) {
     const barber_email = req["user"]["email"];
@@ -89,9 +98,13 @@ export class LadenController {
       priceListe: [],
     };
     const createLaden = await this.modelMonogo.createLaden(newLaden);
-    if (createLaden) {
-      return res.status(200).json({ createLaden: true });
+    if (!createLaden.barber_email) {
+      return res.status(400).json({ createLaden: false });
     }
+    const User: any = await this.getUser(barber_email);
+    User.rolle = Rolle.BARBER;
+    await this.userRepository.save(User);
+    return res.status(200).json({ ...createLaden });
   }
   // TODO DTOs
   async updateLaden(req: Request, res: Response) {
@@ -148,7 +161,9 @@ export class LadenController {
     }
 
     const ladenData = await this.modelMonogo.deleteByBarberEmail(email);
-
+    const User: any = this.getUser(email);
+    User.Rolle = Rolle.USER;
+    await this.userRepository.save(User);
     return res.status(200).json({ message: "Laden is deleted", ladenData });
   }
 }

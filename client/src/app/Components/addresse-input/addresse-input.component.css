@@ -1,16 +1,16 @@
 form div {
-    margin-bottom: 10px;
-  }
-  
-  label {
-    display: inline-block;
-    width: 100px;
-  }
-  
-  input {
-    width: 200px;
-  }
- 
+  margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  width: 100px;
+}
+
+input {
+  width: 200px;
+}
+
 /* .button-21 {
   align-items: center;
   appearance: none;
@@ -53,9 +53,8 @@ form div {
 .button-21:focus:not(:active) {
   box-shadow: rgba(208, 255, 40, 0.25) 0 0 0 .125em;
 } */
-.formbox{
+.formbox {
   margin: 0 !important;
   margin-bottom: 50px !important;
   padding: 20px;
 }
-  

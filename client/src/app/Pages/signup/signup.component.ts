@@ -149,4 +149,50 @@ export class SignupComponent {
     if (!constraints) return [];
     return Object.values(constraints);
   }
+<<<<<<< HEAD
+=======
+  async onSubmit() {
+    const isFilled = this.isFormNotEmpty(this.signUPForm);
+
+    if (!isFilled) {
+      // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
+      alert('Please fill out all required fields.');
+      return;
+    }
+
+    if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
+      alert('Die Passwörter stimmen nicht überein');
+      return;
+    }
+
+    const data: any = {
+      image: this.signUPForm.value.image,
+      email: this.signUPForm.value.email,
+      password: this.signUPForm.value.password,
+      vorname: this.signUPForm.value.vorname,
+      nachname: this.signUPForm.value.nachname,
+      handynummer: this.signUPForm.value.handynummer,
+      geburtsdatum: this.signUPForm.value.geburtsdatum,
+      address: {
+        strasse: `${this.signUPForm.value.strasse} ${this.signUPForm.value.hausnummer}`,
+        ort: this.signUPForm.value.ort,
+        plz: this.signUPForm.value.plz,
+      },
+    };
+
+    try {
+      await this.storeService.dispatch(singUp(data));
+      const state = this.storeService.getState().user;
+      this.singUpErorr = state.singUpError || [];
+      if (this.singUpErorr.length > 0) {
+        console.error('Signup Errors:', this.singUpErorr);
+      }
+      setTimeout(() => {
+        this.loading = false;
+      }, 2500);
+    } catch (error) {
+      console.error('Error during form submission:', error);
+    }
+  }
+>>>>>>> 0581701c84e888bac01c5ac3433d55a517c8cbc3
 }

@@ -137,6 +137,21 @@ class UserLoginController {
       return res.status(500).json({ message: "Internal server error" });
     }
   }
+  async checkRoller(req: Request, res: Response) {
+    try {
+      const email = req["user"]?.["email"] || "";
+      const user = await this.getUser(email);
+      if (!user) {
+        return res.status(400).json({ message: "Path Not Found" });
+      }
+      if (user.rolle === "BARBER") {
+        return res.status(200).json({ User: false, barber: true });
+      }
+      return res.status(200).json({ User: true, barber: false });
+    } catch (error) {
+      console.error("Error during email verification:", error);
+    }
+  }
   async changePassword(req: Request, res: Response) {
     try {
       const token = req.query.token as string;
@@ -181,7 +196,7 @@ class UserRegisterController {
   private modelAppointmentUser: UserProfileModel;
   private emailS: EmailService;
   constructor() {
-    this.rolle = Rolle.BARBER;
+    this.rolle = Rolle.USER;
     this.modelAppointmentUser = new UserProfileModel();
     this.emailS = new EmailService();
     // this.imageUpload = new ImageUploads();
