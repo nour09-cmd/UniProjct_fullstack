@@ -3,18 +3,81 @@
 <div *ngIf="!loading">
   <div *ngFor="let error of singUpErorr">
     <div *ngFor="let constraint of getErrorMessages(error.constraints)">
-      <!-- alert alert-warning alert-dismissible ||  alert alert-danger alert-dismissible -->
       <app-notification-bar
         [message]="constraint"
-        type=" alert alert-warning alert-dismissible"
+        type="alert alert-warning alert-dismissible"
       ></app-notification-bar>
     </div>
   </div>
 </div>
-<div>
+
+<div *ngIf="step === 1">
   <div class="container">
     <div class="formbox">
-      <form [formGroup]="signUPForm" (submit)="onSubmit()" >
+      <form [formGroup]="stepOneForm" (ngSubmit)="goToStepTwo()">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Vorname</mat-label>
+            <input matInput formControlName="vorname" placeholder="Vorname" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nachname</mat-label>
+            <input matInput formControlName="nachname" placeholder="Nachname" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Passwort</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+              placeholder="Passwort"
+            />
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Passwort bestätigen</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="passwordwd"
+              placeholder="Passwort bestätigen"
+            />
+          </mat-form-field>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="stepOneForm.invalid"
+        >
+          Weiter
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="step === 2">
+  <div class="container d-flex align-items-center">
+    <div class="formbox">
+      <form [formGroup]="stepTwoForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <div class="bild-upload" (click)="bildEingabe.click()">
             <input
@@ -24,57 +87,14 @@
               (change)="onDateiAuswahl($event)"
               hidden
             />
-            <div class="kreis">
-              <span>Bild auswählen</span>
-            </div>
-          </div>
-
-          <div *ngIf="imagePreview">
-            <p>Vorschau:</p>
             <img
-              [src]="imagePreview"
-              alt="Bildvorschau"
-              width="200"
-              height="200"
+              id="selectedAvatar"
+              [src]="imagePreview || 'assets/logo.svg'"
+              class="rounded-circle"
+              alt="Vorschau"
+              style="width: 150px; height: 150px; object-fit: cover"
             />
           </div>
-        </div>
-
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label>Vorname</mat-label>
-            <input
-              matInput
-              placeholder="Geben Sie Ihren Vornamen ein"
-              formControlName="vorname"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Nachname</mat-label>
-            <input
-              matInput
-              placeholder="Geben Sie Ihren Nachnamen ein"
-              formControlName="nachname"
-            />
-          </mat-form-field>
-        </div>
-
-        <div class="form-group">
-          <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              type="email"
-              formControlName="email"
-              placeholder="Ex. pat@example.com"
-            />
-            <mat-error *ngIf="emailFormControl.hasError('email')"
-              >Ungültige Email-Adresse</mat-error
-            >
-            <mat-error *ngIf="emailFormControl.hasError('required')"
-              >Email ist erforderlich</mat-error
-            >
-          </mat-form-field>
         </div>
 
         <div class="form-group">
@@ -83,18 +103,17 @@
             <input
               matInput
               formControlName="handynummer"
-              placeholder="Geben Sie Ihre Telefonnummer ein"
+              placeholder="Telefonnummer"
               type="tel"
             />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Geburtsdatum</mat-label>
             <input
-              class="inp"
               matInput
               [matDatepicker]="picker"
-              placeholder="Wählen Sie Ihr Geburtsdatum"
               formControlName="geburtsdatum"
+              placeholder="Geburtsdatum"
             />
             <mat-datepicker-toggle
               matSuffix
@@ -103,102 +122,38 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="form-group">
-          <mat-form-field class="example-full-width">
-            <mat-label>Passwort</mat-label>
-            <input
-              matInput
-              formControlName="password"
-              [type]="hide ? 'password' : 'text'"
-              placeholder="Geben Sie Ihr Passwort ein"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hide = !hide"
-              [attr.aria-label]="
-                'Passwort ' + (hide ? 'anzeigen' : 'verbergen')
-              "
-            >
-              <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-
-        <div class="form-group">
-          <mat-form-field class="example-full-width">
-            <mat-label>Passwort erneut eingeben</mat-label>
-            <input
-              matInput
-              formControlName="passwordwd"
-              [type]="hide ? 'password' : 'text'"
-              placeholder="Passwort erneuet  wiederholen"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hide = !hide"
-              [attr.aria-label]="
-                'Passwort ' + (hide ? 'anzeigen' : 'verbergen')
-              "
-            >
-              <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
-            </button>
-          </mat-form-field>
-          <mat-error *ngIf=""
-            >überprüfen sie noch mal ihren password!!
-          </mat-error>
-        </div>
 
         <div class="form-group">
           <mat-form-field>
             <mat-label>Straße</mat-label>
-            <input
-              matInput
-              placeholder="Geben Sie Ihre Straße ein"
-              type="text"
-              formControlName="strasse"
-            />
+            <input matInput formControlName="strasse" placeholder="Straße" />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Hausnummer</mat-label>
             <input
               matInput
-              placeholder="Geben Sie Ihre Hausnummer ein"
-              type="text"
               formControlName="hausnummer"
+              placeholder="Hausnummer"
             />
           </mat-form-field>
         </div>
-
         <div class="form-group">
           <mat-form-field>
             <mat-label>Postleitzahl</mat-label>
             <input
               matInput
               formControlName="plz"
-              placeholder="Geben Sie Ihre Postleitzahl ein"
-              type="text"
+              placeholder="PLZ"
               maxlength="5"
-              pattern="[0-9]*"
             />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Ort</mat-label>
-            <input
-              matInput
-              placeholder="Geben Sie Ihren Wohnort ein"
-              type="text"
-              formControlName="ort"
-            />
+            <input matInput formControlName="ort" placeholder="Ort" />
           </mat-form-field>
         </div>
-        
-        
-    
-        <input type="submit" class="ourBtn gold w-100"  value="SIGN UP">
+        <input type="submit" class="ourBtn gold w-100" value="SIGN UP" />
       </form>
-   
     </div>
   </div>
 </div>

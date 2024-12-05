@@ -41,6 +41,8 @@ export class LadenProfileComponent {
   uploadedFiles: File[] = [];
   constructor(private fb: FormBuilder) {
     this.addressForm = this.fb.group({
+      Laden_name: ['', Validators.required],
+      Laden_description: ['', Validators.required],
       uploadedFiles: this.fb.array(
         [],
         [Validators.required, Validators.maxLength(3)]
@@ -81,6 +83,5 @@ export class LadenProfileComponent {
 
   onSubmit(): void {
     console.log('Form Value:', this.addressForm.value);
-    console.log('Uploaded Files:', this.uploadedFilesArray.value);
   }
 }

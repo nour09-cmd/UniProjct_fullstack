@@ -4,7 +4,7 @@
       <p class="title-dacshboard">Apponimet</p>
     </div>
     <form class="col-4 form-group" [formGroup]="searchForm">
-      <div >
+      <div>
         <mat-form-field>
           <mat-label>Date</mat-label>
           <input
@@ -23,30 +23,44 @@
       </div>
     </form>
   </div>
-  <div class="container-table">  
+  <div class="container-table">
     <div class="container">
-        <div class="row">
-          <div class="col-12">
-              <table class="table table-image">
-                <thead>
-                  <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Telefonnummer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of appoData| keyvalue; let i = index">
-                    <td class="w-25">
-                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid rounded-circle" alt="Sheep">
-                    </td>
-                    <td>{{appoData[i].user[0].name}}</td>
-                    <td>{{formatDate(appoData[i].date) + " : "+ appoData[i].time}}</td>
-                    <td>{{appoData[i].user[0].handynummer}}</td>
-                    <td><button (click)="deletAPPO(appoData[i]._id,appoData[i].user[0].email,i)">delete</button></td>
-                  </tr>
-                  <!-- <tr>
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-image">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Telefonnummer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of appoData | keyvalue; let i = index">
+                <td class="w-25">
+                  <img
+                    src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg"
+                    class="img-fluid rounded-circle"
+                    alt="Sheep"
+                  />
+                </td>
+                <td>{{ appoData[i].user[0].name }}</td>
+                <td>
+                  {{ formatDate(appoData[i].date) + " : " + appoData[i].time }}
+                </td>
+                <td>{{ appoData[i].user[0].handynummer }}</td>
+                <td>
+                  <button
+                    (click)="
+                      deletAPPO(appoData[i]._id, appoData[i].user[0].email, i)
+                    "
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+              <!-- <tr>
                     <td class="w-25">
                         <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid rounded-circle " alt="Sheep">
                     </td>
@@ -54,10 +68,10 @@
                     <td>20.12-2000</td>
                     <td>0175243235678</td>
                   </tr> -->
-                </tbody>
-              </table>   
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
   </div>
 </div>

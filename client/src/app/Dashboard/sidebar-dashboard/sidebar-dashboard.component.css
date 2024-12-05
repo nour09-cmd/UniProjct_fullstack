@@ -4,6 +4,12 @@
     margin-bottom: 10px;
 
 }
+.nav-link.active{
+    background-color: black !important;
+    padding: 13px !important;
+  
+  }
+  
 .logo-cont{
     display: flex;
     justify-content: center;
@@ -15,9 +21,27 @@
 }
 li> a{
     color: white;
+    font-size: 16px !important;
 }
 li > a > i{
     color: #DABE29;
+    margin: 5px;
+    font-size: 16px !important;
+
+}
+li{
+    width: 240px;
+    padding: 10px 20px;
+    
+}
+@media screen and (width< 596px) {
+li{
+    width: 100%;
+}
+li > a > i{
+    font-size: 20px !important;
+
+}
 }
 /* .dashboard-container{
     background-color: #9c0202;
@@ -25,3 +49,6 @@ li > a > i{
     padding: 100px;
 } */
 
+/* .dashboard-container{
+    height: 150vh;
+} */

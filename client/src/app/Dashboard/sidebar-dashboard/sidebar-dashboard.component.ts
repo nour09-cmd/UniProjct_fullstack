@@ -6,6 +6,8 @@ import { StoreService } from '../../redux/store.service';
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { LadenProfileComponent } from '../laden-profile/laden-profile.component';
 import { PriceListeComponent } from '../price-liste/price-liste.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar-dashboard',
@@ -16,6 +18,9 @@ import { PriceListeComponent } from '../price-liste/price-liste.component';
     ClosedaysComponent,
     LadenProfileComponent,
     PriceListeComponent,
+    RouterModule,
+
+    CommonModule,
   ],
   templateUrl: './sidebar-dashboard.component.html',
   styleUrl: './sidebar-dashboard.component.css',
@@ -29,5 +34,9 @@ export class SidebarDashboardComponent implements OnInit {
       this._userData = stateUser.userData;
     });
     this.storeService.dispatch(getUserData());
+  }
+  activeComponent: string = 'appointment';
+  showComponent(componentName: string): void {
+    this.activeComponent = componentName;
   }
 }

@@ -19,6 +19,8 @@ import {
   deletAppointmentVonBarber,
   getAppos,
 } from '../../redux/features/Laden/AppoSlice';
+import { SidebarDashboardComponent } from '../sidebar-dashboard/sidebar-dashboard.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-apponitment-dashboard',
@@ -34,6 +36,8 @@ import {
     ReactiveFormsModule,
     ReactiveFormsModule,
     CommonModule,
+    SidebarDashboardComponent,
+    RouterModule,
   ],
   templateUrl: './apponitment-dashboard.component.html',
   styleUrl: './apponitment-dashboard.component.css',
