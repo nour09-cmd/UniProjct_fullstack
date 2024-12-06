@@ -31,3 +31,6 @@ export class CreatePriceListDTO {
   @IsNotEmpty()
   sales: [SalesDTO];
 }
+export class CreatePriceListArrDTO {
+  List: CreatePriceListDTO[];
+}

@@ -26,25 +26,6 @@ router
         res.status(500).json({ message: "Internal server error" });
       }
     }
-  )
-  .delete(
-    auth.authenticateTokenBarber.bind(auth),
-    async (req: Request, res: Response) => {
-      try {
-        await priceListController.deletePriceList(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-      }
-    }
-  )
-  .put(
-    auth.authenticateTokenBarber.bind(auth),
-    async (req: Request, res: Response) => {
-      try {
-        await priceListController.updatePriceList(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-      }
-    }
   );
+
 module.exports = router;

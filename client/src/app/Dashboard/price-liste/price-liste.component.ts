@@ -15,11 +15,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { DropdownBtnComponent } from '../../Components/dropdown-btn/dropdown-btn.component';
-
-interface Item {
+import { StoreService } from '../../redux/store.service';
+import {
+  getPriceLite,
+  postPriceLite,
+} from '../../redux/features/Laden/LadenSlice';
+interface sales {
   name: string;
-  price: number;
+  price: Number;
+}
+interface Item {
   category: string;
+  sales: sales[];
 }
 
 @Component({
@@ -43,20 +50,37 @@ interface Item {
   styleUrls: ['./price-liste.component.css'], // Schreibweise korrigiert
 })
 export class PriceListeComponent implements OnInit {
-  items: Item[] = [
-    { name: 'Reis', price: 15, category: 'Lebensmittel' },
-    { name: 'Brot', price: 3, category: 'Lebensmittel' },
-    { name: 'Milch', price: 2.5, category: 'Getränke' },
-    { name: 'Cola', price: 1.5, category: 'Getränke' },
-    { name: 'Butter', price: 5, category: 'Lebensmittel' },
-  ];
-
+  liste: any;
+  items: Item[] = [];
+  ngOnInit(): void {
+    this.storeService.dispatch(getPriceLite());
+    this.storeService.subcribe(() => {
+      const stateLaden =
+        this.storeService.getState().laden.priceListe.priceListe;
+      this.items = stateLaden;
+    });
+  }
   CategoryOptions = [
-    { value: 'men', text: 'Männer' },
-    { value: 'women', text: 'Frauen' },
-    { value: 'Beard', text: 'Bart' },
-    { value: 'waxing', text: 'Waxing' },
-    { value: 'kids', text: 'Kinder' },
+    {
+      value: 'men',
+      text: 'Männer',
+    },
+    {
+      value: 'women',
+      text: 'Frauen',
+    },
+    {
+      value: 'Beard',
+      text: 'Bart',
+    },
+    {
+      value: 'waxing',
+      text: 'Waxing',
+    },
+    {
+      value: 'kids',
+      text: 'Kinder',
+    },
   ];
 
   radioOptions = [
@@ -69,7 +93,7 @@ export class PriceListeComponent implements OnInit {
   priceListForm: FormGroup;
   @Input() categoryValue: string = 'Lebensmittel';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private storeService: StoreService) {
     this.priceListForm = this.fb.group({
       category: ['', [Validators.required]],
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -79,7 +103,6 @@ export class PriceListeComponent implements OnInit {
       ],
     });
   }
-  ngOnInit(): void {}
 
   get groupedItems(): { [category: string]: Item[] } {
     return this.items.reduce((grouped, item) => {
@@ -98,28 +121,65 @@ export class PriceListeComponent implements OnInit {
     if (!this.categoryValue) return this.items;
     return this.items.filter((item) => item.category === this.categoryValue);
   }
-  addItem(): void {
+  async addItem() {
     if (this.priceListForm.valid) {
-      const newItem: Item = this.priceListForm.value;
-      this.items.push(newItem);
-      console.log(this.items);
-      alert(
-        `Added Item: ${newItem.name}, Price: ${newItem.price} €, Category: ${newItem.category}`
+      const newItem: any = this.priceListForm.value;
+
+      // Try to find the category and add the new sale item if it exists
+      const categoryIndex = this.items.findIndex(
+        (item) => item.category === newItem.category
       );
+
+      if (categoryIndex !== -1) {
+        // Clone the found category item and update the sales array
+        const updatedItem = { ...this.items[categoryIndex] };
+        updatedItem.sales = [
+          ...updatedItem.sales,
+          { name: newItem.name, price: newItem.price },
+        ];
+
+        // Update the items array with the modified category item
+        this.items = [
+          ...this.items.slice(0, categoryIndex), // Items before the updated category
+          updatedItem, // Updated category with new sale
+          ...this.items.slice(categoryIndex + 1), // Items after the updated category
+        ];
+      } else {
+        // If the category doesn't exist, create a new category with the sales
+        this.items = [
+          ...this.items,
+          {
+            category: newItem.category,
+            sales: [{ name: newItem.name, price: newItem.price }],
+          },
+        ];
+      }
+
+      console.log(this.items);
       this.priceListForm.reset();
     }
   }
-  updateItem(item: Item): void {
-    this.priceListForm.setValue({
-      name: item.name,
-      price: item.price,
-      category: item.category,
-    });
 
-    this.items = this.items.filter((i) => i !== item);
-  }
-  deleteItem(item: Item): void {
-    this.items = this.items.filter((i) => i !== item);
+  deleteItem(categoryIndex: number, sale: sales): void {
+    if (categoryIndex >= 0 && categoryIndex < this.items.length) {
+      const updatedSales = this.items[categoryIndex].sales.filter(
+        (existingSale) => existingSale.name !== sale.name
+      );
+      if (updatedSales.length === 0) {
+        this.items = this.items.filter((_, index) => index !== categoryIndex);
+      } else {
+        this.items = this.items.map((item, index) =>
+          index === categoryIndex ? { ...item, sales: updatedSales } : item
+        );
+      }
+    } else {
+      console.error('Invalid index:', categoryIndex);
+    }
+
     console.log(this.items);
+  }
+  onSubmit() {
+    this.storeService.dispatch(postPriceLite(this.items));
+    location.reload();
   }
 }

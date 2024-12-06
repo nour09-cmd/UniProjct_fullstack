@@ -7,6 +7,7 @@ const initialState: any = {
   errors: '',
   LadensDaten: [],
   getOneLaden: [],
+  priceListe: [],
 };
 
 export const getAllData: any = createAsyncThunk('/getAllData', async () => {
@@ -43,6 +44,34 @@ export const createLaden: any = createAsyncThunk(
     }
   }
 );
+
+export const getPriceLite: any = createAsyncThunk('/getPriceLite', async () => {
+  try {
+    const res = await axios.get(`${BASEURL}/ladens/PriceList/`, {
+      headers: {
+        Authorization: `${TOKEN()}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+export const postPriceLite: any = createAsyncThunk(
+  '/postPriceLite',
+  async (daten: any) => {
+    try {
+      const res = await axios.post(`${BASEURL}/ladens/PriceList/`, daten, {
+        headers: {
+          Authorization: `${TOKEN()}`,
+        },
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 const LadenSlice = createSlice({
   name: 'laden',
   initialState,
@@ -63,6 +92,15 @@ const LadenSlice = createSlice({
       })
       .addCase(createLaden.fulfilled, (state, action) => {
         state.getOneLaden = action.payload;
+        state.loading = false;
+        state.errors = '';
+      })
+      .addCase(getPriceLite.fulfilled, (state, action) => {
+        state.priceListe = action.payload;
+        state.loading = false;
+        state.errors = '';
+      })
+      .addCase(postPriceLite.fulfilled, (state, action) => {
         state.loading = false;
         state.errors = '';
       });

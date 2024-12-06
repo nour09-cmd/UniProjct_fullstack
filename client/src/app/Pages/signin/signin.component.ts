@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
 import { logIn } from '../../redux/features/User/UserSlice';
@@ -20,8 +20,9 @@ import { StoreService } from '../../redux/store.service';
     PagebennerComponent,
     TitleLineComponent,
     ReactiveFormsModule,
-    CommonModule
-],
+    CommonModule,
+    RouterModule,
+  ],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css',
 })

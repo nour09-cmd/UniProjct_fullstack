@@ -64,7 +64,7 @@ export class SignupComponent {
   singUpErorr: any = [];
   imagePreview: string | null = null;
   hide = true;
-  step = 1; // Track the current step
+  step = 1;
 
   stepOneForm!: FormGroup;
   stepTwoForm!: FormGroup;
@@ -134,10 +134,6 @@ export class SignupComponent {
 
     try {
       await this.storeService.dispatch(singUp(formData));
-      await axios.post('http://localhost:3030/img', {
-        img: formData.image,
-        text: 'aha',
-      });
 
       const state = this.storeService.getState().user;
       this.singUpErorr = state.singUpError || [];
@@ -149,50 +145,47 @@ export class SignupComponent {
     if (!constraints) return [];
     return Object.values(constraints);
   }
-<<<<<<< HEAD
-=======
-  async onSubmit() {
-    const isFilled = this.isFormNotEmpty(this.signUPForm);
+  // async onSubmits() {
+  //   const isFilled = this.isFormNotEmpty(this.signUPForm);
 
-    if (!isFilled) {
-      // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
-      alert('Please fill out all required fields.');
-      return;
-    }
+  //   if (!isFilled) {
+  //     // TODO change this to pushing in the singUpError where {constraints:"MASSAGE"}
+  //     alert('Please fill out all required fields.');
+  //     return;
+  //   }
 
-    if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
-      alert('Die Passwörter stimmen nicht überein');
-      return;
-    }
+  //   if (this.signUPForm.value.password !== this.signUPForm.value.passwordwd) {
+  //     alert('Die Passwörter stimmen nicht überein');
+  //     return;
+  //   }
 
-    const data: any = {
-      image: this.signUPForm.value.image,
-      email: this.signUPForm.value.email,
-      password: this.signUPForm.value.password,
-      vorname: this.signUPForm.value.vorname,
-      nachname: this.signUPForm.value.nachname,
-      handynummer: this.signUPForm.value.handynummer,
-      geburtsdatum: this.signUPForm.value.geburtsdatum,
-      address: {
-        strasse: `${this.signUPForm.value.strasse} ${this.signUPForm.value.hausnummer}`,
-        ort: this.signUPForm.value.ort,
-        plz: this.signUPForm.value.plz,
-      },
-    };
+  //   const data: any = {
+  //     image: this.signUPForm.value.image,
+  //     email: this.signUPForm.value.email,
+  //     password: this.signUPForm.value.password,
+  //     vorname: this.signUPForm.value.vorname,
+  //     nachname: this.signUPForm.value.nachname,
+  //     handynummer: this.signUPForm.value.handynummer,
+  //     geburtsdatum: this.signUPForm.value.geburtsdatum,
+  //     address: {
+  //       strasse: `${this.signUPForm.value.strasse} ${this.signUPForm.value.hausnummer}`,
+  //       ort: this.signUPForm.value.ort,
+  //       plz: this.signUPForm.value.plz,
+  //     },
+  //   };
 
-    try {
-      await this.storeService.dispatch(singUp(data));
-      const state = this.storeService.getState().user;
-      this.singUpErorr = state.singUpError || [];
-      if (this.singUpErorr.length > 0) {
-        console.error('Signup Errors:', this.singUpErorr);
-      }
-      setTimeout(() => {
-        this.loading = false;
-      }, 2500);
-    } catch (error) {
-      console.error('Error during form submission:', error);
-    }
-  }
->>>>>>> 0581701c84e888bac01c5ac3433d55a517c8cbc3
+  //   try {
+  //     await this.storeService.dispatch(singUp(data));
+  //     const state = this.storeService.getState().user;
+  //     this.singUpErorr = state.singUpError || [];
+  //     if (this.singUpErorr.length > 0) {
+  //       console.error('Signup Errors:', this.singUpErorr);
+  //     }
+  //     setTimeout(() => {
+  //       this.loading = false;
+  //     }, 2500);
+  //   } catch (error) {
+  //     console.error('Error during form submission:', error);
+  //   }
+  // }
 }

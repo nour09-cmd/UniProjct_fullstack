@@ -18,13 +18,10 @@
     *ngIf="selectedFilter === 'showAll'"
     class="formbox d-flex justify-content-center align-items-start my-4 py-3 px-3"
   >
-    <div
-      *ngFor="let category of groupedItems | keyvalue"
-      class="category-box w-100 px-2 py-3"
-    >
-      <h3>{{ category.key }} :</h3>
+    <div *ngFor="let category of items" class="category-box w-100 px-2 py-3">
+      <h3>{{ category.category }} :</h3>
       <div
-        *ngFor="let item of category.value"
+        *ngFor="let item of category.sales"
         class="formatPricenName w-100 px-2 border-bottom py-3 d-flex justify-content-between flex-nowrap"
       >
         • {{ item.name }} : <span class="price">{{ item.price }} € </span>
@@ -90,8 +87,8 @@
             </div>
 
             <button
+              type="submit"
               class="my-2 btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center"
-              (click)="addItem()"
             >
               <span class="mb-0">+</span>
             </button>
@@ -100,13 +97,13 @@
 
         <ul class="list-unstyled mt-3">
           <li
-            *ngFor="let category of groupedItems | keyvalue"
+            *ngFor="let category of items; let itemindex = index"
             class="d-flex flex-column mb-4"
           >
-            <h1 class="text-secondary">{{ category.key }} :</h1>
+            <h1 class="text-secondary">{{ category.category }} :</h1>
             <ul>
               <li
-                *ngFor="let item of category.value"
+                *ngFor="let item of category.sales; let i = index"
                 class="d-flex justify-content-around align-items-center border-bottom py-2 px-3 rounded-bottom w-100"
               >
                 <div
@@ -122,7 +119,7 @@
 
                 <button
                   class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
-                  (click)="deleteItem(item)"
+                  (click)="deleteItem(itemindex, item)"
                 >
                   <span class="h5 mb-0">-</span>
                 </button>
@@ -134,3 +131,9 @@
     </form>
   </div>
 </div>
+<input
+  type="button"
+  class="ourBtn gold w-100"
+  value="Save"
+  (click)="onSubmit()"
+/>

@@ -305,13 +305,13 @@ export class PriceListeModel {
 
   async addPriceListeBarberProfileByEmail(
     barber_email: string,
-    PriceListe: IPriceListe
+    PriceListe: IPriceListe[]
   ): Promise<ILaden | null> {
     await this.conn.connect();
     const data = await this.model
       .findOneAndUpdate(
         { barber_email: barber_email },
-        { $push: { priceListe: PriceListe } },
+        { priceListe: PriceListe },
         { new: true }
       )
       .lean()

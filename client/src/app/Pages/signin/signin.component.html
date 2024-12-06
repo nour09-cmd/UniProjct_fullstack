@@ -3,7 +3,7 @@
   <div
     class="py-4 d-flex flex-column justify-content-center align-items-center formbox"
   >
-    <form [formGroup]="loginForm" (click)="onSubmit()">
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
       <!-- Eingabefeld für Vollständiger Name mit dem vorherigen Icon -->
       <div class="form-group py-3 position-relative">
         <div class="input-wrapper">
@@ -68,15 +68,13 @@
         </div>
       </div>
 
-<<<<<<< HEAD
-      <input type="submit" class="ourBtn gold w-100" value="SIGN UP" />
-=======
-      <input type="submit" class="ourBtn gold w-100"  value="SIGN IN">
-
->>>>>>> afbdb9ecb3d63b1658d2572947177290c159b117
+      <input type="submit" class="ourBtn gold w-100" value="SIGN IN" />
     </form>
   </div>
-  <a class="text-secondary my-10" href="/"
-    ><title-line titel="Back Home"></title-line
+  <a
+    class="text-secondary my-10"
+    routerLink="/register"
+    routerLinkActive="active"
+    ><title-line titel="Register"></title-line
   ></a>
 </div>
