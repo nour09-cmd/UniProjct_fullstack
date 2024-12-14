@@ -1,39 +1,33 @@
 import {
   Component,
-  Input,
   OnInit,
   ChangeDetectionStrategy,
-  OnChanges,
-  SimpleChanges,
   ChangeDetectorRef,
 } from '@angular/core';
 
 import {
-  ReactiveFormsModule,
   Validators,
-  FormControl,
-  FormsModule,
   FormGroup,
   FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatDatepickerInputEvent,
+  MatDatepickerModule,
+} from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  ErrorStateMatcher,
-  provideNativeDateAdapter,
-} from '@angular/material/core';
 import { Router } from '@angular/router';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
 import { StoreService } from '../../redux/store.service';
 import { singUp } from '../../redux/features/User/UserSlice';
 import { NotificationBarComponent } from '../../Components/notification-bar/notification-bar.component';
-import axios from 'axios';
 
 @Component({
   selector: 'app-signup',
@@ -46,25 +40,24 @@ import axios from 'axios';
     MatNativeDateModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
-    ReactiveFormsModule,
-    CommonModule,
     NotificationBarComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   loading = true;
   singUpErorr: any = [];
   imagePreview: string | null = null;
   hide = true;
   step = 1;
+  maxDate: Date;
 
   stepOneForm!: FormGroup;
   stepTwoForm!: FormGroup;
@@ -79,6 +72,7 @@ export class SignupComponent {
     if (token) {
       this.router.navigate(['/']);
     }
+    this.maxDate = new Date();
   }
 
   ngOnInit(): void {
@@ -92,7 +86,7 @@ export class SignupComponent {
 
     this.stepTwoForm = this.fb.group({
       handynummer: ['', [Validators.required]],
-      geburtsdatum: ['', [Validators.required]],
+      geburtsdatum: ['', [Validators.required, this.validateAge]],
       strasse: ['', [Validators.required]],
       hausnummer: ['', [Validators.required]],
       ort: ['', [Validators.required]],
@@ -106,7 +100,9 @@ export class SignupComponent {
       this.step = 2;
     }
   }
-
+  goToStepOne(): void {
+    this.step = 1;
+  }
   onDateiAuswahl(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -141,10 +137,79 @@ export class SignupComponent {
       console.error('Fehler bei der Registrierung:', error);
     }
   }
+
+  async onSubmits() {
+    const isFilled =
+      this.isFormNotEmpty(this.stepOneForm) &&
+      this.isFormNotEmpty(this.stepTwoForm);
+
+    if (!isFilled) {
+      alert('Bitte füllen Sie alle Felder aus.');
+      console.log(this.stepOneForm.value + this.stepTwoForm.value);
+      return;
+    }
+
+    if (this.stepOneForm.value.password !== this.stepOneForm.value.passwordwd) {
+      alert('Die Passwörter stimmen nicht überein.');
+      return;
+    }
+
+    const data: any = {
+      image: this.stepTwoForm.value.image,
+      email: this.stepOneForm.value.email,
+      password: this.stepOneForm.value.password,
+      vorname: this.stepOneForm.value.vorname,
+      nachname: this.stepOneForm.value.nachname,
+      handynummer: this.stepTwoForm.value.handynummer,
+      geburtsdatum: this.stepTwoForm.value.geburtsdatum,
+      address: {
+        strasse: `${this.stepTwoForm.value.strasse} ${this.stepTwoForm.value.hausnummer}`,
+        ort: this.stepTwoForm.value.ort,
+        plz: this.stepTwoForm.value.plz,
+      },
+    };
+
+    try {
+      await this.storeService.dispatch(singUp(data));
+      const state = this.storeService.getState().user;
+      this.singUpErorr = state.singUpError || [];
+      if (this.singUpErorr.length > 0) {
+        console.error('Signup Errors:', this.singUpErorr);
+      }
+      setTimeout(() => {
+        this.loading = false;
+      }, 2500);
+    } catch (error) {
+      console.error('Fehler während des Formular-Submits:', error);
+    }
+  }
+
+  private isFormNotEmpty(formGroup: FormGroup): boolean {
+    return Object.values(formGroup.controls).every(
+      (control) => control.value !== '' && control.valid
+    );
+  }
   getErrorMessages(constraints: any): string[] {
     if (!constraints) return [];
     return Object.values(constraints);
   }
+  validateAge(control: any): { [key: string]: boolean } | null {
+    const birthDate = new Date(control.value);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+
+    if (
+      age < 16 ||
+      (age === 16 &&
+        (today.getMonth() < birthDate.getMonth() ||
+          (today.getMonth() === birthDate.getMonth() &&
+            today.getDate() < birthDate.getDate())))
+    ) {
+      return { tooYoung: true };
+    }
+    return null;
+  }
+
   // async onSubmits() {
   //   const isFilled = this.isFormNotEmpty(this.signUPForm);
 

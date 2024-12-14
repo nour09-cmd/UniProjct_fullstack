@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../redux/store.service';
 import { getUserData } from '../../redux/features/User/UserSlice';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-desktop',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, RouterModule, CommonModule],
   templateUrl: './navbar-desktop.component.html',
   styleUrl: './navbar-desktop.component.css',
 })
