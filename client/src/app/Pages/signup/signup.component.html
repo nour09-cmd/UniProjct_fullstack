@@ -64,7 +64,7 @@
         <div class="d-flex justify-content-end">
           <button
             mat-raised-button
-            color="primary"
+            color="ourBtn black w-30"
             type="submit"
             [disabled]="stepOneForm.invalid"
           >
@@ -116,7 +116,7 @@
               [matDatepicker]="picker"
               formControlName="geburtsdatum"
               placeholder="Geburtsdatum"
-              [max]="maxDate"
+              [max]="startDate"
             />
             <mat-datepicker-toggle
               matSuffix

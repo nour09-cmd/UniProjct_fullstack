@@ -23,12 +23,15 @@ export class AppointmentController {
     this.emailS = new EmailService();
   }
   async getAppointmentLaden(req: Request, res: Response) {
-    const getLadenDTO = plainToClass(GetLadenDTO, req.body);
+    const getLadenDTO = plainToClass(GetLadenDTO, {
+      email: req.params.email,
+    });
     const errors = await validate(getLadenDTO);
+    console.log(getLadenDTO);
     if (errors.length > 0) {
       return res.status(400).json({ message: "Validation failed", errors });
     }
-    const Laden_email = req.body.email;
+    const Laden_email = getLadenDTO.email;
     const appointments =
       await this.modelAppointmentLaden.getAppointmentBarberProfileByEmail(
         Laden_email

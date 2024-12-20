@@ -45,15 +45,16 @@
                     alt="Sheep"
                   />
                 </td>
-                <td>{{ appoData[i].user[0].name }}</td>
+                <td>{{ appoData[i].name }}</td>
                 <td>
                   {{ formatDate(appoData[i].date) + " : " + appoData[i].time }}
                 </td>
-                <td>{{ appoData[i].user[0].handynummer }}</td>
+                <td>{{ appoData[i].handynummer }}</td>
                 <td>
                   <button
+                  class="btn btn-danger"
                     (click)="
-                      deletAPPO(appoData[i]._id, appoData[i].user[0].email, i)
+                      deletAPPO(appoData[i]._id, appoData[i].email, i)
                     "
                   >
                     delete

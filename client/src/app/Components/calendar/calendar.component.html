@@ -3,8 +3,8 @@
     <div class="col-12 col-sm-10 col-md-8 col-lg-6 text-center">
       <div>
         <div>
-          <h2 class="fs-2">Pick up an appointment</h2>
-          <h3 class="fs-3 mt-5">Calendar</h3>
+          <h2 class="fs-2 h1">Pick up an appointment</h2>
+          <h3 class="fs-3 mt-5 h1">Calendar</h3>
           <mat-calendar
             #calendar
             [minDate]="minDate"
@@ -23,7 +23,11 @@
             ></app-apo-btn>
           </div>
           <p *ngIf="selectedDate && selectedTime && isAngemeldet">
-            Selected Date: {{ selectedDate }} at Time: {{ selectedTime }}
+            <span class="reservation-info">
+              <em>Ausgewähltes Datum:</em> &nbsp;
+              <strong> {{ selectedDate }}</strong> &nbsp; | &nbsp;
+              <em>Uhrzeit:</em> &nbsp;<strong>{{ selectedTime }}</strong>
+            </span>
           </p>
           <Unsere-Buton
             label="SAVE"
@@ -31,9 +35,13 @@
             *ngIf="selectedDate && selectedTime && isAngemeldet"
             (clicked)="handleSelectedTime()"
           ></Unsere-Buton>
-          <p *ngIf="selectedDate && selectedTime && !isAngemeldet">
+          <p
+            *ngIf="selectedDate && selectedTime && !isAngemeldet"
+            class="reservation-hinweis"
+          >
             um diese termin zu reavieren sie müssen erste mal her anmelden bitte
-            Selected Date: {{ selectedDate }} at Time: {{ selectedTime }}
+            Selected Date:
+            <strong>{{ selectedDate }} at Time: {{ selectedTime }}</strong>
           </p>
           <Unsere-Buton
             label="Login"

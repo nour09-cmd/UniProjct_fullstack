@@ -37,9 +37,9 @@ export const getAppos: any = createAsyncThunk(
     try {
       const token = TOKEN();
 
-      const res = await axios.post(
-        `${BASEURL}/ladens/getAppointmentLaden/`,
-        { email },
+      const res = await axios.get(
+        `${BASEURL}/ladens/getAppointmentLaden/${email}`,
+
         {
           headers: {
             authorization: token,
@@ -88,7 +88,6 @@ const AppoSlice = createSlice({
         state.errors = '';
       })
       .addCase(deletAppointmentVonBarber.fulfilled, (state, action) => {
-        //TODO change the apo state.appos = action.payload;
         state.loading = false;
         state.errors = '';
       })

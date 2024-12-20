@@ -106,11 +106,11 @@ export class LadenController {
     await this.userRepository.save(User);
     return res.status(200).json({ ...createLaden });
   }
-  // TODO DTOs
+
   async updateLaden(req: Request, res: Response) {
     const barber_email = req["user"]["email"];
 
-    const { data } = req.body;
+    const data = req.body;
     const findLaden = await this.modelMonogo.findByBarberEmail(barber_email);
     if (!findLaden) {
       return res.status(400).json({ message: "Laden not exsist " });
@@ -151,7 +151,7 @@ export class LadenController {
       barber_email,
       clearDataLaden
     );
-    return res.status(200).json({ messager: true, data: clearDataLaden });
+    return res.status(200).json({ messager: true, data: data });
   }
   async deleteLadenByEmail(req: Request, res: Response) {
     const email = req["user"]["email"];

@@ -58,4 +58,17 @@ router
     }
   );
 
+router
+  .route("/getladens/update")
+  .post(
+    auth.authenticateTokenBarber.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await ladenController.updateLaden(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  );
+
 module.exports = router;

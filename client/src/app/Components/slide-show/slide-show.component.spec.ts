@@ -8,10 +8,9 @@ describe('SlideShowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SlideShowComponent]
-    })
-    .compileComponents();
-    
+      imports: [SlideShowComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SlideShowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

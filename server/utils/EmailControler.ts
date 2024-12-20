@@ -645,8 +645,8 @@ export class EmailService {
               <p>Hallo ${userData.vorname + " " + userData.nachname},</p>
               <p>
                 Ihr Termin bei ${ladenData.Laden_name} am ${
-      other.apoData.date
-    } um ${other.apoData.time} wurde leider vom Barber abgesagt. Wir
+      other.apoData?.date || ""
+    } um ${other.apoData?.time} wurde leider vom Barber abgesagt. Wir
                 bedauern die Unannehmlichkeiten und hoffen, Ihnen bald einen neuen
                 Termin anbieten zu können.
               </p>
@@ -715,8 +715,8 @@ export class EmailService {
             <p>Hallo Team der ${ladenData.Laden_name},</p>
             <p>
               Der Termin mit ${userData.vorname + " " + userData.nachname} am ${
-      other.apoData.date
-    } um ${other.apoData.time}  wurde erfolgreich aus Ihrem Kalender
+      other.apoData?.date
+    } um ${other.apoData?.time}  wurde erfolgreich aus Ihrem Kalender
               entfernt. Falls Sie Unterstützung benötigen oder weitere Informationen
               benötigen, stehen wir Ihnen gerne zur Verfügung.
             </p>

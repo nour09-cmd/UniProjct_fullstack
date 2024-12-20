@@ -2,8 +2,10 @@
 <app-navbar-mobile />
 <div class="container">
   <h1 class="my-3">
-    {{ ladenDaten.Laden_adress.ort }} ->
-    <strong>{{ ladenDaten.Laden_name }} </strong>
+    <i class="bi bi-geo-alt-fill"></i>{{ " " + ladenDaten.Laden_adress.ort }}
+    <i class="bi bi-caret-right-fill"></i>
+
+    <span class="titel">{{ " " + ladenDaten.Laden_name }}</span>
   </h1>
 </div>
 <!-- // add a array with image path  -->
@@ -12,8 +14,10 @@
 <app-star-rating [ratingArr]="ladenDaten.reviews" />
 
 <div class="container mt-3 d">
-  <h3>{{ ladenDaten.Laden_name }}</h3>
-  <p>
+  <h2 class="titel">
+    {{ ladenDaten.Laden_name }}
+  </h2>
+  <p class="description">
     {{ ladenDaten.Laden_description }}
   </p>
 </div>

@@ -44,7 +44,21 @@ export const createLaden: any = createAsyncThunk(
     }
   }
 );
-
+export const updateLaden: any = createAsyncThunk(
+  '/updateLaden',
+  async (data: any) => {
+    try {
+      const res = await axios.post(`${BASEURL}/ladens/getladens/update`, data, {
+        headers: {
+          Authorization: `${TOKEN()}`,
+        },
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 export const getPriceLite: any = createAsyncThunk('/getPriceLite', async () => {
   try {
     const res = await axios.get(`${BASEURL}/ladens/PriceList/`, {
@@ -101,6 +115,11 @@ const LadenSlice = createSlice({
         state.errors = '';
       })
       .addCase(postPriceLite.fulfilled, (state, action) => {
+        state.loading = false;
+        state.errors = '';
+      })
+      .addCase(updateLaden.fulfilled, (state, action) => {
+        state.getOneLaden = action.payload;
         state.loading = false;
         state.errors = '';
       });

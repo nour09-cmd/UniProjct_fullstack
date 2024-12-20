@@ -1,4 +1,8 @@
-<div class="container p-4">
+<div style="padding: 0" *ngIf="counter == false">
+  <app-willkommen></app-willkommen>
+</div>
+
+<div class="container p-4" *ngIf="counter == true">
   <div class="row">
     <div class="col">
       <p class="title-dacshboard">Laden Profile</p>
@@ -11,17 +15,17 @@
         <input
           class="form-control form-control-lg my-3"
           type="text"
+          placeholder="Name the Store"
           id="Laden_name"
           formControlName="Laden_name"
-          placeholder="Name the Store"
         />
 
         <textarea
           class="form-control my-3"
-          id="Laden_description"
-          formControlName="Laden_description"
           rows="3"
           placeholder="Describtion"
+          id="Laden_description"
+          formControlName="Laden_description"
         ></textarea>
         <label for="exampleFormControlTextarea1 my-3 "
           >Add Laden Images (Max 3 images) :</label
@@ -33,10 +37,12 @@
             >
               <div
                 class="py-2 px-3 rounded-top border-secondary w-50 d-flex justify-content-center align-items-center border border-bottom-0"
+                (click)="fileInput.click()"
               >
                 <p class="m-0">Add img</p>
               </div>
               <button
+                type="button"
                 class="my-2 btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center"
                 (click)="fileInput.click()"
                 [disabled]="isUploadDisabled()"
@@ -78,7 +84,54 @@
       </div>
 
       <label for="exampleFormControlTextarea1 my-3 ">Laden Addres :</label>
-      <app-addresse-input></app-addresse-input>
+      <div class="container d-flex justify-content-center formbox">
+        <div class="adbox row g-2 my-3 mx-3">
+          <div class="col-md-6">
+            <label for="street" class="form-label">Straße:</label>
+            <input
+              type="text"
+              id="street"
+              formControlName="street"
+              class="form-control inputAdress"
+              placeholder="Straße eingeben"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="houseNumber" class="form-label">Hausnummer:</label>
+            <input
+              type="text"
+              id="houseNumber"
+              formControlName="houseNumber"
+              class="form-control inputAdress"
+              placeholder="Hausnummer eingeben"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="postalCode" class="form-label">PLZ:</label>
+            <input
+              type="text"
+              id="postalCode"
+              formControlName="postalCode"
+              class="form-control inputAdress"
+              placeholder="12345"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="city" class="form-label">Ort:</label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              class="form-control inputAdress"
+              placeholder="Ort eingeben"
+            />
+          </div>
+        </div>
+      </div>
+
+      <Unsere-Buton classes="black" label="submit"></Unsere-Buton>
     </form>
   </div>
 </div>

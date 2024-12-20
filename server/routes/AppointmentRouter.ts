@@ -18,7 +18,7 @@ router
     }
   );
 router
-  .route("/getAppointmentLaden") // TODO fix the value response !!
+  .route("/getAppointmentLaden/:email") // TODO fix the value response !!
   .get(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
@@ -44,7 +44,7 @@ router
 
 router
   .route("/AppointmentVonUser")
-  .delete(
+  .post(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {
       try {
@@ -56,7 +56,7 @@ router
   );
 router
   .route("/AppointmentVonBarber")
-  .delete(
+  .post(
     auth.authenticateTokenBarber.bind(auth),
     async (req: Request, res: Response) => {
       try {

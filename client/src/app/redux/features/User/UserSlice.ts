@@ -58,7 +58,6 @@ export const getUserData: any = createAsyncThunk(
       }
       return res.data;
     } catch (error: any) {
-      localStorage.removeItem('token');
       console.log(error);
       return rejectWithValue(
         error.response?.data || 'Failed to fetch user data'

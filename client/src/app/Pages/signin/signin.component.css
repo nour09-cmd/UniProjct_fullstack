@@ -1,67 +1,57 @@
-
- 
+/* Container Configuration */
 .container {
-  max-width: 811px; 
+  max-width: 600px;
   padding-top: 170px;
-  
-}
-.form-control{
-  display: flex;
-  padding: 13px 256px 13px 12px;
-  align-items: center;
-  gap: 10px;
-  margin: 0px;
-  border-radius: 8px;
-  background: #E8E7E7;
-  padding-left: 35px; 
+  width: 100%;
 }
 
-.input-wrapper {
-  position: relative;
+.formbox {
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.input-icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+mat-form-field {
+  width: 40vh;
+
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+  margin: 12px;
+  border: none;
+  background-color: white;
 }
 
 
+mat-icon {
+  font-family: 'Material Icons' !important;
+  color: #000;
+  line-height: 24px;
+  font-size: 24px;
+}
 
+
+/* Responsive Design */
 @media screen and (max-width: 560px) {
   .container {
-    width: 80%;
+    width: 100%;
+    padding: 1.5rem;
   }
 
+  mat-form-field {
+    width: 100%;
+
+  }
   .formbox {
     padding: 1.5rem;
   }
-  .form-control{
-    padding: 23px 127px 11px 41px;
-  }
+
 }
 
-/* Stile für Smartphones und sehr kleine Bildschirme */
 @media screen and (max-width: 480px) {
   .container {
-    width: 95%;
-  }
-
-  .formbox {
+    width: 41vh;
     padding: 1rem;
-  }
-
-  .input-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .input-icon {
-    margin-top: 0.5rem;
-  }
-  .form-control{
-    padding: 23px 127px 11px 41px;
   }
 }

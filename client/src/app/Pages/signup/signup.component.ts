@@ -52,6 +52,8 @@ import { NotificationBarComponent } from '../../Components/notification-bar/noti
   styleUrl: './signup.component.css',
 })
 export class SignupComponent implements OnInit {
+  year = new Date();
+  startDate = new Date(this.year.getFullYear() - 15, 0, 1);
   loading = true;
   singUpErorr: any = [];
   imagePreview: string | null = null;
