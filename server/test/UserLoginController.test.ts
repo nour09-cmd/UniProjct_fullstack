@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { UserLoginController } from "../controller/UserController";
+import { UserLoginController } from "../controller/UserRegisterController";
 import { validate } from "class-validator";
 import { UserLoginDTO } from "../DTOs/LoginDTO";
 import { User } from "../models/User";

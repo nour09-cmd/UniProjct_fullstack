@@ -1,9 +1,7 @@
 import { Request, Response, Router } from "express";
-import {
-  UserLoginController,
-  UserRegisterController,
-} from "../controller/UserController";
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
+import { UserLoginController } from "../controller/UserLoginController";
+import { UserRegisterController } from "../controller/UserRegisterController";
 
 const router = Router();
 
