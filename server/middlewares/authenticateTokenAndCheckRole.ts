@@ -3,7 +3,6 @@ import { SECRET_KEY } from "../utils/conifg";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User";
 import { AppDataSource } from "../utils/data-source";
-import { Rolle } from "../models/Rolle"; // TODO use as barber and admin
 
 export class AuthentivateToken {
   private userRepository = AppDataSource.getRepository(User);

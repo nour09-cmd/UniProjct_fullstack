@@ -62,7 +62,6 @@ class UserLoginController {
         return res.status(404).json({ error: "User not found" });
       }
 
-      // const isPasswordValid = password == user.password;
       const isPasswordValid = await bcrypt.compare(passwords, user.password);
 
       if (!isPasswordValid) {

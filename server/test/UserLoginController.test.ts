@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { UserLoginController } from "../controller/UserRegisterController";
-import { validate } from "class-validator";
-import { UserLoginDTO } from "../DTOs/LoginDTO";
 import { User } from "../models/User";
 import { Adresse } from "models/Adresse";
+import { UserLoginController } from "../controller/UserLoginController";
 
 jest.mock("bcryptjs");
 

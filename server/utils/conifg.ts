@@ -13,3 +13,28 @@ export const FRONDENDLOGIN = "http://localhost:3000/Login";
 export const TERMINURL = "http://localhost:3000/contact";
 export const SHOPNAME = "Barber Finder";
 export const SUPPORT = "http://localhost:3000/contact";
+
+// TODO change this in all controller
+import { Request, Response } from "express";
+const HttpStatus: Record<number, string> = {
+  200: "OK",
+  201: "Created",
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  500: "Internal Server Error",
+  503: "Service Unavailable",
+};
+
+export function sendResponse(
+  res: Response,
+  statusCode: number,
+  data: any = ""
+) {
+  res.status(statusCode).json({
+    status: statusCode,
+    message: HttpStatus[statusCode] || "Unknown Status",
+    data,
+  });
+}

@@ -18,7 +18,6 @@ import { IUserProfile } from "@mrx/barbar-finder";
 class UserRegisterController {
   private userRepository = AppDataSource.getRepository(User);
   private adresseRepository = AppDataSource.getRepository(Adresse);
-  // private imageUpload: ImageUploads;
   private rolle: string;
   private modelAppointmentUser: UserProfileModel;
   private emailS: EmailService;
@@ -26,7 +25,6 @@ class UserRegisterController {
     this.rolle = Rolle.USER;
     this.modelAppointmentUser = new UserProfileModel();
     this.emailS = new EmailService();
-    // this.imageUpload = new ImageUploads();
   }
 
   createToken(email: string, name: string) {
@@ -96,9 +94,7 @@ class UserRegisterController {
         plz: plzs,
       });
       const savedAddressId = await this.adresseRepository.save(newAddress);
-      //
       const emailToken = crypto.randomBytes(64).toString("hex");
-
       const newUser = this.userRepository.create({
         image: req.body.image || "",
         email: emails,
@@ -115,7 +111,6 @@ class UserRegisterController {
         resetPasswordStatus: false,
       });
       await this.userRepository.save(newUser);
-
       const name = `${vornames} ${nachnames}`;
       const token = this.createToken(emails, name);
       const data: IUserProfile = {

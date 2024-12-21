@@ -18,7 +18,7 @@ router
     }
   );
 router
-  .route("/getAppointmentLaden/:email") // TODO fix the value response !!
+  .route("/getAppointmentLaden/:email")
   .get(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {

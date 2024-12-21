@@ -5,28 +5,22 @@ const router = Router();
 const ladenController = new LadenController();
 const auth = new AuthentivateToken();
 
-router.route("/getOneladens").post(
-  // auth.authenticateToken.bind(auth),
-  async (req: Request, res: Response) => {
+router.route("/getOneladens").post(async (req: Request, res: Response) => {
+  try {
+    await ladenController.getLadenByEmail(req, res);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+router
+  .route("/getladens")
+  .get(async (req: Request, res: Response) => {
     try {
-      await ladenController.getLadenByEmail(req, res);
+      await ladenController.getLadens(req, res);
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
-  }
-);
-router
-  .route("/getladens")
-  .get(
-    // auth.authenticateToken.bind(auth),
-    async (req: Request, res: Response) => {
-      try {
-        await ladenController.getLadens(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-      }
-    }
-  )
+  })
   .post(
     auth.authenticateToken.bind(auth),
     async (req: Request, res: Response) => {

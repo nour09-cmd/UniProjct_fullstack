@@ -9,7 +9,6 @@ import { LadenModel } from "../models/Laden/LadenModel";
 export class WeekDaysController {
   private modelWeeksDays: WeeksDaysModel;
   private modelLaden: LadenModel;
-
   constructor() {
     this.modelWeeksDays = new WeeksDaysModel();
     this.modelLaden = new LadenModel();
@@ -40,7 +39,6 @@ export class WeekDaysController {
         barber_email,
         weekDays
       );
-
     if (!weekDaysdb)
       return res.status(400).json({ message: "Laden Not Found" });
 
