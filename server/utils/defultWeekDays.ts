@@ -6,7 +6,7 @@ interface Weekday {
   appointment_duration: number;
 }
 
-const WEEKDAYS: Weekday[] = [
+const WEEKDAYS: any[] = [
   {
     day: "Mo",
     status: "open",

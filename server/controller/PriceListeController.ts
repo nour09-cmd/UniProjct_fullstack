@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import { LadenModel, PriceListeModel } from "../models/Laden";
-import { GetLadenDTO } from "../DTOs/AppointmentDTO";
 import { CreatePriceListArrDTO } from "../DTOs/PriceListeDTO";
+import { LadenModel } from "../models/Laden/LadenModel";
+import { PriceListeModel } from "../models/Laden/PriceListeModel";
 
 export class PriceListController {
   private modelLaden: LadenModel;

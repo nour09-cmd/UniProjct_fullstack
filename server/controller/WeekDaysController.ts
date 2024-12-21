@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { LadenModel, WeeksDaysModel } from "../models/Laden";
-import { GetLadenDTO } from "../DTOs/AppointmentDTO";
+import { GetLadenDTO } from "../DTOs/GetLadenDTO";
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
 import { WeekDaysDTO } from "../DTOs/WeeksdaysDTO";
+import { WeeksDaysModel } from "../models/Laden/WeeksDaysModel";
+import { LadenModel } from "../models/Laden/LadenModel";
 
 export class WeekDaysController {
   private modelWeeksDays: WeeksDaysModel;

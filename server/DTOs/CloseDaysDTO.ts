@@ -1,10 +1,10 @@
 import { IsDateString, IsEmail, IsNotEmpty } from "class-validator";
-
-export class CloseDaysDTO {
+import { ICloseDays } from "@mrx/barbar-finder";
+export class CloseDaysDTO implements ICloseDays {
   @IsDateString()
   @IsNotEmpty()
   date: string;
-  // // TODO after middelware remove the email !!!!
+
   @IsEmail()
   @IsNotEmpty()
   barberEmail: string;

@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import { CloseDaysModel, LadenModel } from "../models/Laden";
 import { CloseDaysDTO } from "../DTOs/CloseDaysDTO";
-import { GetLadenDTO } from "../DTOs/AppointmentDTO";
+import { GetLadenDTO } from "../DTOs/GetLadenDTO";
+import { LadenModel } from "../models/Laden/LadenModel";
+import { CloseDaysModel } from "../models/Laden/CloseDaysModel";
 
 export class CloseDaysController {
   private modelLaden: LadenModel;
@@ -30,7 +31,7 @@ export class CloseDaysController {
     const createdDay =
       await this.modelCloseDays.addCloseDayBarberProfileByEmail(
         req["user"]["email"],
-        { date: new Date(createLadenDTO.date) }
+        { date: `${new Date(createLadenDTO.date)}` }
       );
     return res
       .status(200)

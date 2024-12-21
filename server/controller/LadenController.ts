@@ -1,4 +1,5 @@
-import { ILaden, LadenModel } from "../models/Laden";
+import { ILaden } from "@mrx/barbar-finder";
+
 import { Request, Response } from "express";
 import { CreateLadenDTO, GetLadenDTO } from "../DTOs/LadenDTO";
 import { plainToClass } from "class-transformer";
@@ -10,6 +11,7 @@ import { Validierunges } from "../utils/ValidierungsClasse";
 import { User } from "../models/User";
 import { AppDataSource } from "../utils/data-source";
 import { Rolle } from "../models/Rolle";
+import { LadenModel } from "../models/Laden/LadenModel";
 
 export class LadenController {
   private modelMonogo: LadenModel;

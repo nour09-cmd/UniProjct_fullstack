@@ -1,19 +1,11 @@
 import mongoose, { Schema, Model } from "mongoose";
 import DatabaseConnection from "../utils/mongoDBconnection";
+import {  IAppointmentUser, IUserProfile } from "@mrx/barbar-finder";
 
-export interface IAppointment {
-  barber_email: string;
-  apoLadenId: string;
-  date: Date;
-}
 
-export interface IUserProfile {
-  user_email: string;
 
-  Appointments: IAppointment[];
-}
 
-const AppointmentSchema = new Schema<IAppointment>({
+const AppointmentSchema = new Schema<IAppointmentUser>({
   barber_email: { type: String, required: true },
   apoLadenId: { type: String, required: true },
   date: { type: Date, required: true },
@@ -62,7 +54,7 @@ export class UserProfileModel {
 
   async createUserAppointment(
     user_email: string,
-    appointment: IAppointment
+    appointment: IAppointmentUser
   ): Promise<IUserProfile | null> {
     await this.conn.connect();
     const profile = await this.model

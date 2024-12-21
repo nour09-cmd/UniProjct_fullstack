@@ -5,7 +5,7 @@ import {
   ValidateNested,
   IsNumber,
 } from "class-validator";
-
+// TODO InterFaces
 export class DayDTO {
   @IsString()
   @IsNotEmpty()

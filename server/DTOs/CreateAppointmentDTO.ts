@@ -1,11 +1,5 @@
-import { IsString, IsEmail, IsNotEmpty, IsDateString } from "class-validator";
-
-export class GetLadenDTO {
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-}
-
+import { IsString, IsEmail, IsNotEmpty } from "class-validator";
+// TODO InterFaces
 export class CreateAppointmentDTO {
   @IsEmail()
   @IsNotEmpty()

@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
-import { AppointmentsModel, LadenModel } from "../models/Laden";
 import { UserProfileModel } from "../models/UserAppointments";
-import { CreateAppointmentDTO } from "../DTOs/AppointmentDTO";
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import { GetLadenDTO } from "../DTOs/LadenDTO";
 import { EmailService } from "../utils/EmailControler";
 import { AppDataSource } from "../utils/data-source";
 import { User } from "../models/User";
-import { add, format, formatDate, parse } from "date-fns";
+import { add,  parse } from "date-fns";
+import { CreateAppointmentDTO } from "../DTOs/CreateAppointmentDTO";
+import { GetLadenDTO } from "../DTOs/LadenDTO";
+import { AppointmentsModel } from "../models/Laden/AppointmentsModel";
+import { LadenModel } from "../models/Laden/LadenModel";
 
 export class AppointmentController {
   private userRepository = AppDataSource.getRepository(User);

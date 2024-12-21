@@ -9,3 +9,5 @@ export * from "./lib/Reviews.interface";
 export * from "./lib/Sales.interface";
 export * from "./lib/User.interface";
 export * from "./lib/Weekdays.interface";
+export * from "./lib/IUserProfile.interface";
+export * from "./lib/IAppointmentUser.interface";

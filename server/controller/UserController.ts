@@ -12,8 +12,9 @@ import { AddressDTO, UserRegisterDTO } from "../DTOs/RegisterDTO";
 import { validate } from "class-validator";
 import { Validierunges } from "../utils/ValidierungsClasse";
 import { ResetPasswordDTO, UserLoginDTO } from "../DTOs/LoginDTO";
-import { IUserProfile, UserProfileModel } from "../models/UserAppointments";
+import {  UserProfileModel } from "../models/UserAppointments";
 import { EmailService } from "../utils/EmailControler";
+import { IUserProfile } from "@mrx/barbar-finder";
 // import { ImageUploads } from "../utils/UploadImages";
 
 class UserLoginController {

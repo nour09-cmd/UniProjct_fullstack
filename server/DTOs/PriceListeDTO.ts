@@ -5,7 +5,7 @@ import {
   IsNumber,
   ValidateNested,
 } from "class-validator";
-
+// TODO InterFaces
 class SalesDTO {
   @IsString()
   @IsNotEmpty()

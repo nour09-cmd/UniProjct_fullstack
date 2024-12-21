@@ -6,6 +6,6 @@
     "outDir": "./dist",
     "strict": true
   },
-  "include": ["lib/**/*"], // Suche in allen Dateien im src-Ordner
-  "exclude": ["dist"] // Schließe den dist-Ordner aus
+  "include": ["lib/**/*"], 
+  "exclude": ["dist"]
 }
