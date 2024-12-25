@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model } from "mongoose";
+import { Schema } from "mongoose";
 import {
   ILaden,
   IAppointment,
@@ -66,7 +66,3 @@ export const ladenSchema = new Schema<ILaden>({
   close_days: { type: [closeDaysSchema] },
   priceListe: { type: [priceListeSchema] },
 });
-
-
-
-

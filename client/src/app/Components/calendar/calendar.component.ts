@@ -11,6 +11,7 @@ import { StoreService } from '../../redux/store.service';
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { Router } from '@angular/router';
 import { createAppos } from '../../redux/features/Laden/AppoSlice';
+import { IAppointment } from '@mrx/barbar-finder';
 
 @Component({
   selector: 'app-calendar',
@@ -176,11 +177,16 @@ export class CalendarComponent implements OnInit {
         return;
       }
       const parsedDate = parse(this.selectedDate, 'dd-MM-yyyy', new Date());
-      const formData = {
-        barber_email: this.barberEmail,
+      const formDatas: IAppointment = {
+        user_email: 'string',
         name: `${this.userData.vorname} ${this.userData.nachname}`,
         date: parsedDate,
         time: this.selectedTime,
+        status: true,
+      };
+      const formData = {
+        barber_email: this.barberEmail,
+        ...formDatas,
       };
 
       await this.storeService.dispatch(createAppos(formData));
