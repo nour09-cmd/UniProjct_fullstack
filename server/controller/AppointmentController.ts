@@ -5,7 +5,7 @@ import { validate } from "class-validator";
 import { EmailService } from "../utils/EmailControler";
 import { AppDataSource } from "../utils/data-source";
 import { User } from "../models/User";
-import { add,  parse } from "date-fns";
+import { add, parse } from "date-fns";
 import { CreateAppointmentDTO } from "../DTOs/CreateAppointmentDTO";
 import { GetLadenDTO } from "../DTOs/LadenDTO";
 import { AppointmentsModel } from "../models/Laden/AppointmentsModel";
@@ -83,6 +83,7 @@ export class AppointmentController {
     await this.modelAppointmentUser.createUserAppointment(user_email, {
       barber_email,
       date,
+      time: time,
       apoLadenId: apoLadenId._id,
     });
     const userData = await this.userRepository.findOne({
@@ -122,7 +123,10 @@ export class AppointmentController {
     return res.status(200).json({ status: true, ...appointment });
   }
   async deleteAppointmentVonBarber(req: Request, res: Response) {
-    const { barber_email, user_email, apoId, apoData } = req.body;
+    const { barber_email, apoId, apoData } = req.body;
+    // TODO create a DTOs
+    const user_email = req["user"]["email"];
+
     const userData = await this.userRepository.findOne({
       where: { email: user_email },
     });
@@ -161,7 +165,9 @@ export class AppointmentController {
   }
   async deleteAppointmentVonUser(req: Request, res: Response) {
     // TODO create a DTOs
-    const { barber_email, user_email, apoId, apoData } = req.body;
+    const { barber_email, apoId, apoData } = req.body;
+    const user_email = req["user"]["email"];
+
     const userData = await this.userRepository.findOne({
       where: { email: user_email },
     });

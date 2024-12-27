@@ -1,14 +1,12 @@
 import mongoose, { Schema, Model } from "mongoose";
 import DatabaseConnection from "../utils/mongoDBconnection";
-import {  IAppointmentUser, IUserProfile } from "@mrx/barbar-finder";
-
-
-
+import { IAppointmentUser, IUserProfile } from "@mrx/barbar-finder";
 
 const AppointmentSchema = new Schema<IAppointmentUser>({
   barber_email: { type: String, required: true },
   apoLadenId: { type: String, required: true },
   date: { type: Date, required: true },
+  time: { type: String, required: true },
 });
 
 const UserProfileSchema = new Schema<IUserProfile>({
