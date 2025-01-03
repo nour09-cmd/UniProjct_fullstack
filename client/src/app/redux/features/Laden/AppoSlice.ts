@@ -27,10 +27,25 @@ export const deletAppointmentVonBarber: any = createAsyncThunk(
     }
   }
 );
-// export const deletAppointmentVonUser: any = createAsyncThunk(
-//   '/deletAppointmentVonUser',
-//   async (id) => {}
-// );
+export const deletAppointmentVonUser: any = createAsyncThunk(
+  '/deletAppointmentVonUser',
+  async (data) => {
+    try {
+      const response = await axios.post(
+        `${BASEURL}/ladens/AppointmentVonUser/`,
+        data,
+        {
+          headers: {
+            Authorization: `${TOKEN()}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 export const getAppos: any = createAsyncThunk(
   '/getAppos',
   async (email: any) => {
@@ -52,6 +67,24 @@ export const getAppos: any = createAsyncThunk(
     }
   }
 );
+export const getApposUser: any = createAsyncThunk('/getApposUser', async () => {
+  try {
+    const token = TOKEN();
+
+    const res = await axios.get(
+      `${BASEURL}/ladens/getAppointmentUser/`,
+
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 export const createAppos: any = createAsyncThunk(
   '/createAppos',
@@ -94,6 +127,11 @@ const AppoSlice = createSlice({
       .addCase(createAppos.fulfilled, (state, action) => {
         state.loading = false;
         state.errors = action.payload;
+      })
+      .addCase(getApposUser.fulfilled, (state, action) => {
+        state.appos = action.payload;
+        state.loading = false;
+        state.errors = '';
       });
   },
 });

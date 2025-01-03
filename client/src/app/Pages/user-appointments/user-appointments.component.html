@@ -1,0 +1,57 @@
+<app-navbar-desktop></app-navbar-desktop>
+<app-navbar-mobile></app-navbar-mobile>
+
+<div class="container p-4">
+  <div class="row">
+    <div class="col">
+      <p class="title-dacshboard">Appointments</p>
+    </div>
+    <form class="col-4 form-group"></form>
+  </div>
+
+  <div class="container-table">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-image">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Barber Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of appoData; let i = index">
+                <td class="w-25">
+                  <img
+                    [src]="getBarberDetails(item.barber_email).img"
+                    class="img-fluid rounded-circle"
+                    alt="Barber Image"
+                  />
+                </td>
+                <td>
+                  {{ getBarberDetails(item.barber_email).name }}
+                </td>
+                <td>
+                  {{ formatDate(appoData[i].date) + " : " + appoData[i].time }}
+                </td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="deletAppointment(item)"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

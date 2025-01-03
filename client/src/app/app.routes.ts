@@ -15,31 +15,33 @@ import { ClosedaysPageComponent } from './Pages/Dashboard/closedays-page/closeda
 import { WeekdaysPageComponent } from './Pages/Dashboard/weekdays-page/weekdays-page.component';
 import { AppointmentPageComponent } from './Pages/Dashboard/appointment-page/appointment-page.component';
 import { SeiBarberPageComponent } from './Pages/sei-barber-page/sei-barber-page.component';
+import { UserAppointmentsComponent } from './Pages/user-appointments/user-appointments.component';
 
- function getRoutes(): Routes {
-   const user: Routes = [
-     { path: '', component: HomePageComponent },
-     { path: 'login', component: SigninComponent },
-     { path: 'register', component: SignupComponent },
-     { path: 'pagebenner', component: PagebennerComponent },
-     { path: 'rest', component: ResetPasswordComponent },
-     { path: 'changepass', component: ChangePassComponent },
-     { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-     { path: 'profile/:email', component: ProfileComponent },
+function getRoutes(): Routes {
+  const user: Routes = [
+    { path: '', component: HomePageComponent, pathMatch: 'full' },
+    { path: 'login', component: SigninComponent },
+    { path: 'register', component: SignupComponent },
+    { path: 'pagebenner', component: PagebennerComponent },
+    { path: 'rest', component: ResetPasswordComponent },
+    { path: 'changepass', component: ChangePassComponent },
+    { path: 'anmelden-register', component: AnmeldenRegisterComponent },
+    { path: 'profile/:email', component: ProfileComponent },
 
-     { path: 'recover', component: RecoverPassComponent },
+    { path: 'recover', component: RecoverPassComponent },
 
-     { path: 'appointment', component: AppointmentPageComponent },
-     { path: 'working-days', component: WeekdaysPageComponent },
-     { path: 'closed-days', component: ClosedaysPageComponent },
-     { path: 'laden-profile', component: LadenProfilePageComponent },
-     { path: 'price-list', component: PriseListPageComponent },
-     { path: '', redirectTo: '/appointment', pathMatch: 'full' },
+    { path: 'appointment', component: AppointmentPageComponent },
+    { path: 'working-days', component: WeekdaysPageComponent },
+    { path: 'closed-days', component: ClosedaysPageComponent },
+    { path: 'laden-profile', component: LadenProfilePageComponent },
+    { path: 'price-list', component: PriseListPageComponent },
+    { path: '', redirectTo: '/appointment', pathMatch: 'full' },
 
-     { path: 'seibarber', component: SeiBarberPageComponent },
-   ];
-   return user;
- }
+    { path: 'seibarber', component: SeiBarberPageComponent },
+    { path: 'appointmentUser', component: UserAppointmentsComponent },
+  ];
+  return user;
+}
 export const routes: Routes = getRoutes();
 
 @NgModule({

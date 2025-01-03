@@ -6,7 +6,7 @@ import { StoreService } from '../../redux/store.service';
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { LadenProfileComponent } from '../laden-profile/laden-profile.component';
 import { PriceListeComponent } from '../price-liste/price-liste.component';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
     LadenProfileComponent,
     PriceListeComponent,
     RouterModule,
-
     CommonModule,
   ],
   templateUrl: './sidebar-dashboard.component.html',
@@ -27,7 +26,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarDashboardComponent implements OnInit {
   _userData: any = [];
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
   ngOnInit(): void {
     this.storeService.subcribe(() => {
       const stateUser = this.storeService.getState().user;
@@ -38,5 +37,11 @@ export class SidebarDashboardComponent implements OnInit {
   activeComponent: string = 'appointment';
   showComponent(componentName: string): void {
     this.activeComponent = componentName;
+  }
+  logOut() {
+    if (confirm('Are you sure you want to sign out?')) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
   }
 }

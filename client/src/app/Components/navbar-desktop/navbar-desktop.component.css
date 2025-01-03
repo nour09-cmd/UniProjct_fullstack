@@ -1,3 +1,4 @@
+/* Navbar-Desktop mit Hintergrundbildern */
 .navbar-desktop {
   background-image: url("/assets/Left_pic.svg"), url("/assets/right_pic.svg");
   background-size: contain, contain;
@@ -5,9 +6,17 @@
   background-position: left center, right center;
   height: 150px;
 }
-.nav-link.active {
+
+/* Navbar Link Styling */
+.nav-link {
+  color: #ffffff;
   position: relative;
   overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.nav-link.active {
+  font-weight: bold;
 }
 
 .nav-link.active::after {
@@ -23,30 +32,43 @@
   transition: transform 0.3s ease-out;
 }
 
-.nav-link.active:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
 
-.nav-link.active:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
+/* Logout-Box Styling */
 #logout_box {
   background-color: whitesmoke;
   border-radius: 8px;
   width: 180px;
   height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 #logout_box > button {
-  width: 70% !important;
-  height: 100% !important;
+  width: 70%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 #logout_box > button:hover {
   color: white;
   background-color: #000000;
 }
+
 #logout_box > img {
-  width: 30% !important;
-  margin: 0 !important;
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
 }

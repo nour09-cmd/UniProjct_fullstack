@@ -1,50 +1,66 @@
 <nav
-  class="navbar navbar-expand-lg navbar-dark bg-dark p-4 navbar-desktop d-none d-lg-flex d-flex justify-content-between"
+  class="navbar navbar-expand-lg navbar-dark bg-dark p-4 d-none d-lg-flex justify-content-between"
 >
   <div class="container-fluid">
+    <!-- Navbar Toggler für mobile Ansicht -->
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarTogglerDemo01"
-      aria-controls="navbarTogglerDemo01"
+      data-bs-target="#navbarToggler"
+      aria-controls="navbarToggler"
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
       <i class="fas fa-bars"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+    <!-- Navbar Inhalt -->
+    <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
         <li class="nav-item">
-          <a class="navbar-brand ms-auto" href="/">
+          <a
+            class="navbar-brand ms-auto"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <img src="assets/logo.svg" alt="Logo" />
           </a>
         </li>
         <li class="nav-item">
           <a
-            class="nav-link active"
-            aria-current="page"
+            class="nav-link"
+            routerLink="/"
             routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Home</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Termine</a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active"
+            >Profile</a
+          >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link active"
-            aria-current="page"
-            href="#"
+            class="nav-link"
+            routerLink="/appointmentUser"
+            routerLinkActive="active"
+            >Termine</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
             routerLink="/appointment"
-            routerLinkActive="accept"
+            routerLinkActive="active"
             >Dashboard</a
           >
         </li>
       </ul>
+
+      <!-- Suchleiste -->
       <form class="d-flex mx-auto" style="flex: 1; max-width: 400px">
         <input
           type="search"
@@ -53,27 +69,29 @@
           aria-label="Search"
         />
       </form>
-      <a
-        type="button"
-        href="/login"
-        class="btn btn-light fw-bold mx-3"
-        *ngIf="!islogedin"
-      >
-        Log in
-      </a>
-      <div id="logout_box" *ngIf="islogedin">
-        <img [src]="userData.image" alt="" width="50" height="50" />
-        <button
-          type="button"
-          class="btn btn-light fw-bold w-70"
-          (click)="logOut()"
-        >
-          log out
-        </button>
-      </div>
-      <!-- <a class="navbar-brand ms-auto" href="/">
-        <img src="assets/logo.svg" alt="Logo" />
-      </a> -->
+
+      <!-- Login/Logout Bereich -->
+      <ng-container *ngIf="!islogedin; else loggedInTemplate">
+        <a href="/login" class="btn btn-light fw-bold mx-3"> Log in </a>
+      </ng-container>
+      <ng-template #loggedInTemplate>
+        <div id="logout_box" class="d-flex align-items-center">
+          <img
+            [src]="userData.image"
+            alt="User Image"
+            width="50"
+            height="50"
+            class="rounded-circle me-2"
+          />
+          <button
+            type="button"
+            class="btn btn-light fw-bold"
+            (click)="logOut()"
+          >
+            Log out
+          </button>
+        </div>
+      </ng-template>
     </div>
   </div>
 </nav>
