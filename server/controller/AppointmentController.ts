@@ -33,22 +33,55 @@ export class AppointmentController {
       return res.status(400).json({ message: "Validation failed", errors });
     }
     const Laden_email = getLadenDTO.email;
-    const appointments =
+    const appointments: any =
       await this.modelAppointmentLaden.getAppointmentBarberProfileByEmail(
         Laden_email
       );
     if (!appointments)
       return res.status(400).json({ status: false, message: "User Not Found" });
-    return res.status(200).json({ status: true, appointments });
+    const useres: any = await this.userRepository.find();
+    const newArr: any = [];
+    appointments.map((item: any) => {
+      useres.map((newitem: any) => {
+        if (item.user_email === newitem.email) {
+          newArr.push({
+            ...item,
+            user_IMG: newitem.image,
+          });
+          return;
+        }
+      });
+    });
+
+    return res.status(200).json({ status: true, appointments: newArr });
+  }
+  async getLadens() {
+    const ladens = await this.modelMonogo.findByBarberes();
+    return ladens;
   }
   async getAppointmentUser(req: Request, res: Response) {
     const User_email = req["user"]["email"];
-    const appointments = await this.modelAppointmentUser.findProfileByEmail(
-      User_email
-    );
+
+    const appointments: any =
+      await this.modelAppointmentUser.findProfileByEmail(User_email);
     if (!appointments)
       return res.status(400).json({ status: false, message: "User Not Found" });
-    return res.status(200).json({ status: true, appointments });
+    const ladens: any = await this.getLadens();
+    const newData: any = [];
+    appointments.Appointments.map((item: any) => {
+      ladens.map((newitem: any) => {
+        if (item.barber_email === newitem.barber_email) {
+          newData.push({
+            termin: item,
+            barber_email: newitem.barber_email,
+            Laden_name: newitem.Laden_name,
+            Laden_IMG: newitem.Laden_IMG[0],
+          });
+          return;
+        }
+      });
+    });
+    return res.status(200).json({ ...newData });
   }
 
   async createAppointment(req: Request, res: Response) {

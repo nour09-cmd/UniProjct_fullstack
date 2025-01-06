@@ -1,4 +1,4 @@
-export const PORT = 4545;
+export const PORT = 4546;
 export const DB_URIMONGODB = "mongodb://localhost:27017/";
 // export const DB_URIMONGODB = "mongodb://uniprojct_fullstack-mongo-1:27017/";
 export const DB_URIPOSTGRESQL = "postgresql://admin:test@localhost:5432/barber";

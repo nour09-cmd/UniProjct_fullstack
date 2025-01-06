@@ -23,24 +23,28 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of appoData; let i = index">
+              <tr *ngFor="let item of appoData | keyvalue; let i = index">
                 <td class="w-25">
                   <img
-                    [src]="getBarberDetails(item.barber_email).img"
+                    [src]="appoData[i].Laden_IMG"
                     class="img-fluid rounded-circle"
                     alt="Barber Image"
                   />
                 </td>
                 <td>
-                  {{ getBarberDetails(item.barber_email).name }}
+                  {{ appoData[i].Laden_name }}
                 </td>
                 <td>
-                  {{ formatDate(appoData[i].date) + " : " + appoData[i].time }}
+                  {{
+                    formatDate(appoData[i].termin.date) +
+                      " : " +
+                      appoData[i].termin.time
+                  }}
                 </td>
                 <td>
                   <button
                     class="btn btn-danger"
-                    (click)="deletAppointment(item)"
+                    (click)="deletAppointment(appoData[i].termin)"
                   >
                     Delete
                   </button>

@@ -5,13 +5,21 @@
     <a class="nav-link" href="/">
       <i class="bi bi-house-door fs-1"></i>
     </a>
-    <a class="nav-link" href="">
-      <i class="bi bi-person fs-1"></i>
-    </a>
-    <a class="nav-link" href="/">
+
+    <a
+      class="nav-link"
+      routerLink="/appointmentUser"
+      routerLinkActive="active"
+      *ngIf="isUser"
+    >
       <i class="bi bi-calendar fs-1"></i>
     </a>
-    <a class="nav-link" href="#">
+    <a
+      class="nav-link"
+      routerLink="/appointment"
+      routerLinkActive="active"
+      *ngIf="isBarber"
+    >
       <i class="bi bi-justify fs-1"></i>
     </a>
   </div>
