@@ -52,7 +52,7 @@ export const getUserData: any = createAsyncThunk(
           authorization: token,
         },
       });
-      if (res.data.message === 'Invalid token') {
+      if (res.data.message == 'Invalid token') {
         localStorage.removeItem('token');
         return rejectWithValue('Invalid token');
       }

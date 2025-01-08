@@ -34,6 +34,7 @@ export const routes: Routes = [
     path: '',
     canActivate: [RoleGuardUSER],
     children: [
+      { path: 'seibarber', component: SeiBarberPageComponent },
       { path: 'appointmentUser', component: UserAppointmentsComponent },
       { path: 'recover', component: RecoverPassComponent },
       { path: 'anmelden-register', component: AnmeldenRegisterComponent },
@@ -55,7 +56,6 @@ export const routes: Routes = [
       { path: 'closed-days', component: ClosedaysPageComponent },
       { path: 'laden-profile', component: LadenProfilePageComponent },
       { path: 'price-list', component: PriseListPageComponent },
-      { path: 'seibarber', component: SeiBarberPageComponent },
       { path: '', redirectTo: 'appointment', pathMatch: 'full' },
     ],
   },

@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@mrx/barbar-finder": "file:../interfaces",
+    "@mrx/barbar-finder": "git+https://github.com/nour022/iterfaces_barber.git",
     "@types/cors": "^2.8.17",
     "@types/dompurify": "^3.0.5",
     "@types/express": "^5.0.0",
