@@ -41,7 +41,7 @@ My Barber wird in einer modernen Technologieumgebung entwickelt, die Node.js und
 
 ## Team mitgleider
 
-- Mohammad Gaser (inf4024, 678565)
+- Mohammad Nour Gaser (inf4024, 678565)
 - Jafar Alizadeh
 - Mohamad Alraghban
 - Amer Al-Aloush
