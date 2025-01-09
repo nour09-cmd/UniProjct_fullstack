@@ -47,6 +47,9 @@ export const getUserData: any = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const token = TOKEN();
+      if (!token) {
+        return;
+      }
       const res: any = await axios.get(`${BASEURL}/users/getUserData/`, {
         headers: {
           authorization: token,
@@ -58,7 +61,10 @@ export const getUserData: any = createAsyncThunk(
       }
       return res.data;
     } catch (error: any) {
-      console.log(error);
+      console.log(error.message);
+      if (error.message == 'Request failed with status code 400') {
+        localStorage.removeItem('token');
+      }
       return rejectWithValue(
         error.response?.data || 'Failed to fetch user data'
       );

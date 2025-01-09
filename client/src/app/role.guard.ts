@@ -3,7 +3,6 @@ import { CanActivate, Router } from '@angular/router';
 import axios from 'axios';
 import { BASEURL, TOKEN } from './utils/config';
 
-// Guard for Barber Routes
 @Injectable({
   providedIn: 'root',
 })
@@ -20,11 +19,9 @@ export class RoleGuardBarber implements CanActivate {
       if (res.data.barber === true) {
         return true;
       } else {
-        // this.router.navigate(['/']);
         return false;
       }
     } catch (error) {
-      console.error('Role check failed:', error);
       this.router.navigate(['/login']);
       return false;
     }
@@ -47,11 +44,9 @@ export class RoleGuardUSER implements CanActivate {
       if (res.data.User === true) {
         return true;
       } else {
-        // this.router.navigate(['/']);
         return false;
       }
     } catch (error) {
-      console.error('Role check failed:', error);
       this.router.navigate(['/login']);
       return false;
     }

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { SECRET_KEY } from "../utils/conifg";
+import { SECRET_KEY, sendResponse } from "../utils/conifg";
 import { AppDataSource } from "../utils/data-source";
 import { User } from "../models/User";
 import { plainToClass } from "class-transformer";
@@ -30,12 +30,16 @@ class UserLoginController {
     const emails = req["user"]["email"];
     const user = await this.getUser(emails);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return sendResponse(res, 404);
     }
     const { vorname, nachname, email, handynummer, image } = user;
-    return res
-      .status(200)
-      .json({ vorname, nachname, email, handynummer, image });
+    return sendResponse(res, 200, {
+      vorname,
+      nachname,
+      email,
+      handynummer,
+      image,
+    });
   }
   createToken(email: string, name: string) {
     const token = jwt.sign({ name, email }, SECRET_KEY!, {
@@ -49,7 +53,7 @@ class UserLoginController {
       const userDTO = plainToClass(UserLoginDTO, req.body);
       const errors = await validate(userDTO);
       if (errors.length > 0) {
-        return res.status(400).json({ message: "Validation failed", errors });
+        return sendResponse(res, 400);
       }
       const { email, password } = userDTO;
       const validierungesData = new Validierunges([email, password]);
@@ -59,20 +63,20 @@ class UserLoginController {
       const user = await this.getUser(emails);
 
       if (!user) {
-        return res.status(404).json({ error: "User not found" });
+        return sendResponse(res, 404);
       }
 
       const isPasswordValid = await bcrypt.compare(passwords, user.password);
 
       if (!isPasswordValid) {
-        return res.status(401).json({ error: "Invalid possword" });
+        return sendResponse(res, 400);
       }
       const name = `${user.vorname} ${user.nachname}`;
       const token = this.createToken(emails, name);
-      return res.status(200).json({ token });
+      return sendResponse(res, 200, { token });
     } catch (err) {
       console.error("Error during login:", err);
-      return res.status(500).json({ error: "Internal server error" });
+      return sendResponse(res, 500);
     }
   }
   async VerifyEmail(req: Request, res: Response) {
@@ -81,12 +85,12 @@ class UserLoginController {
       const email = req["user"]?.["email"] || "";
 
       if (!token) {
-        return res.status(400).json({ message: "Token not found" });
+        return sendResponse(res, 401);
       }
 
       const userData = await this.getUserWithToken(token);
       if (!userData) {
-        return res.status(400).json({ message: "Invalid token" });
+        return sendResponse(res, 401);
       }
 
       userData.verifyToken = "";
@@ -96,10 +100,12 @@ class UserLoginController {
       this.emailS.AcceptedUserEmail(userData.email, userData, {
         subject: "Email verified successfully",
       });
-      return res.status(200).json({ message: "Email verified successfully" });
+      return sendResponse(res, 200, {
+        message: "Email verified successfully",
+      });
     } catch (error) {
       console.error("Error during email verification:", error);
-      return res.status(500).json({ message: "Internal server error" });
+      return sendResponse(res, 500);
     }
   }
   async resetPassword(req: Request, res: Response) {
@@ -107,12 +113,12 @@ class UserLoginController {
       const userDTO = plainToClass(ResetPasswordDTO, req.body);
       const errors = await validate(userDTO);
       if (errors.length > 0) {
-        return res.status(400).json({ message: "Validation failed", errors });
+        return sendResponse(res, 400);
       }
 
       const userData = await this.getUser(userDTO.email);
       if (!userData) {
-        return res.status(400).json({ message: "Invalid email" });
+        return sendResponse(res, 400, { message: "Invalid email" });
       }
       const passwordToken = crypto.randomBytes(64).toString("hex");
 
@@ -124,11 +130,12 @@ class UserLoginController {
         subject: "Passwort zurücksetzen für Ihr Barber-Finder-Konto",
         link: `http://localhost:4545/api/users/changePassword?token=${passwordToken}`,
       });
-
-      return res.status(200).json({ message: "Email verified successfully" });
+      return sendResponse(res, 200, {
+        message: "Email verified successfully",
+      });
     } catch (error) {
       console.error("Error during email verification:", error);
-      return res.status(500).json({ message: "Internal server error" });
+      return sendResponse(res, 503);
     }
   }
   async checkRoller(req: Request, res: Response) {
@@ -136,12 +143,12 @@ class UserLoginController {
       const email = req["user"]?.["email"] || "";
       const user = await this.getUser(email);
       if (!user) {
-        return res.status(400).json({ message: "Path Not Found" });
+        return sendResponse(res, 400);
       }
       if (user.rolle === "BARBER") {
-        return res.status(200).json({ User: false, barber: true });
+        return sendResponse(res, 200, { User: false, barber: true });
       }
-      return res.status(200).json({ User: true, barber: false });
+      return sendResponse(res, 200, { User: true, barber: false });
     } catch (error) {
       console.error("Error during email verification:", error);
     }
@@ -151,19 +158,14 @@ class UserLoginController {
       const token = req.query.token as string;
       const { password } = req.body;
       if (!password || !token) {
-        return res
-          .status(400)
-          .json({ message: "Invalid no password or token" });
+        return sendResponse(res, 400);
       }
       const userData = await this.getUserWithPasswordToken(token);
       if (!userData?.email) {
-        return res.status(400).json({ message: "Invalid token" });
+        return sendResponse(res, 401);
       }
       if (!userData?.resetpasswordtoken) {
-        return res.status(400).json({
-          message:
-            "Your password action is not started pls click on restePassword first",
-        });
+        return sendResponse(res, 400);
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       userData.password = hashedPassword;
@@ -173,11 +175,10 @@ class UserLoginController {
       this.emailS.passwordChangedEmail(userData.email, userData, {
         subject: "Passwortänderung erfolgreich für Ihr Barber-Finder-Konto",
       });
-
-      return res.status(200).json({ message: "Email verified successfully" });
+      return sendResponse(res, 200, { message: "Email verified successfully" });
     } catch (error) {
       console.error("Error during email verification:", error);
-      return res.status(500).json({ message: "Internal server error" });
+      return sendResponse(res, 500);
     }
   }
 }

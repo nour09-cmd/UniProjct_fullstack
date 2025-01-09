@@ -10,6 +10,7 @@ import { CreateAppointmentDTO } from "../DTOs/CreateAppointmentDTO";
 import { GetLadenDTO } from "../DTOs/LadenDTO";
 import { AppointmentsModel } from "../models/Laden/AppointmentsModel";
 import { LadenModel } from "../models/Laden/LadenModel";
+import { sendResponse } from "../utils/conifg";
 
 export class AppointmentController {
   private userRepository = AppDataSource.getRepository(User);
@@ -30,15 +31,15 @@ export class AppointmentController {
     const errors = await validate(getLadenDTO);
     console.log(getLadenDTO);
     if (errors.length > 0) {
-      return res.status(400).json({ message: "Validation failed", errors });
+      return sendResponse(res, 400, errors);
     }
     const Laden_email = getLadenDTO.email;
     const appointments: any =
       await this.modelAppointmentLaden.getAppointmentBarberProfileByEmail(
         Laden_email
       );
-    if (!appointments)
-      return res.status(400).json({ status: false, message: "User Not Found" });
+    if (!appointments) return sendResponse(res, 404);
+
     const useres: any = await this.userRepository.find();
     const newArr: any = [];
     appointments.map((item: any) => {
@@ -53,7 +54,7 @@ export class AppointmentController {
       });
     });
 
-    return res.status(200).json({ status: true, appointments: newArr });
+    return sendResponse(res, 200, { status: true, appointments: newArr });
   }
   async getLadens() {
     const ladens = await this.modelMonogo.findByBarberes();
@@ -64,8 +65,7 @@ export class AppointmentController {
 
     const appointments: any =
       await this.modelAppointmentUser.findProfileByEmail(User_email);
-    if (!appointments)
-      return res.status(400).json({ status: false, message: "User Not Found" });
+    if (!appointments) return sendResponse(res, 404);
     const ladens: any = await this.getLadens();
     const newData: any = [];
     appointments.Appointments.map((item: any) => {
@@ -81,14 +81,14 @@ export class AppointmentController {
         }
       });
     });
-    return res.status(200).json({ ...newData });
+    return sendResponse(res, 200, { ...newData });
   }
 
   async createAppointment(req: Request, res: Response) {
     const createLadenDTO = plainToClass(CreateAppointmentDTO, req.body);
     const errors = await validate(createLadenDTO);
     if (errors.length > 0) {
-      return res.status(400).json({ message: "Validation failed", errors });
+      return sendResponse(res, 400, errors);
     }
     const { name, date, time, barber_email } = createLadenDTO;
     const user_email = req["user"]["email"];
@@ -106,10 +106,7 @@ export class AppointmentController {
           status: true,
         }
       );
-    if (!appointment)
-      return res
-        .status(400)
-        .json({ status: false, message: "Appointment Not Created" });
+    if (!appointment) return sendResponse(res, 400);
 
     const apoLadenId: any = appointment.reserved_appointments.slice(-1)[0];
 
@@ -153,13 +150,11 @@ export class AppointmentController {
         googleKalnderLink,
       }
     );
-    return res.status(200).json({ status: true, ...appointment });
+    return sendResponse(res, 200, { status: true, ...appointment });
   }
   async deleteAppointmentVonBarber(req: Request, res: Response) {
     const { barber_email, apoId, apoData } = req.body;
-    // TODO create a DTOs
     const user_email = req["user"]["email"];
-
     const userData = await this.userRepository.findOne({
       where: { email: user_email },
     });
@@ -170,9 +165,10 @@ export class AppointmentController {
         apoId
       );
     if (!appointment)
-      return res
-        .status(400)
-        .json({ status: false, message: "Appointment Not Found" });
+      return sendResponse(res, 400, {
+        status: false,
+        message: "Appointment Not Found",
+      });
     await this.modelAppointmentUser.deleteUserAppointment(user_email, apoId);
     this.emailS.barberAppointmentDeletionEmailAnUser(
       user_email,
@@ -192,12 +188,9 @@ export class AppointmentController {
         subject: "Terminlöschung erfolgreich",
       }
     );
-    return res
-      .status(200)
-      .json({ status: true, message: "Appointment Deleted" });
+    return sendResponse(res, 200);
   }
   async deleteAppointmentVonUser(req: Request, res: Response) {
-    // TODO create a DTOs
     const { barber_email, apoId, apoData } = req.body;
     const user_email = req["user"]["email"];
 
@@ -210,10 +203,7 @@ export class AppointmentController {
         barber_email,
         apoId
       );
-    if (!appointment)
-      return res
-        .status(400)
-        .json({ status: false, message: "Appointment Not Found" });
+    if (!appointment) return sendResponse(res, 404);
     await this.modelAppointmentUser.deleteUserAppointment(user_email, apoId);
 
     this.emailS.UserAppointmentDeletionEmailAnUser(
@@ -234,8 +224,6 @@ export class AppointmentController {
         subject: "Ein Termin wurde vom Nutzer storniert",
       }
     );
-    return res
-      .status(200)
-      .json({ status: true, message: "Appointment Deleted" });
+    return sendResponse(res, 200);
   }
 }

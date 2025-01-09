@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
 import { PriceListController } from "../controller/PriceListeController";
+import { sendResponse } from "../utils/conifg";
 const router = Router();
 const priceListController = new PriceListController();
 
@@ -13,7 +14,7 @@ router
       try {
         await priceListController.getPriceList(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   )
@@ -23,7 +24,7 @@ router
       try {
         await priceListController.createPriceList(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );

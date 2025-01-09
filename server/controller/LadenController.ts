@@ -10,6 +10,7 @@ import { User } from "../models/User";
 import { AppDataSource } from "../utils/data-source";
 import { Rolle } from "../models/Rolle";
 import { LadenModel } from "../models/Laden/LadenModel";
+import { sendResponse } from "../utils/conifg";
 
 export class LadenController {
   private modelMonogo: LadenModel;
@@ -19,22 +20,22 @@ export class LadenController {
   }
   async getLadens(req: Request, res: Response) {
     const ladens = await this.modelMonogo.findByBarberes();
-    return res.status(200).json({ ...ladens });
+    sendResponse(res, 200, ladens);
   }
   async getLadenByEmail(req: Request, res: Response) {
     const getLadenDTO = plainToClass(GetLadenDTO, req.body);
     const errors = await validate(getLadenDTO);
     if (errors.length > 0) {
-      return res.status(400).json({ message: "Validation failed", errors });
+      sendResponse(res, 400, errors);
     }
     const { email } = getLadenDTO;
     const ladenData = await this.modelMonogo.findByBarberEmail(email);
     if (!ladenData) {
-      return res.status(400).json({ message: "ladenData not Fund" });
+      return sendResponse(res, 404);
     }
     ladenData.start_Abo_Date = "";
     ladenData.end_Abo_Date = "";
-    return res.status(200).json({ ...ladenData });
+    sendResponse(res, 200, ladenData);
   }
 
   async getUser(email: string) {
@@ -45,7 +46,7 @@ export class LadenController {
     const createLadenDTO = plainToClass(CreateLadenDTO, req.body);
     const errors = await validate(createLadenDTO);
     if (errors.length > 0) {
-      return res.status(400).json({ message: "Validation failed", errors });
+      sendResponse(res, 400, errors);
     }
 
     const { Laden_name, Laden_description, Laden_IMG, Laden_adress } =
@@ -63,9 +64,7 @@ export class LadenController {
     const [Laden_names, Laden_descriptions, strasses, orts, plzs] = arrData;
     const findLaden = await this.modelMonogo.findByBarberEmail(barber_email);
     if (findLaden) {
-      return res
-        .status(400)
-        .json({ message: "this email have olready on Laden" });
+      sendResponse(res, 409);
     }
     const reserved_appointments = [];
     const close_days = [];
@@ -90,12 +89,12 @@ export class LadenController {
     };
     const createLaden = await this.modelMonogo.createLaden(newLaden);
     if (!createLaden.barber_email) {
-      return res.status(400).json({ createLaden: false });
+      return sendResponse(res, 400, { createLaden: false });
     }
     const User: any = await this.getUser(barber_email);
     User.rolle = Rolle.BARBER;
     await this.userRepository.save(User);
-    return res.status(200).json({ ...createLaden });
+    return sendResponse(res, 201, createLaden);
   }
 
   async updateLaden(req: Request, res: Response) {
@@ -104,7 +103,7 @@ export class LadenController {
     const data = req.body;
     const findLaden = await this.modelMonogo.findByBarberEmail(barber_email);
     if (!findLaden) {
-      return res.status(400).json({ message: "Laden not exsist " });
+      return sendResponse(res, 404);
     }
     const { strasse, ort, plz } = data.Laden_adress || findLaden?.Laden_adress;
     let Laden_IMG = findLaden.Laden_IMG;
@@ -142,19 +141,22 @@ export class LadenController {
       barber_email,
       clearDataLaden
     );
-    return res.status(200).json({ messager: true, data: data });
+    return sendResponse(res, 200, { messager: true, data: data });
   }
   async deleteLadenByEmail(req: Request, res: Response) {
     const email = req["user"]["email"];
     const getLaden = await this.modelMonogo.findByBarberEmail(email);
     if (!getLaden) {
-      return res.status(400).json({ message: "Laden not exsist " });
+      return sendResponse(res, 404);
     }
 
     const ladenData = await this.modelMonogo.deleteByBarberEmail(email);
     const User: any = this.getUser(email);
     User.Rolle = Rolle.USER;
     await this.userRepository.save(User);
-    return res.status(200).json({ message: "Laden is deleted", ladenData });
+    return sendResponse(res, 200, {
+      message: "Laden is deleted",
+      ladenData,
+    });
   }
 }

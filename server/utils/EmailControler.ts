@@ -20,7 +20,7 @@ export class EmailService {
     to: string,
     subject: string,
     htmlLayout: any
-  ): Promise<void> {
+  ): Promise<void | boolean> {
     const mailOptions = {
       from: `Your Team Barber Finder <${from}>`,
       to,
@@ -33,6 +33,7 @@ export class EmailService {
       console.log("Email sent:", info.response);
     } catch (error) {
       console.error("Error sending email:", error);
+      return true;
     }
   }
 

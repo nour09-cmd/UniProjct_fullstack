@@ -27,7 +27,7 @@ export class NavbarDesktopComponent {
       const state = this.storeService.getState().user;
       this.userData = state.userData;
       this.loading = state.loading;
-      if (this.userData.email) {
+      if (this.userData?.email) {
         this.islogedin = true;
       }
     });

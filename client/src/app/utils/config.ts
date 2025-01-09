@@ -3,9 +3,11 @@ import axios from 'axios';
 export const BASEURL = 'http://localhost:4545/api'; // bei deploay env ist wichtig oder diese url andern
 // export const TOKEN = localStorage.getItem('token') || '';
 export const TOKEN = () => {
-  return localStorage.getItem('token') || '';
+  if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    return localStorage.getItem('token') || '';
+  }
+  return '';
 };
-
 export const logOut = () => {
   localStorage.removeItem('token');
 };
@@ -13,6 +15,9 @@ export const logOut = () => {
 export const rolleIsBarber = async (): Promise<boolean> => {
   try {
     const token = TOKEN();
+    if (!token) {
+      return false;
+    }
     const res = await axios.get(`${BASEURL}/users/rollerChecker/`, {
       headers: { authorization: token },
     });
@@ -26,6 +31,9 @@ export const rolleIsBarber = async (): Promise<boolean> => {
 export const rolleIsUser = async (): Promise<boolean> => {
   try {
     const token = TOKEN();
+    if (!token) {
+      return false;
+    }
     const res = await axios.get(`${BASEURL}/users/rollerChecker/`, {
       headers: { authorization: token },
     });

@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
 import { UserLoginController } from "../controller/UserLoginController";
 import { UserRegisterController } from "../controller/UserRegisterController";
+import { sendResponse } from "../utils/conifg";
 
 const router = Router();
 
@@ -17,7 +18,7 @@ router
       try {
         await userLoginController.checkRoller(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );
@@ -44,7 +45,7 @@ router
       try {
         await userLoginController.getUserData(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );

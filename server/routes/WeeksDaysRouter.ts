@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { WeekDaysController } from "../controller/WeekDaysController";
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
+import { sendResponse } from "../utils/conifg";
 const router = Router();
 const weekDaysController = new WeekDaysController();
 const auth = new AuthentivateToken();
@@ -13,7 +14,7 @@ router
       try {
         await weekDaysController.getWeeksDays(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   )
@@ -23,7 +24,7 @@ router
       try {
         await weekDaysController.updateWeeksDays(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );

@@ -1,6 +1,7 @@
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
 import { AppointmentController } from "../controller/AppointmentController";
 import { Request, Response, Router } from "express";
+import { sendResponse } from "../utils/conifg";
 
 const router = Router();
 const appointmentController = new AppointmentController();
@@ -13,7 +14,7 @@ router
       try {
         await appointmentController.getAppointmentUser(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );
@@ -25,7 +26,7 @@ router
       try {
         await appointmentController.getAppointmentLaden(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );
@@ -50,7 +51,7 @@ router
       try {
         await appointmentController.deleteAppointmentVonUser(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );
@@ -62,7 +63,7 @@ router
       try {
         await appointmentController.deleteAppointmentVonBarber(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );

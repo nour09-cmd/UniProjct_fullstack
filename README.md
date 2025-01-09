@@ -1,11 +1,47 @@
-# starting
+# Barber Shops Finder. Fullstack Webanwendungen bei (Prof. Dr. Kohler) WiSe2024/25
 
-## `git clone https://github.com/nour022/UniProjct_fullstack.git`
+## discrption
 
-# creat in server folder an .env
+My Barber Webapp. Finden sie die besten Friseure in deinem Ort und buche deine Termine bequem online. Mit My Barber kannst du nicht nur Termine vereinbaren, sondern auch ganz einfach verwalten, verschieben oder absagen – alles an einem Ort.
 
-## write this inside `PORT=4545 DB_URIMONGODB=mongodb://localhost:27017/barber DB_URIPOSTGRESQL=postgresql://postgres:postgres@uniprojct_fullstack-postgres-1:5432/postgres`
+## GOALS
 
-# to start the frond/backend ang monogodb und postgresSQL
+• Für Friseur\*innen:
 
-## just run `npm start` or `docker-compose up --build`in UniProjct_fullstack
+    - Einfaches Erstellen eines Profils und Präsentation der Dienstleistungen.
+
+    - Flexible Terminverwaltung, um Kund*innen den besten Service zu bieten.
+
+    - Erhöhte Sichtbarkeit durch spezielle Angebote und Rabatte.
+
+• Für Kund\*innen:
+
+    - Schnelle und bequeme Terminbuchung bei professionellem Friseur*innen.
+
+    - Verwaltung der eigenen Termine, inklusive Änderungen oder Stornierungen.
+
+    - Erhalt des perfekten Looks durch den passenden Friseur.
+
+## ENVIRONMENT
+
+My Barber wird in einer modernen Technologieumgebung entwickelt, die Node.js und Docker für die Backend-Architektur, Angular in TypeScript für das Frontend und kann auf AWS für das Hosting verwendet.
+
+## Download the Demo projekt
+
+### 1. `git clone https://github.com/nour022/UniProjct_fullstack.git`
+
+## 2. to start the projekt only oppen the docker app and write this command
+
+### `docker-compose up --build` or `npm start`
+
+## um test das projekt zu führen
+
+- Frontend `cd client; ng test --include src/app/Components/willkommen/willkommen.component.spec.ts`
+- Backend `cd server; npm run test`
+
+## Team mitgleider
+
+- Mohammad Gaser (inf4024, 678565)
+- Jafar Alizadeh
+- Mohamad Alraghban
+- Amer Al-Aloush

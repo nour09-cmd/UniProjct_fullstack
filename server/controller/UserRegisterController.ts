@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { Rolle } from "../models/Rolle";
-import { SECRET_KEY } from "../utils/conifg";
+import { SECRET_KEY, sendResponse } from "../utils/conifg";
 import { AppDataSource } from "../utils/data-source";
 import { User } from "../models/User";
 import { Adresse } from "../models/Adresse";
@@ -43,7 +43,7 @@ class UserRegisterController {
       const userDTO = plainToClass(UserRegisterDTO, req.body);
       const errors = await validate(userDTO);
       if (errors.length > 0) {
-        return res.status(400).json({ message: "Validation failed", errors });
+        return sendResponse(res, 400, errors);
       }
       const {
         email,
@@ -83,7 +83,7 @@ class UserRegisterController {
 
       const existingUser = await this.getUser(emails);
       if (existingUser) {
-        return res.status(409).json({ error: "User already exists" });
+        return sendResponse(res, 409);
       }
 
       const hashedPassword = await bcrypt.hash(passwords, 10);
@@ -134,7 +134,7 @@ class UserRegisterController {
           link: `http://localhost:4545/api/users/VerifyEmail?token=${emailToken}`,
         }
       );
-      return res.status(201).json({
+      return sendResponse(res, 200, {
         message: "User registered successfully",
         token,
         createProfileUser,
@@ -142,10 +142,8 @@ class UserRegisterController {
       });
     } catch (error) {
       console.error("Error during registration:", error);
-      return res.status(500).json({
-        error: "Internal server error",
-        message: error.message,
-      });
+      3;
+      return sendResponse(res, 500);
     }
   }
 }

@@ -26,32 +26,33 @@ describe("UserLoginController", () => {
 
   describe("login", () => {
     it("should return 400 if validation fails", async () => {
-      // Simuliere ungültige Eingabe
       req.body = {};
 
       await userLoginController.login(req as Request, res as Response);
 
       expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({
-        message: "Validation failed",
-        errors: expect.any(Array),
+        err: "",
+        message: "Bad Request",
+        status: 400,
       });
     });
 
     it("should return 404 if user is not found", async () => {
-      // Simuliere gültige Eingabe
       req.body = { email: "testuser@example.com", password: "password123" };
-
-      // Mock für getUser
       jest.spyOn(userLoginController, "getUser").mockResolvedValue(null);
 
       await userLoginController.login(req as Request, res as Response);
 
       expect(res.status).toHaveBeenCalledWith(404);
-      expect(res.json).toHaveBeenCalledWith({ error: "User not found" });
+      expect(res.json).toHaveBeenCalledWith({
+        err: "",
+        message: "Not Found",
+        status: 404,
+      });
     });
 
-    it("should return 401 if password is incorrect", async () => {
+    it("should return 400 if password is incorrect", async () => {
       req.body = { email: "testuser@example.com", password: "wrongpassword" };
 
       const mockUser: any = {
@@ -59,16 +60,18 @@ describe("UserLoginController", () => {
         password: "hashedPassword",
       };
 
-      // Mock für getUser
       jest.spyOn(userLoginController, "getUser").mockResolvedValue(mockUser);
 
-      // Mock für bcrypt.compare
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
       await userLoginController.login(req as Request, res as Response);
 
-      expect(res.status).toHaveBeenCalledWith(401);
-      expect(res.json).toHaveBeenCalledWith({ error: "Invalid possword" });
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({
+        err: "",
+        message: "Bad Request",
+        status: 400,
+      });
     });
 
     it("should return 200 with a token if login is successful", async () => {

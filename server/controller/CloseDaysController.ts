@@ -5,6 +5,7 @@ import { CloseDaysDTO } from "../DTOs/CloseDaysDTO";
 import { GetLadenDTO } from "../DTOs/GetLadenDTO";
 import { LadenModel } from "../models/Laden/LadenModel";
 import { CloseDaysModel } from "../models/Laden/CloseDaysModel";
+import { sendResponse } from "../utils/conifg";
 
 export class CloseDaysController {
   private modelLaden: LadenModel;
@@ -20,12 +21,12 @@ export class CloseDaysController {
     });
     const errors = await validate(createLadenDTO);
     if (errors.length > 0) {
-      return res.status(400).json({ message: "Validation failed", errors });
+      return sendResponse(res, 400, errors);
     }
 
     const laden = await this.modelLaden.findByBarberEmail(req["user"]["email"]);
     if (!laden) {
-      return res.status(400).json({ message: "Laden Not Found" });
+      return sendResponse(res, 404);
     }
 
     const createdDay =
@@ -33,22 +34,22 @@ export class CloseDaysController {
         req["user"]["email"],
         { date: `${new Date(createLadenDTO.date)}` }
       );
-    return res
-      .status(200)
-      .json({ message: "Colse Day Date is created", createdDay });
+    return sendResponse(res, 201, {
+      message: "Colse Day Date is created",
+      createdDay,
+    });
   }
   async getCloseDays(req: Request, res: Response) {
     const getLadenDTO = plainToClass(GetLadenDTO, req.body);
     const errors = await validate(getLadenDTO);
     if (errors.length > 0) {
-      return res.status(400).json({ message: "Validation failed", errors });
+      return sendResponse(res, 400, errors);
     }
     const laden = await this.modelLaden.findByBarberEmail(getLadenDTO.email);
     if (!laden) {
-      return res.status(400).json({ message: "Laden Not Found" });
+      return sendResponse(res, 404);
     }
-
-    return res.status(200).json({ ...laden.close_days });
+    return sendResponse(res, 200, { ...laden.close_days });
   }
   async deleteCloseDays(req: Request, res: Response) {
     const closeDayId = req.body.closeDayId;
@@ -58,8 +59,9 @@ export class CloseDaysController {
         barberEmail,
         closeDayId
       );
-    return res
-      .status(200)
-      .json({ message: "Close Day Date is deleted", deleteDay });
+    return sendResponse(res, 200, {
+      message: "Close Day Date is deleted",
+      deleteDay,
+    });
   }
 }

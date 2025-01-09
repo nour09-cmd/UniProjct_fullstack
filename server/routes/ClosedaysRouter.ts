@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { CloseDaysController } from "../controller/CloseDaysController";
 import { AuthentivateToken } from "../middlewares/authenticateTokenAndCheckRole";
+import { sendResponse } from "../utils/conifg";
 const router = Router();
 const closeDaysController = new CloseDaysController();
 const auth = new AuthentivateToken();
@@ -12,7 +13,7 @@ router
       try {
         await closeDaysController.getCloseDays(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   )
@@ -22,7 +23,7 @@ router
       try {
         await closeDaysController.createCloseDays(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   )
@@ -32,7 +33,7 @@ router
       try {
         await closeDaysController.deleteCloseDays(req, res);
       } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        sendResponse(res, 500, error.message);
       }
     }
   );
