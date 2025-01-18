@@ -1,19 +1,32 @@
+version: "3.8"
 services:
   mongo:
     image: mongo:latest
+    container_name: mongodbNonosql
     ports:
       - "27017:27017"
     networks:
       - app-network
+    # volumes:
+    #   - ./initDemoDaten/nosql:/docker-entrypoint-initdb.d
+    # command: bash /docker-entrypoint-initdb.d/import.sh
+
+   
   postgres:
     image: postgres:latest
+    container_name: postgresSQLdb
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: barber
+
     ports:
       - "5432:5432"
     networks:
       - app-network
+    volumes:
+      #   # - ./dbdataSQL:/var/lib/postgresql/data
+      - ./initDemoDaten/sql:/docker-entrypoint-initdb.d
   backend:
     build: ./server
     ports:
@@ -37,3 +50,6 @@ services:
 networks:
   app-network:
     driver: bridge
+# volumes:
+#   dbdataSQL:
+#   dbdataMongodb:

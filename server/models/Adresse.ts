@@ -5,12 +5,12 @@ export class Adresse {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar", length: 100 })
+  @Column({ type: "varchar", length: 100, nullable: false })
   strasse: string;
 
-  @Column({ type: "varchar", length: 100 })
+  @Column({ type: "varchar", length: 100, nullable: false })
   ort: string;
 
-  @Column({ type: "int" })
+  @Column({ type: "varchar", length: 10, nullable: false })
   plz: string;
 }
