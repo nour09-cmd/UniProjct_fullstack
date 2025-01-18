@@ -6,7 +6,9 @@
 * {
   font-family: "Montserrat", Arial, Helvetica, sans-serif !important;
 }
-
+.sidebarsInBarber {
+    background: #252525 !important;
+}
 .formbox {
   border-radius: 27px;
   background: var(--Schemes-On-Primary, #fff);

@@ -7,14 +7,14 @@
 .nav-link.active{
     background-color: black !important;
     padding: 13px !important;
-  
+
   }
-  
+
 .logo-cont{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    
+
 }
 .sidebar-col{
     background-color:#252525 ;
@@ -32,7 +32,13 @@ li > a > i{
 li{
     width: 240px;
     padding: 10px 20px;
-    
+
+}
+.text-white{
+  color: white !important;
+}
+.app-sidebar-dashboard{
+  background-color: #252525;
 }
 @media screen and (width< 596px) {
 li{
@@ -45,7 +51,7 @@ li > a > i{
 }
 /* .dashboard-container{
     background-color: #9c0202;
-   
+
     padding: 100px;
 } */
 
