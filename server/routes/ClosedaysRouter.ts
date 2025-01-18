@@ -6,6 +6,18 @@ const router = Router();
 const closeDaysController = new CloseDaysController();
 const auth = new AuthentivateToken();
 router
+  .route("/closedayss")
+  .post(
+    auth.authenticateToken.bind(auth),
+    async (req: Request, res: Response) => {
+      try {
+        await closeDaysController.getCloseDays(req, res);
+      } catch (error) {
+        sendResponse(res, 500, error.message);
+      }
+    }
+  );
+router
   .route("/closedays")
   .get(
     auth.authenticateToken.bind(auth),
@@ -26,8 +38,10 @@ router
         sendResponse(res, 500, error.message);
       }
     }
-  )
-  .delete(
+  );
+router
+  .route("/closedaysD")
+  .post(
     auth.authenticateTokenBarber.bind(auth),
     async (req: Request, res: Response) => {
       try {

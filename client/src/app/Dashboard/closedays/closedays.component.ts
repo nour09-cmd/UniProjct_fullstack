@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +14,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RadioButtonComponent } from '../../Components/radio-button/radio-button.component';
+import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-button.component';
+import { StoreService } from '../../redux/store.service';
+import {
+  createCloseDay,
+  deleteCloseDay,
+  getCloseDaysData,
+} from '../../redux/features/Laden/CloseDaysSlice';
 
 @Component({
   selector: 'app-closedays',
@@ -27,35 +34,79 @@ import { RadioButtonComponent } from '../../Components/radio-button/radio-button
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
     CommonModule,
     RadioButtonComponent,
+    UnsereButtonComponent,
   ],
   templateUrl: './closedays.component.html',
   styleUrl: './closedays.component.css',
 })
-export class ClosedaysComponent {
-  searchForm: FormGroup;
-  radioOptions = [
-    { label: 'Show All Appointments', value: 'showAll' },
-    { label: 'Delete Appointment', value: 'deleteAppointment' },
-  ];
-  selectedFilter: string = 'showAll';
+export class ClosedaysComponent implements OnInit {
+  async ngOnInit() {
+    this.getUserData();
+  }
 
+  radioOptions = [
+    { label: 'Add Day', value: 'addDay' },
+    { label: 'Delete Day', value: 'deleteDay' },
+  ];
+
+  closedDayForm: FormGroup;
+  selectedFilter: string = 'addDay';
+  closedDay: string | undefined;
+  barber_email: any;
+  closedDays: any;
+  minDate: string;
   selectedDate: Date | null = null;
-  constructor(private fb: FormBuilder) {
-    this.searchForm = this.fb.group({
+
+  constructor(private fb: FormBuilder, private storeService: StoreService) {
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
+    this.closedDayForm = this.fb.group({
       date: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  async onDateChange(event: any) {
-    if (this.searchForm.valid) {
-      const date = this.searchForm.value;
-      this.selectedDate = event.value;
-      console.log(date);
+
+  onFilterChange(selected: string) {
+    this.getUserData();
+    this.selectedFilter = selected;
+  }
+
+  async getUserData() {
+    // Hier könnte Logik hinzugefügt werden, falls Benutzerdaten benötigt werden.
+    const stateUser = await this.storeService.getState().user;
+    if (stateUser?.userData?.email != undefined) {
+      this.barber_email = stateUser.userData.email;
+      await this.getCloseDays(stateUser.userData.email);
     }
   }
-  onFilterChange(selected: string) {
-    this.selectedFilter = selected;
+
+  async getCloseDays(email: string) {
+    // Aktion auslösen, um die Schließtage zu erhalten
+    await this.storeService.dispatch(getCloseDaysData(email));
+
+    // Auf Änderungen im Zustand abonnieren
+    this.storeService.subcribe(() => {
+      const stateCloseDays = this.storeService.getState().closeDays;
+      console.log(stateCloseDays);
+      this.closedDays = stateCloseDays.closeDays || [];
+    });
+  }
+
+  async deleteDay(id: any) {
+    if (!id) return;
+    await this.storeService.dispatch(deleteCloseDay({ closeDayId: id }));
+
+    location.reload();
+  }
+
+  async createClosedDay() {
+    if (this.closedDayForm.valid) {
+      const { date } = this.closedDayForm.value;
+      await this.storeService.dispatch(
+        createCloseDay({ date, barber_email: this.barber_email })
+      );
+    }
+    location.reload();
   }
 }

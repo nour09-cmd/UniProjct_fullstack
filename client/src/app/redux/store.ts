@@ -3,6 +3,7 @@ import UserSlice from './features/User/UserSlice';
 import LadenSlice from './features/Laden/LadenSlice';
 import WeeksDaysSlice from './features/Laden/WeekDaysSlice';
 import AppoSlice from './features/Laden/AppoSlice';
+import CloseDaysSlice from './features/Laden/CloseDaysSlice';
 
 const store: any = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store: any = configureStore({
     laden: LadenSlice,
     weeksDays: WeeksDaysSlice,
     appo: AppoSlice,
+    closeDays: CloseDaysSlice,
     // Laden ->
     // - LadenProfiles
     // - LadenProfile
