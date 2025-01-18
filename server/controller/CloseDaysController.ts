@@ -32,7 +32,7 @@ export class CloseDaysController {
     const createdDay =
       await this.modelCloseDays.addCloseDayBarberProfileByEmail(
         req["user"]["email"],
-        { date: `${new Date(createLadenDTO.date)}` }
+        { date: `${createLadenDTO.date}` }
       );
     return sendResponse(res, 201, {
       message: "Colse Day Date is created",
@@ -54,6 +54,7 @@ export class CloseDaysController {
   async deleteCloseDays(req: Request, res: Response) {
     const closeDayId = req.body.closeDayId;
     const barberEmail = req["user"]["email"];
+    console.log(closeDayId);
     const deleteDay =
       await this.modelCloseDays.deleteCloseDayBarberProfileByEmail(
         barberEmail,

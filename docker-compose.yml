@@ -18,9 +18,7 @@ services:
     build: ./server
     ports:
       - "4545:4545"
-    environment:
-      - DB_URI_MONGODB=mongodb://mongo:27017/barber
-      - DB_URI_POSTGRESQL=postgresql://postgres:postgres@postgres:5432/barber
+ 
     depends_on:
       - mongo
       - postgres
