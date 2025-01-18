@@ -177,10 +177,11 @@ export class SignupComponent implements OnInit {
       this.singUpErorr = state.singUpError || [];
       if (this.singUpErorr.length > 0) {
         console.error('Signup Errors:', this.singUpErorr);
+      } else {
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 2500);
       }
-      setTimeout(() => {
-        this.router.navigate(['/']);
-      }, 2500);
     } catch (error) {
       console.error('Fehler während des Formular-Submits:', error);
     }

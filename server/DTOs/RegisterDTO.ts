@@ -40,7 +40,6 @@ export class UserRegisterDTO {
   @IsNotEmpty()
   password: string;
 
-  @IsPhoneNumber("DE")
   @IsNotEmpty()
   handynummer: string;
 
