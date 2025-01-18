@@ -41,7 +41,6 @@ export const singUp: any = createAsyncThunk(
   }
 );
 
-// Get User Data
 export const getUserData: any = createAsyncThunk(
   '/getUserData',
   async (_, { rejectWithValue }) => {

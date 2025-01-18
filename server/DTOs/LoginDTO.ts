@@ -1,5 +1,4 @@
 import { IsString, IsEmail, IsNotEmpty } from "class-validator";
-// TODO InterFaces
 export class UserLoginDTO {
   @IsEmail()
   @IsNotEmpty()

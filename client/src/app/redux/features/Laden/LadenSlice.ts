@@ -1,4 +1,4 @@
-import axios from 'axios'; // for API Req  [POST=create, GET, PUT, DELETE]
+import axios from 'axios'; 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BASEURL, TOKEN } from '../../../utils/config';
 

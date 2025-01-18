@@ -73,7 +73,7 @@ export class ClosedaysComponent implements OnInit {
   }
 
   async getUserData() {
-    // Hier könnte Logik hinzugefügt werden, falls Benutzerdaten benötigt werden.
+   
     const stateUser = await this.storeService.getState().user;
     if (stateUser?.userData?.email != undefined) {
       this.barber_email = stateUser.userData.email;
@@ -82,10 +82,10 @@ export class ClosedaysComponent implements OnInit {
   }
 
   async getCloseDays(email: string) {
-    // Aktion auslösen, um die Schließtage zu erhalten
+
     await this.storeService.dispatch(getCloseDaysData(email));
 
-    // Auf Änderungen im Zustand abonnieren
+
     this.storeService.subcribe(() => {
       const stateCloseDays = this.storeService.getState().closeDays;
       console.log(stateCloseDays);

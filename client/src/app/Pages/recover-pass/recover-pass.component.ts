@@ -41,7 +41,6 @@ export class RecoverPassComponent {
     });
   }
 
-  // The onOtpChange function will capture the OTP value as it changes
   onOtpChange(otp: string): void {
     this.otpValue = otp;
     this.otpForm.patchValue({ otp: this.otpValue });

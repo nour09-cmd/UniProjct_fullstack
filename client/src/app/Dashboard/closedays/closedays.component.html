@@ -24,7 +24,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <!-- Verbesserte Tabelle -->
+
             <div class="table-responsive">
               <table
                 class="table table-bordered table-striped table-hover shadow-sm rounded"
@@ -39,7 +39,7 @@
                   <tr *ngFor="let day of closedDays | keyvalue; let i = index">
                     <td class="text-start">{{ closedDays[i].date }}</td>
                     <td class="text-center">
-                      <!-- Button zum Löschen -->
+
                       <button
                         class="btn btn-danger btn-sm"
                         (click)="deleteDay(closedDays[i]._id)"
@@ -48,7 +48,6 @@
                       </button>
                     </td>
                   </tr>
-                  <!-- Weitere Daten können hier hinzugefügt werden -->
                 </tbody>
               </table>
             </div>

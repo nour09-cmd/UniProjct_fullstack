@@ -1,37 +1,18 @@
-<nav
-  class="navbar navbar-expand-sm navbar-light bg-white fixed-bottom d-flex d-lg-none text-dark navbar-mobile py-5"
->
+<nav class="navbar navbar-expand-sm navbar-light bg-white fixed-bottom d-flex d-lg-none text-dark navbar-mobile py-5">
   <div class="container-fluid justify-content-around">
     <a class="nav-link" href="/">
       <i class="bi bi-house-door fs-1"></i>
     </a>
 
-    <a
-      class="nav-link"
-      routerLink="/appointmentUser"
-      routerLinkActive="active"
-      *ngIf="isUser"
-    >
+    <a class="nav-link" routerLink="/appointmentUser" routerLinkActive="active" *ngIf="isUser">
       <i class="bi bi-calendar fs-1"></i>
     </a>
-    <a
-      class="nav-link"
-      routerLink="/appointment"
-      routerLinkActive="active"
-      *ngIf="isBarber"
-    >
+    <a class="nav-link" routerLink="/appointment" routerLinkActive="active" *ngIf="isBarber">
       <i class="bi bi-justify fs-1"></i>
     </a>
   </div>
 </nav>
 
 <div class="container my-4 d-lg-none">
-  <form class="d-flex mx-auto" style="flex: 1; max-width: 70%">
-    <input
-      type="search"
-      class="form-control"
-      placeholder="Search/Address"
-      aria-label="Search"
-    />
-  </form>
+
 </div>

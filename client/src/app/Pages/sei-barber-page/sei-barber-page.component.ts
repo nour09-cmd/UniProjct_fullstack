@@ -29,7 +29,6 @@ import { Router } from '@angular/router';
     FooterComponent,
     NavbarDesktopComponent,
     NavbarMobileComponent,
-    // AddresseInputComponent,
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
@@ -74,7 +73,6 @@ export class SeiBarberPageComponent {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
 
-      // Validate file type: Only allow images
       if (!file.type.startsWith('image/')) {
         console.error('Bitte nur Bilddateien auswählen!');
         return;
@@ -117,7 +115,6 @@ export class SeiBarberPageComponent {
     };
     await this.storeService.dispatch(createLaden(data));
     if (!data) {
-      // TODO change this later
       this._router.navigate(['/']);
     }
   }

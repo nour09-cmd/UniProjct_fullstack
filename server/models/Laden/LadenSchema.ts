@@ -10,7 +10,6 @@ import {
   IPriceListe,
 } from "@mrx/barbar-finder";
 
-// Schema Definitions
 const salesSchema = new Schema<ISales>({
   name: { type: String, required: true },
   price: { type: Number, required: true },

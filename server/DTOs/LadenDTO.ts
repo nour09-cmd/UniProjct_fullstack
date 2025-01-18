@@ -7,7 +7,6 @@ import {
   IsPostalCode,
   ValidateNested,
 } from "class-validator";
-// TODO InterFaces und aufteilen
 export class AddressDTO {
   @IsString()
   @IsNotEmpty()

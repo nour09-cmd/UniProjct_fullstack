@@ -42,7 +42,6 @@ import { Router } from '@angular/router';
 })
 export class WorkingDaysComponent implements OnInit {
   scheduleForm: FormGroup;
-  //'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'
   weekdays: string[] = [];
 
   statusOptions = [

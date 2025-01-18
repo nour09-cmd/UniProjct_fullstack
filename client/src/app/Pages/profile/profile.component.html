@@ -8,9 +8,7 @@
     <span class="titel">{{ " " + ladenDaten.Laden_name }}</span>
   </h1>
 </div>
-<!-- // add a array with image path  -->
 <app-slide-show [imagesArr]="ladenDaten.Laden_IMG" />
-<!-- // TODO  function to calculate a stars && create a varibel startNum && and function to chack if allredy giveing stars && nur nutzer die sich angemaldet ist!  -->
 <app-star-rating [ratingArr]="ladenDaten.reviews" />
 
 <div class="container mt-3 d">
@@ -33,5 +31,4 @@
 <app-opening-hours [workingHour]="ladenDaten.week_days" />
 <app-price-list [list]="ladenDaten.priceListe" />
 
-<!-- // function  || APIs  to make a map editabale  -->
 <app-map />

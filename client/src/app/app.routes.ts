@@ -60,6 +60,5 @@ export const routes: Routes = [
     ],
   },
 
-  // Fallback Route
   { path: '**', redirectTo: '' },
 ];

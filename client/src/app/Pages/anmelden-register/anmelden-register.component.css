@@ -2,13 +2,13 @@
  
  
   width: 100%;
-  max-width: 700px; /* Restrict to 700px on larger screens */
-  height: auto; /* Allow dynamic height adjustment */
+  max-width: 700px;
+  height: auto; 
   flex-shrink: 0;
   padding-top: 170px;
   padding-left: 15px;
   padding-right: 15px;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto;
   
 }
 
@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px; /* Space between elements */
+  gap: 12px; 
   height: 100%;
   justify-content: space-between;
   padding: 20px;
@@ -33,14 +33,14 @@
 .info h2 {
   color: #000;
   font-family: Montserrat, sans-serif;
-  font-size: 1.2em; /* Scale font size */
+  font-size: 1.2em; 
   font-weight: 700;
   line-height: normal;
 }
 .info p {
   color: #000;
   font-family: Montserrat, sans-serif;
-  font-size: 0.9em; /* Responsive font scaling */
+  font-size: 0.9em; 
   font-style: italic;
   font-weight: 400;
   line-height: normal;
@@ -64,7 +64,7 @@
   }
 
   .info h2 {
-    font-size: 1.5em; /* Slightly larger font on tablets */
+    font-size: 1.5em; 
   }
 
   .info p {
@@ -83,7 +83,7 @@
   }
 
   .info h2 {
-    font-size: 1.2em; /* Compact font on small screens */
+    font-size: 1.2em; 
   }
 
   .info p {
@@ -91,6 +91,6 @@
   }
 
   .control {
-    width: 100%; /* Full width for buttons */
+    width: 100%;
   }
 }

@@ -8,7 +8,6 @@ import {
   Length,
   ValidateNested,
 } from "class-validator";
-// TODO InterFaces
 export class AddressDTO {
   @IsString()
   @IsNotEmpty()

@@ -12,14 +12,6 @@ const store: any = configureStore({
     weeksDays: WeeksDaysSlice,
     appo: AppoSlice,
     closeDays: CloseDaysSlice,
-    // Laden ->
-    // - LadenProfiles
-    // - LadenProfile
-    // - APPOs
-    // - WEEKDAYS -> von Laden
-    //  - Close Days
-    //  - Product List
-    //  - POSTs !
   },
 });
 export default store;

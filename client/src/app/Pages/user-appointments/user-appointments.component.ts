@@ -69,7 +69,6 @@ export class UserAppointmentsComponent implements OnInit {
     }
   }
 
-  /** Format Date */
   formatDate(date: string): string {
     return format(new Date(date), 'dd-MM-yyyy');
   }

@@ -7,7 +7,6 @@ const initialState: any = {
   errors: '',
   appos: [],
 };
-//TODO CLANDER const createtApo: any = createAsyncThunk('/deletApo', async (id) => {});
 export const deletAppointmentVonBarber: any = createAsyncThunk(
   '/deletAppointmentVonBarber',
   async (data) => {

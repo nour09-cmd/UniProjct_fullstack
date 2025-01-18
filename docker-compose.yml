@@ -24,9 +24,9 @@ services:
       - "5432:5432"
     networks:
       - app-network
-    volumes:
-      #   # - ./dbdataSQL:/var/lib/postgresql/data
-      - ./initDemoDaten/sql:/docker-entrypoint-initdb.d
+    # volumes:
+    #   #   # - ./dbdataSQL:/var/lib/postgresql/data
+    #   - ./initDemoDaten/sql:/docker-entrypoint-initdb.d
   backend:
     build: ./server
     ports:

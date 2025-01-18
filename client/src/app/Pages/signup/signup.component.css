@@ -79,11 +79,6 @@ mat-form-field {
   margin-top: 20px;
 }
 
-Unsere-Buton {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 15px; 
-}
 
 mat-error {
   font-size: 12px;
@@ -116,4 +111,3 @@ mat-icon {
 
 
 
-/* ----------------------------------------------------- */

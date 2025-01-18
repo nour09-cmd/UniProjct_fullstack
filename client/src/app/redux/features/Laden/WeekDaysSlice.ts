@@ -35,7 +35,6 @@ export const updateWeeksDaysData: any = createAsyncThunk(
   async (dataList: any) => {
     try {
       const token = TOKEN();
-      // TODO         ...dataList,
       const res = await axios.put(
         `${BASEURL}/ladens/weekdays/`,
         { weekDays: [...dataList] },
@@ -47,7 +46,6 @@ export const updateWeeksDaysData: any = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      // console.log(err);
     }
   }
 );

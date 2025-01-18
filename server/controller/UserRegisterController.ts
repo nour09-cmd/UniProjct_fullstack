@@ -55,7 +55,6 @@ class UserRegisterController {
         address,
       } = userDTO;
       const { strasse, ort, plz } = address || {};
-      // Kann auch weg !!!
       const validierungesData = new Validierunges([
         email,
         password,
