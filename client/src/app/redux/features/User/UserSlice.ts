@@ -83,8 +83,9 @@ const UserSlice = createSlice({
     builder
       .addCase(logIn.fulfilled, (state, action) => {
         state.loading = false;
-        state.errors = '';
+        state.errors = action.payload;
       })
+
       .addCase(logIn.rejected, (state, action) => {
         state.loading = false;
         state.errors = action.payload;

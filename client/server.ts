@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
 
-
 export function app(): express.Express {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
@@ -17,12 +16,13 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
-  
-  server.get('*.*', express.static(browserDistFolder, {
-    maxAge: '1y'
-  }));
+  server.get(
+    '*.*',
+    express.static(browserDistFolder, {
+      maxAge: '1y',
+    })
+  );
 
- 
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 

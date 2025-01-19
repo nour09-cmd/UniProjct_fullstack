@@ -4,18 +4,23 @@ services:
     container_name: mongodbNonosql
     ports:
       - "27017:27017"
+    # volumes:
+    #   - ./initDemoDaten/nosql:/nosql
+    #   - ./initDemoDaten/init:/docker-entrypoint-initdb.d/ 
     networks:
       - app-network
   postgres:
     image: postgres:latest
     container_name: postgresSQLdb
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test
       POSTGRES_DB: barber
 
     ports:
       - "5432:5432"
+    # volumes:
+    #   - ./initDemoDaten/sql:/docker-entrypoint-initdb.d
     networks:
       - app-network
 

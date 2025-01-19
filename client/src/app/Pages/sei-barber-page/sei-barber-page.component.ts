@@ -21,6 +21,7 @@ import { UnsereButtonComponent } from '../../Components/unsere-button/unsere-but
 import { StoreService } from '../../redux/store.service';
 import { createLaden } from '../../redux/features/Laden/LadenSlice';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sei-barber-page',
@@ -47,10 +48,12 @@ import { Router } from '@angular/router';
 export class SeiBarberPageComponent {
   addressForm: FormGroup;
   uploadedFiles: File[] = [];
+  singUpErorr: any = [];
   constructor(
     private fb: FormBuilder,
     private storeService: StoreService,
-    private _router: Router
+    private _router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.addressForm = this.fb.group({
       Laden_name: ['', Validators.required],
@@ -97,7 +100,13 @@ export class SeiBarberPageComponent {
   }
 
   async onSubmit() {
-    if (!this.addressForm.value) {
+    if (this.addressForm.invalid) {
+      this.snackBar.open(`'füllen sie bitte alle felder ein`, 'X', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar-error'],
+      });
       return;
     }
     const data = {
@@ -114,8 +123,32 @@ export class SeiBarberPageComponent {
       },
     };
     await this.storeService.dispatch(createLaden(data));
-    if (!data) {
-      this._router.navigate(['/']);
-    }
+    this.storeService.subcribe(() => {
+      const state = this.storeService.getState().laden;
+      console.log(state.errors);
+      this.singUpErorr = state.errors || [];
+      if (state.errors.message == 'Created') {
+        this.snackBar.open(`Created sucssuc`, 'X', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-sucssec'],
+        });
+
+        setTimeout(() => {
+          this._router.navigate(['/']);
+        }, 2500);
+        return;
+      }
+      if (this.singUpErorr.message) {
+        this.snackBar.open(`'Etwas ${state.errors.message}`, 'X', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-error'],
+        });
+        console.error('Signup Errors:', this.singUpErorr);
+      }
+    });
   }
 }

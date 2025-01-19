@@ -31,6 +31,24 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello, From our backend");
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
+});
+process.on("SIGINT", async () => {
+  console.log("SIGINT received. Cleaning up resources...");
+
+  try {
+    if (AppDataSource.isInitialized) {
+      await AppDataSource.destroy();
+      console.log("Database connection closed.");
+    }
+  } catch (error) {
+    console.error("Error during cleanup:", error);
+  }
+
+  // Server schließen
+  server.close(() => {
+    console.log("Server closed.");
+    process.exit(0);
+  });
 });

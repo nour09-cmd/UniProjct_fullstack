@@ -7,6 +7,7 @@ import { getAllData } from '../../redux/features/Laden/LadenSlice';
 import { CommonModule } from '@angular/common';
 import { WillkommenComponent } from '../../Components/willkommen/willkommen.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-page',

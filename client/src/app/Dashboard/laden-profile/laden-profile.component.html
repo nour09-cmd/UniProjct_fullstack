@@ -12,69 +12,38 @@
     <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="my-3">
       <div class="my-2 form-group form-control-lg">
         <label for="exampleFormControlTextarea1 my-3 ">Laden Details :</label>
-        <input
-          class="form-control form-control-lg my-3"
-          type="text"
-          placeholder="Name the Store"
-          id="Laden_name"
-          formControlName="Laden_name"
-        />
+        <input class="form-control form-control-lg my-3" type="text" placeholder="Name the Store" id="Laden_name"
+          formControlName="Laden_name" />
 
-        <textarea
-          class="form-control my-3"
-          rows="3"
-          placeholder="Describtion"
-          id="Laden_description"
-          formControlName="Laden_description"
-        ></textarea>
-        <label for="exampleFormControlTextarea1 my-3 "
-          >Add Laden Images (Max 3 images) :</label
-        >
+        <textarea class="form-control my-3" rows="3" placeholder="Describtion" id="Laden_description"
+          formControlName="Laden_description"></textarea>
+        <label for="exampleFormControlTextarea1 my-3 ">Add Laden Images (Max 3 images) :</label>
         <div class="container formbox">
           <div class="container my-4">
-            <div
-              class="d-flex align-items-center justify-content-around border-bottom border-secondary rounded-bottom"
-            >
+            <div class="d-flex align-items-center justify-content-around border-bottom border-secondary rounded-bottom">
               <div
                 class="py-2 px-3 rounded-top border-secondary w-50 d-flex justify-content-center align-items-center border border-bottom-0"
-                (click)="fileInput.click()"
-              >
+                (click)="fileInput.click()">
                 <p class="m-0">Add img</p>
               </div>
-              <button
-                type="button"
+              <button type="button"
                 class="my-2 btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center"
-                (click)="fileInput.click()"
-                [disabled]="isUploadDisabled()"
-              >
+                (click)="fileInput.click()" [disabled]="isUploadDisabled()">
                 <span class="mb-0">+</span>
               </button>
-              <input
-                type="file"
-                #fileInput
-                (change)="onFileSelected($event)"
-                accept="image/*"
-                class="d-none"
-              />
+              <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" class="d-none" />
             </div>
           </div>
 
           <ul class="list-unstyled mt-3">
-            <li
-              *ngFor="
+            <li *ngFor="
                 let fileControl of uploadedFilesArray.controls;
                 let i = index
-              "
-              class="d-flex justify-content-between align-items-center border-bottom py-2 px-3 rounded-bottom"
-            >
-              <span class="text-muted">• {{ fileControl.value.name }}</span>
-              <p
-                class="text-primary text-decoration-none"
-                (click)="removeFile(i)"
-              >
-                <button
-                  class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
-                >
+              " class="d-flex justify-content-between align-items-center border-bottom py-2 px-3 rounded-bottom">
+              <span class="text-muted"><img [src]="fileControl.value" alt="" width="100" height="100"></span>
+              <p class="text-primary text-decoration-none" (click)="removeFile(i)">
+                <button type="button"
+                  class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center">
                   <span class="h5 mb-0">--</span>
                 </button>
               </p>
@@ -88,45 +57,25 @@
         <div class="adbox row g-2 my-3 mx-3">
           <div class="col-md-6">
             <label for="street" class="form-label">Straße:</label>
-            <input
-              type="text"
-              id="street"
-              formControlName="street"
-              class="form-control inputAdress"
-              placeholder="Straße eingeben"
-            />
+            <input type="text" id="street" formControlName="street" class="form-control inputAdress"
+              placeholder="Straße eingeben" />
           </div>
 
           <div class="col-md-6">
             <label for="houseNumber" class="form-label">Hausnummer:</label>
-            <input
-              type="text"
-              id="houseNumber"
-              formControlName="houseNumber"
-              class="form-control inputAdress"
-              placeholder="Hausnummer eingeben"
-            />
+            <input type="text" id="houseNumber" formControlName="houseNumber" class="form-control inputAdress"
+              placeholder="Hausnummer eingeben" />
           </div>
 
           <div class="col-md-6">
             <label for="postalCode" class="form-label">PLZ:</label>
-            <input
-              type="text"
-              id="postalCode"
-              formControlName="postalCode"
-              class="form-control inputAdress"
-              placeholder="12345"
-            />
+            <input type="text" id="postalCode" formControlName="postalCode" class="form-control inputAdress"
+              placeholder="12345" />
           </div>
           <div class="col-md-6">
             <label for="city" class="form-label">Ort:</label>
-            <input
-              type="text"
-              id="city"
-              formControlName="city"
-              class="form-control inputAdress"
-              placeholder="Ort eingeben"
-            />
+            <input type="text" id="city" formControlName="city" class="form-control inputAdress"
+              placeholder="Ort eingeben" />
           </div>
         </div>
       </div>

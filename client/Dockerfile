@@ -7,7 +7,7 @@ RUN npm install -g @angular/cli@17.3.2
 RUN npm ci
 COPY . .
 
-RUN ng build
+RUN ng build --configuration production --output-hashing none
 
 FROM nginx:latest
 

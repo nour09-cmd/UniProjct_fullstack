@@ -24,6 +24,7 @@ import {
 } from '../../redux/features/Laden/LadenSlice';
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { WillkommenComponent } from '../../Components/willkommen/willkommen.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-laden-profile',
@@ -64,14 +65,21 @@ export class LadenProfileComponent implements OnInit {
     this.storeService.subcribe(() => {
       const state = this.storeService.getState().laden;
       this._ladenDate = state.getOneLaden;
+      if (
+        this._ladenDate?.Laden_IMG &&
+        Array.isArray(this._ladenDate.Laden_IMG) &&
+        this.uploadedFilesArray.length == 0
+      ) {
+        this._ladenDate.Laden_IMG.forEach((item: any) => {
+          this.uploadedFilesArray.push(this.fb.control(item));
+        });
+      }
       if (this._ladenDate?.Laden_name)
         this.initializeProfileData(state.getOneLaden);
     });
   };
   addressForm: FormGroup;
   initializeProfileData(laden: any) {
-    console.log(laden);
-
     const teile = laden.Laden_adress.strasse.split(' ');
     const hausnumer = teile.pop();
     const strasse = teile.join(' ').trim();
@@ -94,7 +102,8 @@ export class LadenProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private storeService: StoreService,
-    private _router: Router
+    private _router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.addressForm = this.fb.group({
       Laden_name: ['', Validators.required],
@@ -129,12 +138,27 @@ export class LadenProfileComponent implements OnInit {
         this.uploadedFilesArray.push(this.fb.control(base64String));
       };
       reader.readAsDataURL(file);
-      console.log('Ausgewählte Datei:', file.name);
+      this.snackBar.open(
+        'bild eingefügt sie muss auf save drück wenn sie spiechen wollen',
+        'X',
+        {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-sucssec'],
+        }
+      );
     }
   }
 
   removeFile(index: number): void {
     this.uploadedFilesArray.removeAt(index);
+    this.snackBar.open('bild ist gelöscht', 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-werning'],
+    });
   }
 
   isUploadDisabled(): boolean {
@@ -159,7 +183,12 @@ export class LadenProfileComponent implements OnInit {
       },
     };
     await this.storeService.dispatch(updateLaden(data));
-
+    this.snackBar.open('bild ist gelöscht', 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-sucssec'],
+    });
     location.reload();
   }
 }

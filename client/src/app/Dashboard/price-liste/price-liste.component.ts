@@ -20,6 +20,7 @@ import {
   getPriceLite,
   postPriceLite,
 } from '../../redux/features/Laden/LadenSlice';
+import { MatSnackBar } from '@angular/material/snack-bar';
 interface sales {
   name: string;
   price: Number;
@@ -93,7 +94,11 @@ export class PriceListeComponent implements OnInit {
   priceListForm: FormGroup;
   @Input() categoryValue: string = 'Lebensmittel';
 
-  constructor(private fb: FormBuilder, private storeService: StoreService) {
+  constructor(
+    private fb: FormBuilder,
+    private storeService: StoreService,
+    private snackBar: MatSnackBar
+  ) {
     this.priceListForm = this.fb.group({
       category: ['', [Validators.required]],
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -145,7 +150,6 @@ export class PriceListeComponent implements OnInit {
           ...this.items.slice(categoryIndex + 1), // Items after the updated category
         ];
       } else {
-        // If the category doesn't exist, create a new category with the sales
         this.items = [
           ...this.items,
           {
@@ -154,7 +158,16 @@ export class PriceListeComponent implements OnInit {
           },
         ];
       }
-
+      this.snackBar.open(
+        'bild eingefügt sie muss auf save drück wenn sie spiechen wollen',
+        'X',
+        {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-sucssec'],
+        }
+      );
       console.log(this.items);
       this.priceListForm.reset();
     }
@@ -175,7 +188,16 @@ export class PriceListeComponent implements OnInit {
     } else {
       console.error('Invalid index:', categoryIndex);
     }
-
+    this.snackBar.open(
+      'bild gelöscht sie muss auf save drück wenn sie spiechen wollen',
+      'X',
+      {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar-werning'],
+      }
+    );
     console.log(this.items);
   }
   onSubmit() {

@@ -1,4 +1,4 @@
-import axios from 'axios'; 
+import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BASEURL, TOKEN } from '../../../utils/config';
 
@@ -107,7 +107,12 @@ const LadenSlice = createSlice({
       .addCase(createLaden.fulfilled, (state, action) => {
         state.getOneLaden = action.payload;
         state.loading = false;
-        state.errors = '';
+        state.errors = action.payload;
+      })
+      .addCase(createLaden.rejected, (state, action) => {
+        state.getOneLaden = action.payload;
+        state.loading = false;
+        state.errors = action.payload;
       })
       .addCase(getPriceLite.fulfilled, (state, action) => {
         state.priceListe = action.payload;

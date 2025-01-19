@@ -28,6 +28,7 @@ import { TitleLineComponent } from '../../Components/title-line/title-line.compo
 import { StoreService } from '../../redux/store.service';
 import { singUp } from '../../redux/features/User/UserSlice';
 import { NotificationBarComponent } from '../../Components/notification-bar/notification-bar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -68,7 +69,8 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private storeService: StoreService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar
   ) {
     const token = localStorage.getItem('token');
     if (token) {
@@ -121,7 +123,12 @@ export class SignupComponent implements OnInit {
 
   async onSubmit() {
     if (this.stepTwoForm.invalid) {
-      alert('Bitte füllen Sie alle Felder aus.');
+      this.snackBar.open('Bitte füllen Sie alle Felder aus.', 'X', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar-werning'],
+      });
       return;
     }
 
@@ -145,14 +152,24 @@ export class SignupComponent implements OnInit {
       this.isFormNotEmpty(this.stepOneForm) &&
       this.isFormNotEmpty(this.stepTwoForm);
 
-    if (!isFilled) {
-      alert('Bitte füllen Sie alle Felder aus.');
+    if (!this.stepTwoForm.value.image) {
+      this.snackBar.open('Bitte füllen Sie bild Felder aus.', 'X', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar-werning'],
+      });
       console.log(this.stepOneForm.value + this.stepTwoForm.value);
       return;
     }
 
     if (this.stepOneForm.value.password !== this.stepOneForm.value.passwordwd) {
-      alert('Die Passwörter stimmen nicht überein.');
+      this.snackBar.open('password stimmt nicht', 'X', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar-werning '],
+      });
       return;
     }
 
@@ -173,15 +190,32 @@ export class SignupComponent implements OnInit {
 
     try {
       await this.storeService.dispatch(singUp(data));
-      const state = this.storeService.getState().user;
-      this.singUpErorr = state.singUpError || [];
-      if (this.singUpErorr.length > 0) {
-        console.error('Signup Errors:', this.singUpErorr);
-      } else {
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 2500);
-      }
+      this.storeService.subcribe(() => {
+        const state = this.storeService.getState().user;
+        console.log(state.errors);
+        this.singUpErorr = state.errors || [];
+        if (state.errors == 'User registered successfully') {
+          this.snackBar.open(`${state.errors}`, 'X', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-sucssec'],
+          });
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 2500);
+          return;
+        }
+        if (this.singUpErorr) {
+          this.snackBar.open(`'Etwas ${state.errors}`, 'X', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-error'],
+          });
+          console.error('Signup Errors:', this.singUpErorr);
+        }
+      });
     } catch (error) {
       console.error('Fehler während des Formular-Submits:', error);
     }
