@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -21,6 +28,8 @@ import {
   deleteCloseDay,
   getCloseDaysData,
 } from '../../redux/features/Laden/CloseDaysSlice';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
 
 @Component({
   selector: 'app-closedays',
@@ -42,13 +51,15 @@ import {
   styleUrl: './closedays.component.css',
 })
 export class ClosedaysComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   async ngOnInit() {
     this.getUserData();
   }
 
   radioOptions = [
-    { label: 'Add Day', value: 'addDay' },
-    { label: 'Delete Day', value: 'deleteDay' },
+    { label: 'Füge ein Tag hinzu', value: 'addDay' },
+    { label: 'Tag löschen', value: 'deleteDay' },
   ];
 
   closedDayForm: FormGroup;
@@ -73,7 +84,6 @@ export class ClosedaysComponent implements OnInit {
   }
 
   async getUserData() {
-   
     const stateUser = await this.storeService.getState().user;
     if (stateUser?.userData?.email != undefined) {
       this.barber_email = stateUser.userData.email;
@@ -82,9 +92,7 @@ export class ClosedaysComponent implements OnInit {
   }
 
   async getCloseDays(email: string) {
-
     await this.storeService.dispatch(getCloseDaysData(email));
-
 
     this.storeService.subcribe(() => {
       const stateCloseDays = this.storeService.getState().closeDays;
@@ -95,9 +103,20 @@ export class ClosedaysComponent implements OnInit {
 
   async deleteDay(id: any) {
     if (!id) return;
-    await this.storeService.dispatch(deleteCloseDay({ closeDayId: id }));
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Ruhetage löschen',
+        titel: 'möchten sie wirklich den Ruhetage löschen ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        await this.storeService.dispatch(deleteCloseDay({ closeDayId: id }));
 
-    location.reload();
+        location.reload();
+      }
+    });
   }
 
   async createClosedDay() {

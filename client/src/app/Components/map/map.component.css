@@ -1,26 +1,26 @@
 .location-header {
-    background-color: #252525;
-    color: #FFFFFF;
-    border-radius: 8px;
-    padding: 1rem;
-    background-image: url('/assets/right_pic.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  background-color: #252525;
+  color: #ffffff;
+  border-radius: 8px;
+  padding-top: 1rem;
+  background-image: url("/assets/right_pic.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+.map-container {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 768px) {
   .map-container {
-    width: 100%;
+    height: 100;
+  }
+}
+
+@media (max-width: 576px) {
+  .map-container {
     height: 400px;
   }
-  
-  @media (max-width: 768px) {
-    .map-container {
-      height: 100;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .map-container {
-      height: 400px; 
-    }
-  }
+}

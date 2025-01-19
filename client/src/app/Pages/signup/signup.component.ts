@@ -27,7 +27,7 @@ import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.comp
 import { TitleLineComponent } from '../../Components/title-line/title-line.component';
 import { StoreService } from '../../redux/store.service';
 import { singUp } from '../../redux/features/User/UserSlice';
-import { NotificationBarComponent } from '../../Components/notification-bar/notification-bar.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -43,7 +43,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    NotificationBarComponent,
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormsModule,

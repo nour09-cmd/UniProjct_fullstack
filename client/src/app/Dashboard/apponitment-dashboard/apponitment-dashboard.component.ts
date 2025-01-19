@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { format } from 'date-fns';
 import {
   FormBuilder,
@@ -21,6 +21,9 @@ import {
 } from '../../redux/features/Laden/AppoSlice';
 import { SidebarDashboardComponent } from '../sidebar-dashboard/sidebar-dashboard.component';
 import { RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-apponitment-dashboard',
@@ -43,11 +46,17 @@ import { RouterModule } from '@angular/router';
   styleUrl: './apponitment-dashboard.component.css',
 })
 export class ApponitmentDashboardComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   appoData: any = [];
   barber_email: any;
   searchForm: FormGroup;
   selectedDate: Date | null = null;
-  constructor(private fb: FormBuilder, private storeService: StoreService) {
+  constructor(
+    private fb: FormBuilder,
+    private storeService: StoreService,
+    private snackBar: MatSnackBar
+  ) {
     this.searchForm = this.fb.group({
       date: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -84,13 +93,30 @@ export class ApponitmentDashboardComponent implements OnInit {
     }
   }
   async deletAPPO(id: any, user_email: any, index: any) {
-    this.storeService.dispatch(
-      deletAppointmentVonBarber({
-        user_email,
-        barber_email: this.barber_email,
-        apoId: id,
-      })
-    );
-    location.reload();
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Termin Absagen',
+        titel: 'möchten sie wirklich löschen ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        await this.storeService.dispatch(
+          deletAppointmentVonBarber({
+            user_email,
+            barber_email: this.barber_email,
+            apoId: id,
+          })
+        );
+        this.snackBar.open(`Termin erfolgriech gelöscht`, 'X', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-sucssec'],
+        });
+        location.reload();
+      }
+    });
   }
 }

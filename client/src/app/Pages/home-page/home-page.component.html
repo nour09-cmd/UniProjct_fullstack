@@ -1,17 +1,32 @@
-<div *ngIf="loading == true">
+<div *ngIf="loading === true">
   <app-willkommen></app-willkommen>
 </div>
-<div *ngIf="loading == false">
+
+<div *ngIf="loading === false">
   <app-navbar-desktop />
-  <app-navbar-mobile />
 
   <div class="container mt-5">
+    <div class="d-flex justify-content-center mb-3">
+      <h1 class="text-center heading schrifftH1">
+        Hier sehen Sie alle Frisuren, die verfügbar sind!
+      </h1>
+    </div>
+
     <div class="row g-5">
-      <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let item of ladenDaten | keyvalue; let i = index">
-        <app-cards [Name]="ladenDaten[i].Laden_name" [description]="ladenDaten[i].Laden_description"
-          [id]="ladenDaten[i].barber_email" [image]="ladenDaten[i].Laden_IMG[0]"></app-cards>
+      <div
+        class="col-lg-4 col-md-6 col-sm-12"
+        *ngFor="let item of ladenDaten | keyvalue; let i = index"
+      >
+        <app-cards
+          [Name]="ladenDaten[i].Laden_name"
+          [description]="ladenDaten[i].Laden_description"
+          [id]="ladenDaten[i].barber_email"
+          [image]="ladenDaten[i].Laden_IMG[0]"
+          class="card-item"
+        ></app-cards>
       </div>
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>

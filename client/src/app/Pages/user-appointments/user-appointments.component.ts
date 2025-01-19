@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavbarMobileComponent } from '../../Components/navbar-mobile/navbar-mobile.component';
 import { NavbarDesktopComponent } from '../../Components/navbar-desktop/navbar-desktop.component';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,9 @@ import {
   deletAppointmentVonUser,
 } from '../../redux/features/Laden/AppoSlice';
 import { StoreService } from '../../redux/store.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-appointments',
@@ -35,11 +38,16 @@ import { StoreService } from '../../redux/store.service';
   styleUrls: ['./user-appointments.component.css'],
 })
 export class UserAppointmentsComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   appoData: any[] = [];
   loading: boolean = true;
   counter: boolean = false;
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private snackBar: MatSnackBar
+  ) {}
   async ngOnInit() {
     await this.getAppos();
   }
@@ -52,21 +60,38 @@ export class UserAppointmentsComponent implements OnInit {
   }
 
   deletAppointment(item: any) {
-    try {
-      this.storeService.dispatch(
-        deletAppointmentVonUser({
-          barber_email: item.barber_email,
-          apoId: item.apoLadenId,
-          apoData: {
-            date: item.date,
-            time: item.time,
-          },
-        })
-      );
-      location.reload();
-    } catch (err) {
-      console.error('Fehler beim Löschen des Termins:', err);
-    }
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Termin Absagen',
+        titel: 'möchten sie wirklich löschen ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        try {
+          this.storeService.dispatch(
+            deletAppointmentVonUser({
+              barber_email: item.barber_email,
+              apoId: item.apoLadenId,
+              apoData: {
+                date: item.date,
+                time: item.time,
+              },
+            })
+          );
+          this.snackBar.open(`Termin erfolgriech gelöscht`, 'X', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-sucssec'],
+          });
+          location.reload();
+        } catch (err) {
+          console.error('Fehler beim Löschen des Termins:', err);
+        }
+      }
+    });
   }
 
   formatDate(date: string): string {

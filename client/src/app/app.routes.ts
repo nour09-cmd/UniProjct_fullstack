@@ -3,10 +3,7 @@ import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
-import { RecoverPassComponent } from './Pages/recover-pass/recover-pass.component';
-import { AnmeldenRegisterComponent } from './Pages/anmelden-register/anmelden-register.component';
-import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
-import { ChangePassComponent } from './change-pass/change-pass.component';
+
 import { PagebennerComponent } from './Components/pagebenner/pagebenner.component';
 import { UserAppointmentsComponent } from './Pages/user-appointments/user-appointments.component';
 import { AppointmentPageComponent } from './Pages/Dashboard/appointment-page/appointment-page.component';
@@ -24,10 +21,7 @@ export const routes: Routes = [
   { path: 'login', component: SigninComponent },
   { path: 'register', component: SignupComponent },
   { path: 'profile/:email', component: ProfileComponent },
-  { path: 'recover', component: RecoverPassComponent },
-  { path: 'anmelden-register', component: AnmeldenRegisterComponent },
-  { path: 'rest', component: ResetPasswordComponent },
-  { path: 'changepass', component: ChangePassComponent },
+
   { path: 'pagebenner', component: PagebennerComponent },
 
   {
@@ -36,13 +30,11 @@ export const routes: Routes = [
     children: [
       { path: 'seibarber', component: SeiBarberPageComponent },
       { path: 'appointmentUser', component: UserAppointmentsComponent },
-      { path: 'recover', component: RecoverPassComponent },
-      { path: 'anmelden-register', component: AnmeldenRegisterComponent },
+
       { path: 'login', component: SigninComponent },
       { path: 'register', component: SignupComponent },
       { path: 'pagebenner', component: PagebennerComponent },
-      { path: 'rest', component: ResetPasswordComponent },
-      { path: 'changepass', component: ChangePassComponent },
+
       { path: '', component: HomePageComponent },
     ],
   },

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MatCalendar, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
@@ -12,6 +12,9 @@ import { getUserData } from '../../redux/features/User/UserSlice';
 import { Router } from '@angular/router';
 import { createAppos } from '../../redux/features/Laden/AppoSlice';
 import { IAppointment } from '@mrx/barbar-finder';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAnimationsExampleDialog } from '../dialog-animations/dialog-animations-example-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-calendar',
@@ -29,6 +32,8 @@ import { IAppointment } from '@mrx/barbar-finder';
   ],
 })
 export class CalendarComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   @ViewChild('calendar') calendar: MatCalendar<Date> | undefined;
   @Input() weeksDays: any;
   @Input() reserved_appointments: any;
@@ -46,7 +51,8 @@ export class CalendarComponent implements OnInit {
   constructor(
     private _router: Router,
     private dateAdapter: DateAdapter<Date>,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private snackBar: MatSnackBar
   ) {
     this.minDate = this.dateAdapter.today();
     this.maxDate = new Date(
@@ -121,7 +127,6 @@ export class CalendarComponent implements OnInit {
       if (!this.filterResivedTime(checkTime, date)) {
         hours.push(`${hour}:${minutes}`);
       }
-      // if
       startTime += appointmentDuration;
     }
 
@@ -171,29 +176,52 @@ export class CalendarComponent implements OnInit {
     }
   }
   async handleSelectedTime() {
-    try {
-      if (!this.selectedDate || !this.selectedTime) {
-        console.error('Datum oder Zeit fehlt.');
-        return;
-      }
-      const parsedDate = parse(this.selectedDate, 'dd-MM-yyyy', new Date());
-      const formDatas: IAppointment = {
-        user_email: 'string',
-        name: `${this.userData.vorname} ${this.userData.nachname}`,
-        date: parsedDate,
-        time: this.selectedTime,
-        status: true,
-      };
-      const formData = {
-        barber_email: this.barberEmail,
-        ...formDatas,
-      };
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Termin buchen',
+        titel: `möchten sie dise ${
+          'Datum:' +
+          this.selectedDate +
+          '   |   ' +
+          'Uhrzeit:' +
+          this.selectedTime
+        }  Termin buchen`,
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        try {
+          if (!this.selectedDate || !this.selectedTime) {
+            console.error('Datum oder Zeit fehlt.');
+            return;
+          }
+          const parsedDate = parse(this.selectedDate, 'dd-MM-yyyy', new Date());
+          const formDatas: IAppointment = {
+            user_email: 'string',
+            name: `${this.userData.vorname} ${this.userData.nachname}`,
+            date: parsedDate,
+            time: this.selectedTime,
+            status: true,
+          };
+          const formData = {
+            barber_email: this.barberEmail,
+            ...formDatas,
+          };
 
-      await this.storeService.dispatch(createAppos(formData));
-      location.reload();
-    } catch (error) {
-      console.error('Fehler beim Verarbeiten der Auswahl:', error);
-    }
+          await this.storeService.dispatch(createAppos(formData));
+          this.snackBar.open(`Termin erfolgriech gebucht`, 'X', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-sucssec'],
+          });
+          location.reload();
+        } catch (error) {
+          console.error('Fehler beim Verarbeiten der Auswahl:', error);
+        }
+      }
+    });
   }
 
   goToLogin() {

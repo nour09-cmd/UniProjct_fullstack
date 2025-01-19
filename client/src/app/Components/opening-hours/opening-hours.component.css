@@ -1,52 +1,65 @@
-.price-card {
+.working-hours-card {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  margin-bottom: 20px;
 }
-.price-title {
+
+.working-hours-title {
   font-size: 2rem;
   font-weight: bold;
   color: #a5953f;
   text-align: center;
-  margin-bottom: 20px;
-}
-.category-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #d2b92e;
   margin-bottom: 10px;
-  text-transform: uppercase;
 }
-.category_list {
+
+.working-hours-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.listItem {
+.working-hours-list li {
   font-size: 1.1rem;
   color: white;
   padding: 8px;
   border-bottom: 1px solid #d2b92e;
+  display: flex;
+  align-items: center;
   transition: background-color 0.3s ease;
 }
 
-.listItem:hover {
+.working-hours-list li:hover {
   background-color: #d2b92e;
   color: #343a40;
   cursor: pointer;
 }
 
+.day-label {
+  width: 120px;
+}
+
+.time-status {
+  font-size: 1.1rem;
+  color: #b8b8b8;
+}
+
+.another_custom-hr {
+  border: 1px solid #eac813;
+  margin: 30px 0;
+}
+
 @media (max-width: 768px) {
-  .price-title {
+  .working-hours-title {
     font-size: 1.5rem;
   }
 
-  .category-title {
+  .working-hours-subtitle {
     font-size: 1.2rem;
   }
 
-  .listItem {
+  .working-hours-list li {
     font-size: 1rem;
+    padding: 6px;
   }
 }

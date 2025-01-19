@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AddresseInputComponent } from '../../Components/addresse-input/addresse-input.component';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -25,6 +24,8 @@ import {
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { WillkommenComponent } from '../../Components/willkommen/willkommen.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
 
 @Component({
   selector: 'app-laden-profile',
@@ -48,6 +49,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './laden-profile.component.css',
 })
 export class LadenProfileComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   _ladenDate: any = [];
   _userData: any = [];
   counter: boolean = false;
@@ -152,12 +155,24 @@ export class LadenProfileComponent implements OnInit {
   }
 
   removeFile(index: number): void {
-    this.uploadedFilesArray.removeAt(index);
-    this.snackBar.open('bild ist gelöscht', 'X', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: ['custom-snackbar-werning'],
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Bild Absagen',
+        titel:
+          'möchten sie wirklich das Bild löschen ? sie müssen am ende auf save drücken',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.uploadedFilesArray.removeAt(index);
+        this.snackBar.open('bild ist gelöscht', 'X', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-werning'],
+        });
+      }
     });
   }
 
@@ -182,13 +197,24 @@ export class LadenProfileComponent implements OnInit {
         plz: this.addressForm.value.postalCode || '',
       },
     };
-    await this.storeService.dispatch(updateLaden(data));
-    this.snackBar.open('bild ist gelöscht', 'X', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: ['custom-snackbar-sucssec'],
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'anderung speichern',
+        titel: 'möchten sie wirklich speichern ?',
+      },
     });
-    location.reload();
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        await this.storeService.dispatch(updateLaden(data));
+        this.snackBar.open('das änderungen ist gespeichert', 'X', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-sucssec'],
+        });
+        location.reload();
+      }
+    });
   }
 }

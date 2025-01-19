@@ -7,28 +7,24 @@
 
     <span class="titel">{{ " " + ladenDaten.Laden_name }}</span>
   </h1>
+  <app-slide-show [imagesArr]="ladenDaten.Laden_IMG" />
+  <div class="mt-3 d">
+    <h2 class="titel">
+      {{ ladenDaten.Laden_name }}
+    </h2>
+    <p class="description">
+      {{ ladenDaten.Laden_description }}
+    </p>
+  </div>
+
+  <hr class="another-custom-hr" />
+  <app-calendar
+    [weeksDays]="ladenDaten.week_days"
+    [reserved_appointments]="ladenDaten.reserved_appointments"
+    [closeDays]="ladenDaten.close_days"
+    [barberEmail]="ladenDaten.barber_email"
+  />
+  <app-opening-hours [workingHour]="ladenDaten.week_days" />
+  <app-price-list [list]="ladenDaten.priceListe" />
+  <app-map />
 </div>
-<app-slide-show [imagesArr]="ladenDaten.Laden_IMG" />
-<app-star-rating [ratingArr]="ladenDaten.reviews" />
-
-<div class="container mt-3 d">
-  <h2 class="titel">
-    {{ ladenDaten.Laden_name }}
-  </h2>
-  <p class="description">
-    {{ ladenDaten.Laden_description }}
-  </p>
-</div>
-
-<hr class="another-custom-hr" />
-<app-calendar
-  [weeksDays]="ladenDaten.week_days"
-  [reserved_appointments]="ladenDaten.reserved_appointments"
-  [closeDays]="ladenDaten.close_days"
-  [barberEmail]="ladenDaten.barber_email"
-/>
-
-<app-opening-hours [workingHour]="ladenDaten.week_days" />
-<app-price-list [list]="ladenDaten.priceListe" />
-
-<app-map />

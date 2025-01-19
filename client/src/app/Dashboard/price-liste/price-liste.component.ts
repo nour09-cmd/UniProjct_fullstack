@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { RadioButtonComponent } from '../../Components/radio-button/radio-button.component';
 import { CommonModule } from '@angular/common';
 import {
@@ -21,6 +21,8 @@ import {
   postPriceLite,
 } from '../../redux/features/Laden/LadenSlice';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
+import { MatDialog } from '@angular/material/dialog';
 interface sales {
   name: string;
   price: Number;
@@ -51,6 +53,8 @@ interface Item {
   styleUrls: ['./price-liste.component.css'], // Schreibweise korrigiert
 })
 export class PriceListeComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   liste: any;
   items: Item[] = [];
   ngOnInit(): void {
@@ -82,11 +86,63 @@ export class PriceListeComponent implements OnInit {
       value: 'kids',
       text: 'Kinder',
     },
+    {
+      value: 'haircut',
+      text: 'Haarschnitt',
+    },
+    {
+      value: 'coloring',
+      text: 'Färben',
+    },
+    {
+      value: 'highlights',
+      text: 'Strähnen',
+    },
+    {
+      value: 'blow_dry',
+      text: 'Föhnen',
+    },
+    {
+      value: 'styling',
+      text: 'Styling',
+    },
+    {
+      value: 'keratin_treatment',
+      text: 'Keratinbehandlung',
+    },
+    {
+      value: 'perm',
+      text: 'Dauerwelle',
+    },
+    {
+      value: 'shampoo',
+      text: 'Shampoo',
+    },
+    {
+      value: 'updo',
+      text: 'Hochsteckfrisur',
+    },
+    {
+      value: 'hair_extensions',
+      text: 'Haarverlängerung',
+    },
+    {
+      value: 'hair_trimming',
+      text: 'Haarschnitt (Spitzen schneiden)',
+    },
+    {
+      value: 'head_massage',
+      text: 'Kopfmassage',
+    },
+    {
+      value: 'bridal_hairstyle',
+      text: 'Hochzeitsfrisur',
+    },
   ];
 
   radioOptions = [
-    { label: 'Add List', value: 'addList' },
-    { label: 'Show All', value: 'showAll' },
+    { label: 'Preisliste Bearbeitung', value: 'addList' },
+    { label: 'Listen anzeigen', value: 'showAll' },
   ];
 
   selectedFilter: string = 'showAll';
@@ -174,34 +230,58 @@ export class PriceListeComponent implements OnInit {
   }
 
   deleteItem(categoryIndex: number, sale: sales): void {
-    if (categoryIndex >= 0 && categoryIndex < this.items.length) {
-      const updatedSales = this.items[categoryIndex].sales.filter(
-        (existingSale) => existingSale.name !== sale.name
-      );
-      if (updatedSales.length === 0) {
-        this.items = this.items.filter((_, index) => index !== categoryIndex);
-      } else {
-        this.items = this.items.map((item, index) =>
-          index === categoryIndex ? { ...item, sales: updatedSales } : item
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Item Löschen',
+        titel: 'möchten sie wirklich löschen ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        if (categoryIndex >= 0 && categoryIndex < this.items.length) {
+          const updatedSales = this.items[categoryIndex].sales.filter(
+            (existingSale) => existingSale.name !== sale.name
+          );
+          if (updatedSales.length === 0) {
+            this.items = this.items.filter(
+              (_, index) => index !== categoryIndex
+            );
+          } else {
+            this.items = this.items.map((item, index) =>
+              index === categoryIndex ? { ...item, sales: updatedSales } : item
+            );
+          }
+        } else {
+          console.error('Invalid index:', categoryIndex);
+        }
+        this.snackBar.open(
+          'item gelöscht sie muss auf save drücken wenn sie spiechen wollen',
+          'X',
+          {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-werning'],
+          }
         );
+        console.log(this.items);
       }
-    } else {
-      console.error('Invalid index:', categoryIndex);
-    }
-    this.snackBar.open(
-      'bild gelöscht sie muss auf save drück wenn sie spiechen wollen',
-      'X',
-      {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['custom-snackbar-werning'],
-      }
-    );
-    console.log(this.items);
+    });
   }
   onSubmit() {
-    this.storeService.dispatch(postPriceLite(this.items));
-    location.reload();
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Speichern das aktuellen zu stand ',
+        titel: 'möchten sie wirklich Speichern ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.storeService.dispatch(postPriceLite(this.items));
+        location.reload();
+      }
+    });
   }
 }

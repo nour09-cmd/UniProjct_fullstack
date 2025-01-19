@@ -1,7 +1,7 @@
 <div class="container p-4">
   <div class="row">
     <div class="col">
-      <p class="title-dacshboard">Price Liste</p>
+      <p class="title-dacshboard">Preisliste</p>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
         <label for="category" class="form-label">Kategorie</label>
         <app-dropdown-btn
           [options]="CategoryOptions"
-          placeholder="Category auswählen"
+          placeholder="Kategorie auswählen"
           controlName="category"
           [control]="priceListForm"
         >
@@ -46,13 +46,13 @@
       </div>
 
       <div class="mb-3">
-        <label for="name" class="form-label">Item-Name</label>
+        <label for="name" class="form-label">Artikelname</label>
         <input
           id="name"
           type="text"
           class="form-control"
           formControlName="name"
-          placeholder="Item-Name eingeben"
+          placeholder="Artikelname eingeben"
           required
         />
       </div>
@@ -83,7 +83,7 @@
             <div
               class="py-2 px-3 rounded-top border-secondary w-25 d-flex justify-content-center align-items-center border border-bottom-0"
             >
-              <p class="m-0">Price</p>
+              <p class="m-0">Preis</p>
             </div>
 
             <button
@@ -133,7 +133,7 @@
   <input
     type="button"
     class="ourBtn gold w-100"
-    value="Save"
+    value="Speichern"
     (click)="onSubmit()"
   />
 </div>

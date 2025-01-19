@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'; 
+import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PagebennerComponent } from '../../Components/pagebenner/pagebenner.component';
@@ -97,7 +97,6 @@ export class SigninComponent implements OnInit {
             console.error('Signup Errors:', this.singUpErorr);
           }
         });
-        // this.checkLogin();
       } catch (error) {
         console.error('Login failed:', error);
         alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.');

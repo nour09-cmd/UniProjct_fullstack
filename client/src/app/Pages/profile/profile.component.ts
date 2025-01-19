@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarDesktopComponent } from '../../Components/navbar-desktop/navbar-desktop.component';
 import { NavbarMobileComponent } from '../../Components/navbar-mobile/navbar-mobile.component';
 import { SlideShowComponent } from '../../Components/slide-show/slide-show.component';
-import { StarRatingComponent } from '../../star-rating/star-rating.component';
-import { OpeningHoursComponent } from '../../opening-hours/opening-hours.component';
+
 import { MapComponent } from '../../Components/map/map.component';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../../redux/store.service';
 import { getOneLaden } from '../../redux/features/Laden/LadenSlice';
 import { CalendarComponent } from '../../Components/calendar/calendar.component';
 import { PriceListComponent } from '../../Components/price-list/price-list.component';
+import { OpeningHoursComponent } from '../../Components/opening-hours/opening-hours.component';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +18,7 @@ import { PriceListComponent } from '../../Components/price-list/price-list.compo
     NavbarDesktopComponent,
     NavbarMobileComponent,
     SlideShowComponent,
-    StarRatingComponent,
+
     OpeningHoursComponent,
     MapComponent,
     CalendarComponent,

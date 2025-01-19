@@ -1,12 +1,21 @@
-<app-pagebenner [title]="'SIGN IN'" [discription]="'Discover Amazing Thing Near Around You'"></app-pagebenner>
+<app-pagebenner
+  [title]="'ANMELDUNG'"
+  [discription]="'Entdecke erstaunliche Dinge in deiner Nähe'"
+></app-pagebenner>
 <div class="container">
-  <div class="py-4 d-flex flex-column justify-content-center align-items-center formbox">
+  <div
+    class="py-4 d-flex flex-column justify-content-center align-items-center formbox"
+  >
     <form [formGroup]="loginForm" (submit)="onSubmit()">
-
       <div class="form-group py-3 position-relative">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="Ex. pat@example.com" />
+          <mat-label>E-Mail</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="Z.B. pat@example.com"
+          />
           <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
             Die E-Mail-Adresse ist erforderlich.
           </mat-error>
@@ -19,11 +28,20 @@
       <div class="form-group py-3 position-relative">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Passwort</mat-label>
-          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"
-            placeholder="Geben Sie Ihr Passwort ein" />
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
-            [attr.aria-label]="'Passwort ' + (hide ? 'anzeigen' : 'verbergen')">
-            <mat-icon>{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
+          <input
+            matInput
+            formControlName="password"
+            [type]="hide ? 'password' : 'text'"
+            placeholder="Geben Sie Ihr Passwort ein"
+          />
+          <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Passwort ' + (hide ? 'anzeigen' : 'verbergen')"
+          >
+            <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
           </button>
           <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
             Das Passwort ist erforderlich.
@@ -34,11 +52,11 @@
         </mat-form-field>
       </div>
 
-      <input type="submit" class="ourBtn gold w-100" value="SIGN IN" />
+      <input type="submit" class="ourBtn gold w-100" value="ANMELDEN" />
     </form>
   </div>
 
   <a class="text-secondary my-10" href="register">
-    <title-line titel="Sign Up"></title-line>
+    <title-line titel="Registrieren"></title-line>
   </a>
 </div>

@@ -1,68 +1,72 @@
 <div class="container p-4">
-    <div class="row">
-      <div class="col">
-        <p class="title-dacshboard">Week Days</p>
-      </div>
+  <div class="row">
+    <div class="col">
+      <p class="title-dacshboard">Wochentage</p>
     </div>
-    <div class="container-table">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
-              <table class="table table-image">
-                <thead>
-                  <tr>
-                    <th scope="col">Day</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Start Work</th>
-                    <th scope="col">End Work</th>
-                    <th scope="col">Appointment Duration (min)</th>
-                  </tr>
-                </thead>
-                <tbody formArrayName="weekSchedule">
-                  <tr *ngFor="let control of weekSchedule.controls; let i = index" [formGroupName]="i">
-                    <td>{{ control.value.day }}</td>
-                    <td>
-                      <app-dropdown-btn
-                        [options]="statusOptions"
-                        placeholder="Status auswählen"
-                        [controlName]="'status'"
-                        [control]="control"
-                      ></app-dropdown-btn>
-                    </td>
-                    <td>
-                      <input
-                        type="time"
-                        class="form-control"
-                        formControlName="available_time_from"
-                        placeholder="Start Work"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="time"
-                        class="form-control"
-                        formControlName="available_time_to"
-                        placeholder="End Work"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="number"
-                        class="form-control"
-                        formControlName="appointment_duration"
-                        placeholder="Dauer in Minuten"
-                        min="0"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <button type="submit" class="btn btn-primary mt-3">Speichern</button>
-            </form>
-          </div>
+  </div>
+  <div class="container-table">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+            <table class="table table-image">
+              <thead>
+                <tr>
+                  <th scope="col">Tag</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Arbeitsbeginn</th>
+                  <th scope="col">Arbeitsende</th>
+                  <th scope="col">Dauer der Termine (min)</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="weekSchedule">
+                <tr
+                  *ngFor="let control of weekSchedule.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <td>{{ control.value.day }}</td>
+                  <td>
+                    <app-dropdown-btn
+                      [options]="statusOptions"
+                      placeholder="Status auswählen"
+                      [controlName]="'status'"
+                      [control]="control"
+                    ></app-dropdown-btn>
+                  </td>
+                  <td>
+                    <input
+                      type="time"
+                      class="form-control"
+                      formControlName="available_time_from"
+                      placeholder="Arbeitsbeginn"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="time"
+                      class="form-control"
+                      formControlName="available_time_to"
+                      placeholder="Arbeitsende"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="appointment_duration"
+                      placeholder="Dauer in Minuten"
+                      min="0"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary mt-3">
+              Speichern
+            </button>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

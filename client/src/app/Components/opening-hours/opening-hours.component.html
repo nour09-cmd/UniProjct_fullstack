@@ -1,18 +1,18 @@
 <div class="container py-3">
   <div class="row box_shadow">
-    <div class="card bg-dark text-white p-3 d-flex justify-content-center">
+    <div class="card bg-dark working-hours-card p-3">
       <div>
-        <h4 class="fs-2" style="color: #a5953f">Online Termine</h4>
-        <p class="fs-4 mx-4">Öffnungszeiten</p>
-        <ul class="list-unstyled mt-3">
+        <h4 class="working-hours-title">Öffnungszeiten</h4>
+
+        <ul class="working-hours-list mt-3">
           <li
             class="d-flex align-items-center mx-5 mb-2"
             *ngFor="let item of workingHour; let i = index"
           >
-            <span class="fw-bold" style="width: 70px">
+            <span class="fw-bold day-label">
               {{ workingHour[i].day }}
             </span>
-            <span class="ms-2">
+            <span class="ms-2 time-status">
               {{
                 workingHour[i].status == "open"
                   ? workingHour[i].available_time_from +

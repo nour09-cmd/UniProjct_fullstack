@@ -4,7 +4,7 @@
 <div class="container p-4">
   <div class="row">
     <div class="col">
-      <p class="title-dacshboard">Appointments</p>
+      <p class="title-dacshboard">Termine</p>
     </div>
     <form class="col-4 form-group"></form>
   </div>
@@ -16,10 +16,10 @@
           <table class="table table-image">
             <thead>
               <tr>
-                <th scope="col">Image</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Barber Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Stornieren</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +46,7 @@
                     class="btn btn-danger"
                     (click)="deletAppointment(appoData[i].termin)"
                   >
-                    Delete
+                    Stornieren
                   </button>
                 </td>
               </tr>

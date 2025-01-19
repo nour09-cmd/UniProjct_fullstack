@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -21,6 +21,8 @@ import {
 } from '../../redux/features/Laden/WeekDaysSlice';
 import { getUserData } from '../../redux/features/User/UserSlice';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
 @Component({
   selector: 'app-working-days',
   standalone: true,
@@ -41,6 +43,8 @@ import { Router } from '@angular/router';
   styleUrl: './working-days.component.css',
 })
 export class WorkingDaysComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
+
   scheduleForm: FormGroup;
   weekdays: string[] = [];
 
@@ -103,11 +107,22 @@ export class WorkingDaysComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.scheduleForm.value.weekSchedule.length != 0) {
-      await this.storeService.dispatch(
-        updateWeeksDaysData(this.scheduleForm.value.weekSchedule)
-      );
-    }
-    location.reload();
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      data: {
+        heading: 'Wochentage Ändern',
+        titel: 'möchten sie wirklich Ändern ?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        if (this.scheduleForm.value.weekSchedule.length != 0) {
+          await this.storeService.dispatch(
+            updateWeeksDaysData(this.scheduleForm.value.weekSchedule)
+          );
+        }
+        location.reload();
+      }
+    });
   }
 }

@@ -1,15 +1,7 @@
-<app-pagebenner></app-pagebenner>
-
-<div *ngIf="!loading">
-  <div *ngFor="let error of singUpErorr">
-    <div *ngFor="let constraint of getErrorMessages(error.constraints)">
-      <app-notification-bar
-        [message]="constraint"
-        type="alert alert-warning alert-dismissible"
-      ></app-notification-bar>
-    </div>
-  </div>
-</div>
+<app-pagebenner
+  discription="Entdecke erstaunliche Dinge in deiner Nähe"
+  title="REGISTRIEREN"
+></app-pagebenner>
 
 <div *ngIf="step === 1">
   <div class="container">
@@ -27,12 +19,12 @@
         </div>
         <div class="form-group">
           <mat-form-field>
-            <mat-label>Email</mat-label>
+            <mat-label>E-Mail</mat-label>
             <input
               matInput
               type="email"
               formControlName="email"
-              placeholder="Email"
+              placeholder="E-Mail"
             />
           </mat-form-field>
         </div>
@@ -169,14 +161,14 @@
             type="reset"
             (click)="goToStepOne()"
             class="ourBtn black w-25"
-            value="zurück"
+            value="Zurück"
           />
-          <input type="submit" class="ourBtn gold w-25" value="SIGN UP" />
+          <input type="submit" class="ourBtn gold w-25" value="ANMELDEN" />
         </div>
       </form>
     </div>
   </div>
 </div>
 <a class="text-secondary my-10" href="login"
-  ><title-line titel="SIGN IN"></title-line
+  ><title-line titel="ANMELDEN"></title-line
 ></a>

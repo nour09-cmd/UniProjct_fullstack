@@ -1,7 +1,7 @@
 <div class="container p-4">
   <div class="row">
     <div class="col">
-      <p class="title-dacshboard">Apponimet</p>
+      <p class="title-dacshboard">Termine</p>
     </div>
   </div>
   <div class="container-table">
@@ -11,16 +11,19 @@
           <table class="table table-image">
             <thead>
               <tr>
-                <th scope="col">Image</th>
+                <th scope="col">Fhoto</th>
                 <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Telefonnummer</th>
+                <th scope="col">Datum</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of appoData | keyvalue; let i = index">
                 <td class="w-25">
-                  <img [src]="appoData[i].user_IMG" class="img-fluid rounded-circle" alt="Sheep" />
+                  <img
+                    [src]="appoData[i].user_IMG"
+                    class="img-fluid rounded-circle"
+                    alt="Sheep"
+                  />
                 </td>
                 <td>{{ appoData[i].name }}</td>
                 <td>
@@ -28,8 +31,11 @@
                 </td>
                 <td>{{ appoData[i].handynummer }}</td>
                 <td>
-                  <button class="btn btn-danger" (click)="deletAPPO(appoData[i]._id, appoData[i].email, i)">
-                    delete
+                  <button
+                    class="btn btn-danger"
+                    (click)="deletAPPO(appoData[i]._id, appoData[i].email, i)"
+                  >
+                    Stornieren
                   </button>
                 </td>
               </tr>
