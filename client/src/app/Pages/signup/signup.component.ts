@@ -200,6 +200,8 @@ export class SignupComponent implements OnInit {
             verticalPosition: 'top',
             panelClass: ['custom-snackbar-sucssec'],
           });
+          this.stepOneForm.reset();
+          this.stepTwoForm.reset();
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 2500);

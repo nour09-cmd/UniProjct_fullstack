@@ -134,7 +134,7 @@ export class SeiBarberPageComponent {
           verticalPosition: 'top',
           panelClass: ['custom-snackbar-sucssec'],
         });
-
+        this.addressForm.reset();
         setTimeout(() => {
           this._router.navigate(['/']);
         }, 2500);

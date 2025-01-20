@@ -48,7 +48,10 @@ export class LadenController {
     if (errors.length > 0) {
       sendResponse(res, 400, errors);
     }
-
+    const check = await this.modelMonogo.findByBarberEmail(barber_email);
+    if (check) {
+      return sendResponse(res, 404);
+    }
     const { Laden_name, Laden_description, Laden_IMG, Laden_adress } =
       createLadenDTO;
 
