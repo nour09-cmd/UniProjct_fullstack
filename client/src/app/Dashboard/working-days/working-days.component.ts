@@ -66,7 +66,7 @@ export class WorkingDaysComponent implements OnInit {
   counter: boolean = false;
   async getList(email: any) {
     await this.storeService.dispatch(getWeeksDaysData(email));
-    this.storeService.subcribe(() => {
+    this.storeService.subscribe(() => {
       const stateLaden = this.storeService.getState().weeksDays;
 
       this.weekdays = Object.values(stateLaden.weekDays).map(
@@ -76,7 +76,7 @@ export class WorkingDaysComponent implements OnInit {
     });
   }
   async getUserData() {
-    await this.storeService.subcribe(async () => {
+    await this.storeService.subscribe(async () => {
       const stateUser = await this.storeService.getState().user;
       if (stateUser.userData.email != undefined && this.counter != true) {
         this.getList(stateUser.userData.email);

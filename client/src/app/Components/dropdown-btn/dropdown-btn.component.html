@@ -1,10 +1,17 @@
-<div class="dropdown">
+<div class="dropdown" [ngClass]="{'status-open': selectedOptionText === 'Offen', 'status-closed': selectedOptionText === 'Geschlossen'}">
   <button
-    class="btn btn-secondary dropdown-toggle"
+    class="btn dropdown-toggle"
     type="button"
     id="dropdownMenuButton"
     data-bs-toggle="dropdown"
     aria-expanded="false">
+    <span class="status-icon">
+      <i class="bi" [ngClass]="{
+        'bi-toggle-on': selectedOptionText === 'Offen',
+        'bi-toggle-off': selectedOptionText === 'Geschlossen',
+        'bi-question-circle': !selectedOptionText
+      }"></i>
+    </span>
     {{ selectedOptionText || placeholder }}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -13,6 +20,10 @@
         class="dropdown-item"
         type="button"
         (click)="selectOption(option.value, option.text)">
+        <i class="bi me-2" [ngClass]="{
+          'bi-toggle-on': option.text === 'Offen',
+          'bi-toggle-off': option.text === 'Geschlossen'
+        }"></i>
         {{ option.text }}
       </button>
     </li>

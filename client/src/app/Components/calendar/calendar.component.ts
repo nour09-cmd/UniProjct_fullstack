@@ -63,7 +63,7 @@ export class CalendarComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loading = false;
-    this.storeService.subcribe(() => {
+    this.storeService.subscribe(() => {
       const state = this.storeService.getState().user;
       this.userData = state.userData;
       this.loading = state.loading;

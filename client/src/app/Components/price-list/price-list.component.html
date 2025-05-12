@@ -1,20 +1,25 @@
-<div class="container py-3">
-  <div class="row box_shadow">
-    <div class="card bg-dark price-card p-3">
-      <div>
-        <h3 class="price-title">PREISE LISTE</h3>
-        <div class="container px-5" *ngFor="let item of list; let i = index">
-          <p class="category-title mt-3">{{ item.category }}:</p>
-          <ul class="category_list">
-            <li
-              class="listItem"
-              *ngFor="let items of item.sales; let i = index"
-            >
-              {{ items.name }} ({{ items.price }}€)
-            </li>
-          </ul>
-        </div>
+<div class="price-list-container">
+  <div class="price-list-header">
+    <h2 class="price-title">PREISE LISTE</h2>
+    <div class="price-subtitle">Unsere Dienstleistungen und Preise</div>
+  </div>
+
+  <div class="categories-grid">
+    <div class="category-card" *ngFor="let item of list; let i = index">
+      <div class="category-header">
+        <i class="bi bi-scissors"></i>
+        <h3 class="category-title">{{ item.category }}</h3>
       </div>
+
+      <ul class="service-list">
+        <li class="service-item" *ngFor="let items of item.sales">
+          <div class="service-info">
+            <span class="service-name">{{ items.name }}</span>
+            <div class="service-price">{{ items.price }}€</div>
+          </div>
+          <div class="service-divider"></div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

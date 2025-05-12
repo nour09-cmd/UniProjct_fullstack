@@ -30,6 +30,7 @@ import {
 } from '../../redux/features/Laden/CloseDaysSlice';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAnimationsExampleDialog } from '../../Components/dialog-animations/dialog-animations-example-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-closedays',
@@ -45,17 +46,13 @@ import { DialogAnimationsExampleDialog } from '../../Components/dialog-animation
     ReactiveFormsModule,
     CommonModule,
     RadioButtonComponent,
-    UnsereButtonComponent,
+    UnsereButtonComponent
   ],
   templateUrl: './closedays.component.html',
   styleUrl: './closedays.component.css',
 })
 export class ClosedaysComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-
-  async ngOnInit() {
-    this.getUserData();
-  }
 
   radioOptions = [
     { label: 'Füge ein Tag hinzu', value: 'addDay' },
@@ -65,12 +62,17 @@ export class ClosedaysComponent implements OnInit {
   closedDayForm: FormGroup;
   selectedFilter: string = 'addDay';
   closedDay: string | undefined;
-  barber_email: any;
-  closedDays: any;
+  barber_email: string = '';
+  closedDays: any[] = [];
   minDate: string;
   selectedDate: Date | null = null;
+  isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder, private storeService: StoreService) {
+  constructor(
+    private fb: FormBuilder,
+    private storeService: StoreService,
+    private snackBar: MatSnackBar
+  ) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
     this.closedDayForm = this.fb.group({
@@ -78,54 +80,107 @@ export class ClosedaysComponent implements OnInit {
     });
   }
 
+  async ngOnInit() {
+    await this.getUserData();
+  }
+
   onFilterChange(selected: string) {
-    this.getUserData();
     this.selectedFilter = selected;
+    this.getUserData();
   }
 
   async getUserData() {
-    const stateUser = await this.storeService.getState().user;
-    if (stateUser?.userData?.email != undefined) {
-      this.barber_email = stateUser.userData.email;
-      await this.getCloseDays(stateUser.userData.email);
+    try {
+      const stateUser = await this.storeService.getState().user;
+      if (stateUser?.userData?.email) {
+        this.barber_email = stateUser.userData.email;
+        await this.getCloseDays(stateUser.userData.email);
+      }
+    } catch (error) {
+      this.handleError('Fehler beim Laden der Benutzerdaten');
     }
   }
 
   async getCloseDays(email: string) {
-    await this.storeService.dispatch(getCloseDaysData(email));
-
-    this.storeService.subcribe(() => {
-      const stateCloseDays = this.storeService.getState().closeDays;
-      console.log(stateCloseDays);
-      this.closedDays = stateCloseDays.closeDays || [];
-    });
+    try {
+      this.isLoading = true;
+      await this.storeService.dispatch(getCloseDaysData(email));
+      this.storeService.subscribe(() => {
+        const stateCloseDays = this.storeService.getState().closeDays;
+        if (stateCloseDays?.closeDays) {
+          this.closedDays = stateCloseDays.closeDays;
+        }
+      });
+    } catch (error) {
+      this.handleError('Fehler beim Laden der geschlossenen Tage');
+    } finally {
+      this.isLoading = false;
+    }
   }
 
-  async deleteDay(id: any) {
+  async deleteDay(id: string) {
     if (!id) return;
+
     const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
       width: '250px',
       data: {
         heading: 'Ruhetage löschen',
-        titel: 'möchten sie wirklich den Ruhetage löschen ?',
+        titel: 'Möchten Sie wirklich den Ruhetag löschen?',
       },
     });
+
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result) {
-        await this.storeService.dispatch(deleteCloseDay({ closeDayId: id }));
-
-        location.reload();
+        try {
+          this.isLoading = true;
+          await this.storeService.dispatch(deleteCloseDay({ closeDayId: id }));
+          this.showSuccess('Ruhetag wurde erfolgreich gelöscht');
+          location.reload();
+        } catch (error) {
+          this.handleError('Fehler beim Löschen des Ruhetages');
+        } finally {
+          this.isLoading = false;
+        }
       }
     });
   }
 
   async createClosedDay() {
-    if (this.closedDayForm.valid) {
+    if (this.closedDayForm.invalid) {
+      this.handleError('Bitte wählen Sie ein gültiges Datum');
+      return;
+    }
+
+    try {
+      this.isLoading = true;
       const { date } = this.closedDayForm.value;
       await this.storeService.dispatch(
         createCloseDay({ date, barber_email: this.barber_email })
       );
+      this.showSuccess('Ruhetag wurde erfolgreich hinzugefügt');
+      location.reload();
+    } catch (error) {
+      this.handleError('Fehler beim Erstellen des Ruhetages');
+    } finally {
+      this.isLoading = false;
     }
-    location.reload();
+  }
+
+  private handleError(message: string) {
+    this.snackBar.open(message, 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-error'],
+    });
+  }
+
+  private showSuccess(message: string) {
+    this.snackBar.open(message, 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-success'],
+    });
   }
 }

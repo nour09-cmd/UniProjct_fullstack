@@ -1,32 +1,39 @@
-<div *ngIf="loading === true">
+<div *ngIf="loading === true" class="loading-container">
   <app-willkommen></app-willkommen>
 </div>
 
-<div *ngIf="loading === false">
+<div *ngIf="loading === false" class="page-wrapper">
   <app-navbar-desktop />
 
-  <div class="container mt-5">
-    <div class="d-flex justify-content-center mb-3">
-      <h1 class="text-center heading schrifftH1">
-        Hier sehen Sie alle Frisuren, die verfügbar sind!
+  <main class="container">
+    <header class="text-center">
+      <h1 class="heading schrifftH1">
+        Entdecken Sie die Kunst des Barbierhandwerks
       </h1>
-    </div>
+      <p class="lead">
+        Professionelle Haarschnitte und Bartpflege von erfahrenen Barbieren.
+        Finden Sie Ihren perfekten Look in einem unserer ausgewählten Salons.
+      </p>
+    </header>
 
-    <div class="row g-5">
-      <div
-        class="col-lg-4 col-md-6 col-sm-12"
-        *ngFor="let item of ladenDaten | keyvalue; let i = index"
-      >
-        <app-cards
-          [Name]="ladenDaten[i].Laden_name"
-          [description]="ladenDaten[i].Laden_description"
-          [id]="ladenDaten[i].barber_email"
-          [image]="ladenDaten[i].Laden_IMG[0]"
-          class="card-item"
-        ></app-cards>
+    <section class="salon-grid">
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-6 col-sm-12"
+          *ngFor="let item of ladenDaten | keyvalue; let i = index"
+          [style.--card-index]="i"
+        >
+          <app-cards
+            [Name]="ladenDaten[i].Laden_name"
+            [description]="ladenDaten[i].Laden_description"
+            [id]="ladenDaten[i].barber_email"
+            [image]="ladenDaten[i].Laden_IMG[0]"
+            class="card-item"
+          ></app-cards>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
+  </main>
 
-<app-footer></app-footer>
+  <app-footer></app-footer>
+</div>

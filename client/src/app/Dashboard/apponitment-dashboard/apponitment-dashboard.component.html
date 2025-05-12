@@ -1,46 +1,137 @@
 <div class="container p-4">
   <div class="row">
     <div class="col">
-      <p class="title-dacshboard">Termine</p>
+      <h2 class="title-dacshboard">Termine</h2>
     </div>
   </div>
+
+  <!-- Statistik-Karten -->
+  <div class="row stats-row">
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="bi bi-calendar-check"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ getTodayAppointments() }}</h3>
+          <p>Termine Heute</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <i class="bi bi-clock"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ getNextAppointment() }}</h3>
+          <p>Nächster Termin</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <i class="bi bi-people"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ getTotalCustomers() }}</h3>
+          <p>Einzigartige Kunden</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <i class="bi bi-currency-euro"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ calculateDailyRevenue() }}</h3>
+          <p>Umsatz (nicht verfügbar)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container-table">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <table class="table table-image">
-            <thead>
-              <tr>
-                <th scope="col">Fhoto</th>
-                <th scope="col">Name</th>
-                <th scope="col">Datum</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of appoData | keyvalue; let i = index">
-                <td class="w-25">
-                  <img
-                    [src]="appoData[i].user_IMG"
-                    class="img-fluid rounded-circle"
-                    alt="Sheep"
-                  />
-                </td>
-                <td>{{ appoData[i].name }}</td>
-                <td>
-                  {{ formatDate(appoData[i].date) + " : " + appoData[i].time }}
-                </td>
-                <td>{{ appoData[i].handynummer }}</td>
-                <td>
-                  <button
-                    class="btn btn-danger"
-                    (click)="deletAPPO(appoData[i]._id, appoData[i].email, i)"
+          <!-- Filter-Leiste -->
+          <div class="filter-bar mb-4">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nach Namen suchen..."
+                    [(ngModel)]="searchTerm"
+                    (input)="filterAppointments()"
                   >
-                    Stornieren
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="date-filter">
+                  <input
+                    type="date"
+                    class="form-control"
+                    [(ngModel)]="selectedDate"
+                    (change)="filterAppointments()"
+                  >
+                </div>
+              </div>
+              <div class="col-md-4 text-end">
+                <button class="btn btn-outline-primary" (click)="exportToExcel()">
+                  <i class="fas fa-file-excel me-2"></i>Export
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-image">
+              <thead>
+                <tr>
+                  <th scope="col">Foto</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Datum</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Aktionen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let appo of filteredAppoData; let i = index">
+                  <td class="w-25">
+                    <img
+                      [src]="appo.user_IMG"
+                      class="img-fluid rounded-circle"
+                      alt="User"
+                    />
+                  </td>
+                  <td>{{ appo.name }}</td>
+                  <td>
+                    {{ formatDate(appo.date) + " : " + appo.time }}
+                  </td>
+                  <td>{{ appo.handynummer }}</td>
+                  <td class="actions-cell">
+                    <button
+                      class="btn btn-danger me-2"
+                      (click)="deletAPPO(appo._id, appo.email, i, appo)"
+                    >
+                      <i class="fas fa-times me-1"></i>
+                      Stornieren
+                    </button>
+                    <button class="btn btn-success" (click)="markAsCompleted(i)">
+                      <i class="fas fa-check me-1"></i>
+                      Erledigt
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

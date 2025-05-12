@@ -1,11 +1,29 @@
-<div class="container p-4">
-  <div class="row">
-    <div class="col">
-      <p class="title-dacshboard">Preisliste</p>
+<div class="container-main">
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="loading-spinner">
+      <i class="bi bi-arrow-repeat spin"></i>
+      <span>Wird geladen...</span>
     </div>
   </div>
 
-  <div class="radio-btn d-flex justify-content-start mx-4">
+  <!-- Error Message -->
+  <div *ngIf="hasErrors" class="error-message">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <!-- Header -->
+  <div class="header-section">
+    <h1 class="title-dashboard">
+      <i class="bi bi-tag-fill"></i>
+      Preisliste verwalten
+    </h1>
+    <p class="subtitle">Verwalten Sie hier Ihre Dienstleistungen und Preise</p>
+  </div>
+
+  <!-- Mode Selector -->
+  <div class="mode-selector">
     <app-radio-button
       [options]="radioOptions"
       [selectedValue]="selectedFilter"
@@ -14,126 +32,199 @@
     </app-radio-button>
   </div>
 
-  <div
-    *ngIf="selectedFilter === 'showAll'"
-    class="formbox d-flex justify-content-center align-items-start my-4 py-3 px-3"
-  >
-    <div *ngFor="let category of items" class="category-box w-100 px-2 py-3">
-      <h3>{{ category.category }} :</h3>
-      <div
-        *ngFor="let item of category.sales"
-        class="formatPricenName w-100 px-2 border-bottom py-3 d-flex justify-content-between flex-nowrap"
-      >
-        • {{ item.name }} : <span class="price">{{ item.price }} € </span>
+  <!-- View Mode -->
+  <div *ngIf="selectedFilter === 'showAll'" class="view-mode">
+    <div class="view-header">
+      <h2>Aktuelle Preisliste</h2>
+      <p class="view-description">Übersicht aller Dienstleistungen nach Kategorien</p>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="items.length === 0" class="empty-state">
+      <i class="bi bi-clipboard-x"></i>
+      <p>Keine Dienstleistungen vorhanden</p>
+      <button class="btn-primary" (click)="selectedFilter = 'addList'">
+        <i class="bi bi-plus-lg"></i>
+        Dienstleistung hinzufügen
+      </button>
+    </div>
+
+    <!-- Categories Grid -->
+    <div *ngIf="items.length > 0" class="categories-grid">
+      <div *ngFor="let category of items" class="category-card">
+        <div class="category-header">
+          <i class="bi bi-folder2-open"></i>
+          <h3 class="category-title">{{ category.category }}</h3>
+          <span class="service-count">{{ category.sales.length }}</span>
+        </div>
+
+        <div class="services-list">
+          <div *ngFor="let service of category.sales" class="service-item">
+            <div class="service-info">
+              <span class="service-name">{{ service.name }}</span>
+              <span class="service-price">{{ service.price | number:'1.2-2' }} €</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div
-    *ngIf="selectedFilter === 'addList'"
-    class="d-flex justify-content-center align-items-start my-4 py-3 px-3"
-  >
-    <form [formGroup]="priceListForm" (ngSubmit)="addItem()" class="w-100">
-      <div class="mb-3 w-100">
-        <label for="category" class="form-label">Kategorie</label>
+  <!-- Edit Mode -->
+  <div *ngIf="selectedFilter === 'addList'" class="edit-mode">
+    <div class="edit-header">
+      <h2>Preise bearbeiten</h2>
+      <p class="edit-description">Fügen Sie neue Dienstleistungen hinzu oder bearbeiten Sie bestehende</p>
+    </div>
+
+    <form [formGroup]="priceListForm" (ngSubmit)="addItem()" class="price-form">
+      <!-- Category Selection -->
+      <div class="form-group">
+        <label class="form-label">
+          <i class="bi bi-bookmark"></i>
+          Kategorie auswählen
+        </label>
         <app-dropdown-btn
           [options]="CategoryOptions"
-          placeholder="Kategorie auswählen"
+          placeholder="Bitte wählen Sie eine Kategorie"
           controlName="category"
           [control]="priceListForm"
+          class="category-dropdown"
         >
         </app-dropdown-btn>
+        <div *ngIf="priceListForm.get('category')?.touched && priceListForm.get('category')?.invalid" class="error-hint">
+          Bitte wählen Sie eine Kategorie aus
+        </div>
       </div>
 
-      <div class="mb-3">
-        <label for="name" class="form-label">Artikelname</label>
+      <!-- Service Name -->
+      <div class="form-group">
+        <label class="form-label">
+          <i class="bi bi-pencil"></i>
+          Bezeichnung der Dienstleistung
+        </label>
         <input
-          id="name"
           type="text"
           class="form-control"
           formControlName="name"
-          placeholder="Artikelname eingeben"
+          placeholder="z.B. Herrenhaarschnitt"
           required
         />
-      </div>
-
-      <div class="mb-3">
-        <label for="price" class="form-label">Preis (€)</label>
-        <input
-          id="price"
-          type="number"
-          class="form-control"
-          formControlName="price"
-          placeholder="Preis eingeben"
-          step="0.01"
-          required
-        />
-      </div>
-
-      <div>
-        <div class="my-4">
-          <div
-            class="d-flex align-items-center justify-content-around border-bottom border-secondary rounded-bottom w-100"
-          >
-            <div
-              class="py-2 px-3 rounded-top border-secondary w-25 d-flex justify-content-center align-items-center border border-bottom-0"
-            >
-              <p class="m-0">Name</p>
-            </div>
-            <div
-              class="py-2 px-3 rounded-top border-secondary w-25 d-flex justify-content-center align-items-center border border-bottom-0"
-            >
-              <p class="m-0">Preis</p>
-            </div>
-
-            <button
-              type="submit"
-              class="my-2 btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center"
-            >
-              <span class="mb-0">+</span>
-            </button>
-          </div>
+        <div *ngIf="priceListForm.get('name')?.touched && priceListForm.get('name')?.invalid" class="error-hint">
+          <span *ngIf="priceListForm.get('name')?.errors?.['required']">
+            Bitte geben Sie einen Namen ein
+          </span>
+          <span *ngIf="priceListForm.get('name')?.errors?.['minlength']">
+            Der Name muss mindestens 2 Zeichen lang sein
+          </span>
+          <span *ngIf="priceListForm.get('name')?.errors?.['maxlength']">
+            Der Name darf maximal 50 Zeichen lang sein
+          </span>
         </div>
+      </div>
 
-        <ul class="list-unstyled mt-3">
-          <li
-            *ngFor="let category of items; let itemindex = index"
-            class="d-flex flex-column mb-4"
-          >
-            <h1 class="text-secondary">{{ category.category }} :</h1>
-            <ul>
-              <li
-                *ngFor="let item of category.sales; let i = index"
-                class="d-flex justify-content-around align-items-center border-bottom py-2 px-3 rounded-bottom w-100"
-              >
-                <div
-                  class="text-muted d-flex justify-content-center align-items-center w-25 py-2 px-5 category-list"
-                >
-                  {{ item.name }}
-                </div>
-                <div
-                  class="text-muted d-flex justify-content-center align-items-center w-50 category-list"
-                >
-                  {{ item.price }} €
-                </div>
+      <!-- Price Input -->
+      <div class="form-group">
+        <label class="form-label">
+          <i class="bi bi-currency-euro"></i>
+          Preis
+        </label>
+        <div class="price-input-group">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="price"
+            placeholder="0.00"
+            step="0.01"
+            min="0"
+            required
+          />
+          <span class="currency-symbol">€</span>
+        </div>
+        <div *ngIf="priceListForm.get('price')?.touched && priceListForm.get('price')?.invalid" class="error-hint">
+          <span *ngIf="priceListForm.get('price')?.errors?.['required']">
+            Bitte geben Sie einen Preis ein
+          </span>
+          <span *ngIf="priceListForm.get('price')?.errors?.['min']">
+            Der Preis muss größer als 0 sein
+          </span>
+          <span *ngIf="priceListForm.get('price')?.errors?.['pattern']">
+            Bitte geben Sie einen gültigen Preis ein (z.B. 19.99)
+          </span>
+        </div>
+      </div>
 
-                <button
-                  class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
-                  (click)="deleteItem(itemindex, item)"
-                >
-                  <span class="h5 mb-0">-</span>
-                </button>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      <!-- Add Button -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn-add"
+          [disabled]="priceListForm.invalid || isLoading"
+          title="Neue Dienstleistung hinzufügen"
+        >
+          <i class="bi bi-plus-lg"></i>
+          Hinzufügen
+        </button>
       </div>
     </form>
+
+    <!-- Current Items List -->
+    <div class="current-items">
+      <div class="list-header">
+        <h3>Aktuelle Einträge</h3>
+        <span class="total-count">Gesamt: {{ getTotalServicesCount() }}</span>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="items.length === 0" class="empty-state">
+        <i class="bi bi-clipboard"></i>
+        <p>Noch keine Dienstleistungen vorhanden</p>
+      </div>
+
+      <!-- Items Grid -->
+      <div class="items-grid">
+        <div *ngFor="let category of items; let categoryIndex = index" class="category-section">
+          <div class="category-header">
+            <div class="category-info">
+              <i class="bi bi-folder2"></i>
+              <h4>{{ category.category }}</h4>
+            </div>
+            <span class="item-count">{{ category.sales.length }} Einträge</span>
+          </div>
+
+          <div class="items-list">
+            <div
+              *ngFor="let service of category.sales"
+              class="item-row"
+            >
+              <div class="item-details">
+                <span class="item-name">{{ service.name }}</span>
+                <span class="item-price">{{ service.price | number:'1.2-2' }} €</span>
+              </div>
+              <button
+                class="btn-remove"
+                (click)="deleteItem(categoryIndex, service)"
+                title="Dienstleistung entfernen"
+                [disabled]="isLoading"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Changes Button -->
+    <div class="form-actions">
+      <button
+        class="btn-save"
+        (click)="onSubmit()"
+        [disabled]="isLoading"
+      >
+        <i class="bi bi-check2-circle"></i>
+        Änderungen speichern
+      </button>
+    </div>
   </div>
-  <input
-    type="button"
-    class="ourBtn gold w-100"
-    value="Speichern"
-    (click)="onSubmit()"
-  />
 </div>

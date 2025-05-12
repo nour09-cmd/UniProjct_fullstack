@@ -40,35 +40,292 @@
 
 /* Logout-Box Styling */
 #logout_box {
-  background-color: whitesmoke;
-  border-radius: 8px;
-  width: 180px;
-  height: 50px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 50px;
+  padding: 0.4rem 0.4rem 0.4rem 0.8rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  gap: 0.8rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(234, 200, 19, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-#logout_box > button {
-  width: 70%;
-  height: 100%;
-  border: none;
-  background-color: transparent;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+#logout_box:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(234, 200, 19, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-#logout_box > button:hover {
-  color: white;
-  background-color: #000000;
-}
-
-#logout_box > img {
-  width: 30%;
-  height: auto;
-  object-fit: cover;
+#logout_box img {
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
+  border: 2px solid rgba(234, 200, 19, 0.3);
+  object-fit: cover;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(234, 200, 19, 0.15);
+}
+
+#logout_box:hover img {
+  transform: scale(1.08) rotate(5deg);
+  border-color: rgba(234, 200, 19, 0.8);
+  box-shadow: 0 0 20px rgba(234, 200, 19, 0.3);
+}
+
+#logout_box button {
+  background: linear-gradient(135deg, rgba(234, 200, 19, 0.05), rgba(255, 215, 0, 0.05));
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(234, 200, 19, 0.3);
+  padding: 0.7rem 1.6rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+#logout_box button i {
+  font-size: 1.1rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#logout_box button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #eac813, #ffd700);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+#logout_box button:hover {
+  color: #000;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(234, 200, 19, 0.25);
+}
+
+#logout_box button:hover::before {
+  opacity: 1;
+}
+
+#logout_box button:hover i {
+  transform: translateX(3px);
+}
+
+#logout_box button span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  #logout_box {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    justify-content: space-between;
+  }
+
+  #logout_box button {
+    padding: 0.8rem 2rem;
+    width: auto;
+    justify-content: center;
+  }
+}
+
+.navbar {
+  background: rgba(26, 26, 26, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1rem 2rem !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(234, 200, 19, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar.scrolled {
+  padding: 0.7rem 2rem !important;
+  background: rgba(26, 26, 26, 0.98) !important;
+}
+
+.container {
+  max-width: 1400px;
+}
+
+.navbar-brand {
+  padding: 0;
+  margin-right: 3rem;
+  position: relative;
+}
+
+.navbar-brand::after {
+  content: '';
+  position: absolute;
+  right: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(to bottom, transparent, rgba(234, 200, 19, 0.3), transparent);
+}
+
+.navbar-brand img {
+  height: 45px;
+  width: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 8px rgba(234, 200, 19, 0.2));
+}
+
+.navbar-brand:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(234, 200, 19, 0.4));
+}
+
+/* Navbar Link Styling */
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem !important;
+  margin: 0 0.3rem;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+}
+
+.nav-link i {
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover i {
+  transform: translateY(-2px);
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(234, 200, 19, 0.1);
+  border-radius: 8px;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0.4rem;
+  left: 1.2rem;
+  width: calc(100% - 2.4rem);
+  height: 2px;
+  background: linear-gradient(90deg, #eac813, #ffd700);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-link:hover {
+  color: #eac813 !important;
+}
+
+.nav-link.active {
+  color: #eac813 !important;
+  font-weight: 600;
+  background: rgba(234, 200, 19, 0.1);
+  border-radius: 8px;
+}
+
+/* Login Button Styling */
+.btn-light {
+  background: linear-gradient(45deg, #eac813, #ffd700);
+  border: none;
+  color: #000;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ffd700, #eac813);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.btn-light:hover::before {
+  opacity: 1;
+}
+
+.btn-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(234, 200, 19, 0.3);
+  color: #000;
+}
+
+/* Animation für Mobile Menu Toggle */
+.navbar-toggler {
+  border: none;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 8px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar-toggler i {
+  color: #eac813;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:hover {
+  background: rgba(234, 200, 19, 0.1);
+}
+
+.navbar-toggler:hover i {
+  transform: scale(1.1);
 }

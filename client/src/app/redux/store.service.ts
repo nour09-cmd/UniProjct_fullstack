@@ -13,8 +13,8 @@ export class StoreService {
   dispatch(action: any) {
     store.dispatch(action);
   }
-  subcribe(listener: any) {
-    store.subscribe(listener);
+  subscribe(listener: any) {
+    return store.subscribe(listener);
   }
-  
+
 }

@@ -4,9 +4,7 @@
 * {
   font-family: "Montserrat", Arial, Helvetica, sans-serif !important;
 }
-.sidebarsInBarber {
-    background: #252525 !important;
-}
+
 .formbox {
   border-radius: 27px;
   background: var(--Schemes-On-Primary, #fff);
@@ -104,15 +102,15 @@ body {
 .custom-snackbar-werning {
   --mdc-snackbar-container-color: Orange !important; /* Hintergrundfarbe */
   --mdc-snackbar-supporting-text-color: white !important; /* Textfarbe */
-  --mat-mdc-snack-bar-button-color: white; 
+  --mat-mdc-snack-bar-button-color: white;
 }
 .custom-snackbar-error {
   --mdc-snackbar-container-color: red !important; /* Hintergrundfarbe */
   --mdc-snackbar-supporting-text-color: white !important; /* Textfarbe */
-  --mat-mdc-snack-bar-button-color: white !important; 
+  --mat-mdc-snack-bar-button-color: white !important;
 }
 .custom-snackbar-sucssec {
   --mdc-snackbar-container-color: #4caf50  !important; /* Hintergrundfarbe */
   --mdc-snackbar-supporting-text-color: white !important; /* Textfarbe */
-  --mat-mdc-snack-bar-button-color: white !important; 
+  --mat-mdc-snack-bar-button-color: white !important;
 }

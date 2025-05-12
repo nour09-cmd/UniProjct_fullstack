@@ -1,108 +1,82 @@
-<div
-  class="align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 navbar-dark"
->
-  <div class="d-flex align-items-center pt-4 px-3">
-    <a
-      routerLink="/"
-      routerLinkActive="active"
-      class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-    >
-      <span class="fs-6 d-none d-sm-inline name-title-style"
-        >BARBIER FINDER</span
-      >
-    </a>
-    <a routerLink="/" routerLinkActive="active">
-      <img class="logo ms-2" src="..\assets\logo.svg" alt="Logo" />
-    </a>
-  </div>
-  <div class="container w-100 py-3">
-    <div
-      class="d-flex flex-column justify-content-center align-items-center logo-cont"
-    >
-      <img
-        id="selectedAvatar"
-        [src]="_userData.image"
-        class="rounded-circle"
-        style="width: 75px; height: 75px; object-fit: cover"
-        alt="Beispiel Platzhalter"
-      />
-      <p class="d-flex align-items-center fs-6 d-none d-sm-inline py-3">
-        {{ _userData.vorname + " " + _userData.nachname }}
-      </p>
+<div class="dashboard-container">
+  <!-- Mobile Navigation Toggle -->
+  <button class="mobile-nav-toggle" (click)="toggleSidebar()">
+    <i class="bi" [class.bi-list]="!isSidebarOpen" [class.bi-x-lg]="isSidebarOpen"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <div class="sidebar" [class.active]="isSidebarOpen">
+    <!-- Logo and Title -->
+    <div class="logo-section">
+      <a routerLink="/" class="d-flex align-items-center text-decoration-none">
+        <span class="name-title-style me-3">BARBIER FINDER</span>
+        <img class="logo" src="../assets/logo.svg" alt="Logo" />
+      </a>
     </div>
+
+    <!-- User Profile -->
+    <div class="user-profile">
+      <img
+        [src]="_userData.image"
+        class="user-avatar"
+        [alt]="_userData.vorname"
+        onerror="this.src='../assets/default-avatar.png'"
+      />
+      <div class="user-name">
+        {{ _userData.vorname + " " + _userData.nachname }}
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a routerLink="/appointment" routerLinkActive="active" class="nav-link" (click)="closeSidebarOnMobile()">
+            <i class="bi bi-calendar-event"></i>
+            <span>Termine</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/working-days" routerLinkActive="active" class="nav-link" (click)="closeSidebarOnMobile()">
+            <i class="bi bi-clock-history"></i>
+            <span>Arbeitstage</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/closed-days" routerLinkActive="active" class="nav-link" (click)="closeSidebarOnMobile()">
+            <i class="bi bi-cup-hot-fill"></i>
+            <span>Ruhetage</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/laden-profile" routerLinkActive="active" class="nav-link" (click)="closeSidebarOnMobile()">
+            <i class="bi bi-house-gear"></i>
+            <span>Geschäftsprofil</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/price-list" routerLinkActive="active" class="nav-link" (click)="closeSidebarOnMobile()">
+            <i class="bi bi-cash-coin"></i>
+            <span>Preisliste</span>
+          </a>
+        </li>
+
+        <!-- Logout Button -->
+        <li class="nav-item logout-item">
+          <a (click)="logOut()" class="nav-link logout-button">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Abmelden</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <div class="container d-flex justify-content-center">
-    <ul
-      class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-      id="menu"
-    >
-      <li class="nav-item">
-        <a
-          routerLink="/appointment"
-          routerLinkActive="active"
-          class="nav-link align-middle px-2 py-1"
-        >
-          <i class="fs-4 bi-calendar-event px-1"></i>
-          <span class="ms-1 d-none d-sm-inline">Termine</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/working-days"
-          routerLinkActive="active"
-          data-bs-toggle="collapse"
-          class="nav-link align-middle px-2 py-1"
-        >
-          <i class="fs-4 bi-clock-history px-1"></i>
-          <span class="ms-1 d-none d-sm-inline">Arbeitstage</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/closed-days"
-          routerLinkActive="active"
-          class="nav-link align-middle px-2 py-1"
-        >
-          <i class="fs-4 bi-cup-hot-fill px-1"></i>
-          <span class="ms-1 d-none d-sm-inline">Ruhetage</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/laden-profile"
-          routerLinkActive="active"
-          data-bs-toggle="collapse"
-          class="nav-link align-middle px-2 py-1"
-        >
-          <i class="fs-4 bi-house-gear px-1"></i>
-          <span class="ms-1 d-none d-sm-inline">Geschäftsprofil</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/price-list"
-          routerLinkActive="active"
-          data-bs-toggle="collapse"
-          class="nav-link align-middle px-2 py-1"
-        >
-          <i class="fs-4 bi-cash-coin px-1"></i>
-          <span class="ms-1 d-none d-sm-inline">Preisliste</span>
-        </a>
-      </li>
-      <li>
-        <a
-          (click)="logOut()"
-          data-bs-toggle="collapse"
-          class="nav-link align-middle px-2 py-1"
-        >
-          <i class="fs-4 bi-box-arrow-left px-1"></i>
-          <span class="ms-1 d-none d-sm-inline">Abmelden</span>
-        </a>
-      </li>
-    </ul>
-    <hr />
-  </div>
-</div>
-<div class="col-lg-10 col-md-9 py-3">
-  <router-outlet></router-outlet>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay" [class.active]="isSidebarOpen" (click)="closeSidebarOnMobile()"></div>
 </div>

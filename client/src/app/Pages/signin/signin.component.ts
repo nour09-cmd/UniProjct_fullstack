@@ -52,7 +52,7 @@ export class SigninComponent implements OnInit {
     });
   }
   async checkLogin() {
-    await this.storeService.subcribe(() => {
+    await this.storeService.subscribe(() => {
       const state = this.storeService.getState().user;
       if (state.userData?.email) {
         this.loadingData = false;
@@ -66,41 +66,34 @@ export class SigninComponent implements OnInit {
   }
   hide = true;
   async onSubmit() {
-    if (this.loginForm.valid) {
-      try {
-        const userData = this.loginForm.value;
-        await this.storeService.dispatch(logIn(userData));
-        this.storeService.subcribe(() => {
-          const state = this.storeService.getState().user;
-          console.log(state.errors);
-          this.singUpErorr = state.errors || [];
-          if (state.errors.token) {
-            this.snackBar.open(`login sucssuc`, 'X', {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'top',
-              panelClass: ['custom-snackbar-sucssec'],
-            });
-
-            setTimeout(() => {
-              this._router.navigate(['/']);
-            }, 2500);
-            return;
-          }
-          if (this.singUpErorr.message) {
-            this.snackBar.open(`'Etwas ${state.errors.message}`, 'X', {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'top',
-              panelClass: ['custom-snackbar-error'],
-            });
-            console.error('Signup Errors:', this.singUpErorr);
-          }
-        });
-      } catch (error) {
-        console.error('Login failed:', error);
-        alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.');
-      }
+    if (this.loginForm.invalid) {
+      this.handleError('Bitte füllen Sie alle Felder aus.');
+      return;
     }
+
+    try {
+      await this.storeService.dispatch(logIn(this.loginForm.value));
+      this.storeService.subscribe(() => {
+        const state = this.storeService.getState().user;
+        if (state.errors) {
+          this.handleError(state.errors);
+        } else if (state.userData?.role === 'barber') {
+          this._router.navigate(['/dashboard/appointment']);
+        } else {
+          this._router.navigate(['/']);
+        }
+      });
+    } catch (error) {
+      this.handleError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+    }
+  }
+
+  private handleError(message: string) {
+    this.snackBar.open(message, 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-error'],
+    });
   }
 }

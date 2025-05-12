@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
         this.storeService.dispatch(getOneLaden({ email: this.email }));
       }
     });
-    this.storeService.subcribe(() => {
+    this.storeService.subscribe(() => {
       const state = this.storeService.getState().laden;
       this.ladenDaten = state.getOneLaden;
       this.loading = false;

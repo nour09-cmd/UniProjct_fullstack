@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    this.storeService.subcribe(() => {
+    this.storeService.subscribe(() => {
       const state = this.storeService.getState().laden;
       this.ladenDaten = state.LadensDaten;
       this.loading = state.loading;

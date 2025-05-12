@@ -50,3 +50,178 @@
     font-size: 1rem;
   }
 }
+
+.price-list-container {
+  padding: 2rem;
+  background: linear-gradient(145deg, #343a40 0%, #212529 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.price-list-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.price-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #eac813;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.price-subtitle {
+  color: #adb5bd;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.category-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(234, 200, 19, 0.1);
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(234, 200, 19, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(234, 200, 19, 0.2);
+}
+
+.category-header i {
+  font-size: 1.5rem;
+  color: #eac813;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #eac813;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-item {
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.service-item:hover {
+  transform: translateX(10px);
+}
+
+.service-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.service-name {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.service-price {
+  color: #eac813;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.3rem 1rem;
+  background: rgba(234, 200, 19, 0.1);
+  border-radius: 20px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.service-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(234, 200, 19, 0.2),
+    transparent
+  );
+  margin: 0.5rem 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .price-list-container {
+    padding: 1.5rem;
+  }
+
+  .price-title {
+    font-size: 2rem;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .category-title {
+    font-size: 1.3rem;
+  }
+
+  .service-name {
+    font-size: 1rem;
+  }
+
+  .service-price {
+    font-size: 1.1rem;
+    padding: 0.25rem 0.75rem;
+  }
+}

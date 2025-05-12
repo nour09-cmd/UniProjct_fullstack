@@ -49,6 +49,9 @@ export class SeiBarberPageComponent {
   addressForm: FormGroup;
   uploadedFiles: File[] = [];
   singUpErorr: any = [];
+  selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
+
   constructor(
     private fb: FormBuilder,
     private storeService: StoreService,
@@ -68,26 +71,25 @@ export class SeiBarberPageComponent {
       ),
     });
   }
+
   get uploadedFilesArray(): FormArray {
     return this.addressForm.get('uploadedFiles') as FormArray;
   }
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
 
-      if (!file.type.startsWith('image/')) {
-        console.error('Bitte nur Bilddateien auswählen!');
-        return;
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.type.match(/image\/*/) && file.size <= 5 * 1024 * 1024) {
+        this.selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagePreview = reader.result as string;
+        };
+        reader.readAsDataURL(file);
+        this.showSuccess('Bild erfolgreich ausgewählt');
+      } else {
+        this.handleError('Bitte wählen Sie ein gültiges Bild (max. 5MB) aus');
       }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64String = reader.result;
-        this.uploadedFilesArray.push(this.fb.control(base64String));
-      };
-      reader.readAsDataURL(file);
-      console.log('Ausgewählte Datei:', file.name);
     }
   }
 
@@ -101,54 +103,70 @@ export class SeiBarberPageComponent {
 
   async onSubmit() {
     if (this.addressForm.invalid) {
-      this.snackBar.open(`'füllen sie bitte alle felder ein`, 'X', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['custom-snackbar-error'],
-      });
+      this.handleError('Bitte füllen Sie alle Pflichtfelder aus');
       return;
     }
-    const data = {
-      Laden_name: this.addressForm.value.Laden_name || '',
-      Laden_description: this.addressForm.value.Laden_description || '',
-      Laden_IMG: this.addressForm.value.uploadedFiles || [],
-      Laden_adress: {
-        strasse:
-          this.addressForm.value.street +
-            ' ' +
-            this.addressForm.value.houseNumber || '',
-        ort: this.addressForm.value.city || '',
-        plz: this.addressForm.value.postalCode || '',
-      },
-    };
-    await this.storeService.dispatch(createLaden(data));
-    this.storeService.subcribe(() => {
-      const state = this.storeService.getState().laden;
-      console.log(state.errors);
-      this.singUpErorr = state.errors || [];
-      if (state.errors.message == 'Created') {
-        this.snackBar.open(`Created sucssuc`, 'X', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['custom-snackbar-sucssec'],
-        });
-        this.addressForm.reset();
-        setTimeout(() => {
-          this._router.navigate(['/']);
-        }, 2500);
-        return;
+
+    try {
+      const data = {
+        Laden_name: this.addressForm.value.Laden_name || '',
+        Laden_description: this.addressForm.value.Laden_description || '',
+        Laden_IMG: this.addressForm.value.uploadedFiles || [],
+        Laden_adress: {
+          strasse:
+            this.addressForm.value.street +
+              ' ' +
+              this.addressForm.value.houseNumber || '',
+          ort: this.addressForm.value.city || '',
+          plz: this.addressForm.value.postalCode || '',
+        },
+      };
+
+      const formData = new FormData();
+      formData.append('Laden_name', data.Laden_name);
+      formData.append('Laden_description', data.Laden_description);
+      formData.append('Laden_IMG', JSON.stringify(data.Laden_IMG));
+      formData.append('Laden_adress', JSON.stringify(data.Laden_adress));
+
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
       }
-      if (this.singUpErorr.message) {
-        this.snackBar.open(`'Etwas ${state.errors.message}`, 'X', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['custom-snackbar-error'],
-        });
-        console.error('Signup Errors:', this.singUpErorr);
-      }
+
+      await this.storeService.dispatch(createLaden(data));
+      this.storeService.subscribe(() => {
+        const state = this.storeService.getState().laden;
+        console.log(state.errors);
+        this.singUpErorr = state.errors || [];
+        if (state.errors.message == 'Created') {
+          this.showSuccess('Created sucssuc');
+          this.addressForm.reset();
+          setTimeout(() => {
+            this._router.navigate(['/']);
+          }, 2500);
+        } else if (this.singUpErorr.message) {
+          this.handleError(this.singUpErorr.message);
+        }
+      });
+    } catch (error) {
+      this.handleError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+    }
+  }
+
+  private handleError(message: string) {
+    this.snackBar.open(message, 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-error'],
+    });
+  }
+
+  private showSuccess(message: string) {
+    this.snackBar.open(message, 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-success'],
     });
   }
 }

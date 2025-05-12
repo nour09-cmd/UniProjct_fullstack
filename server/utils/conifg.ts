@@ -1,12 +1,12 @@
 import { Response } from "express";
 
 export const PORT = 4545;
-// export const DB_URIMONGODB = "mongodb://localhost:27017/";
-export const DB_URIMONGODB = "mongodb://mongodbNonosql:27017/test";
+export const DB_URIMONGODB = "mongodb://localhost:27017/";
+// export const DB_URIMONGODB = "mongodb://mongodbNonosql:27017/test";
 
-// export const DB_URIPOSTGRESQL = "postgresql://admin:test@localhost:5432/barber";
-export const DB_URIPOSTGRESQL =
-  "postgresql://admin:test@postgresSQLdb:5432/barber";
+export const DB_URIPOSTGRESQL = "postgresql://admin:test@localhost:5432/barber";
+// export const DB_URIPOSTGRESQL =
+//   "postgresql://admin:test@postgresSQLdb:5432/barber";
 
 export const SECRET_KEY = "tRuBEf1A0l8Heth3qAgO";
 export const EMAIL = "gmn09000@gmail.com";

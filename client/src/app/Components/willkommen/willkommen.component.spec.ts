@@ -10,8 +10,8 @@ describe('WillkommenComponent', () => {
   beforeEach(async () => {
     // Mock des StoreService
     mockStoreService = {
-      subcribe: jasmine
-        .createSpy('subcribe')
+      subscribe: jasmine
+        .createSpy('subscribe')
         .and.callFake((callback: Function) => {
           callback(); // Simuliere einen Aufruf der Callback-Funktion
         }),

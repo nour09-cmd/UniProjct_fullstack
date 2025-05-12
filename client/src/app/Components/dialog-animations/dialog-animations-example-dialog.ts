@@ -17,6 +17,7 @@ import { Inject } from '@angular/core';
 @Component({
   selector: 'dialog-animations-example-dialog',
   templateUrl: 'dialog-animations-example-dialog.html',
+  styleUrls: ['dialog-animations-example-dialog.css'],
   standalone: true,
   imports: [
     MatButtonModule,
@@ -30,7 +31,11 @@ import { Inject } from '@angular/core';
 export class DialogAnimationsExampleDialog {
   constructor(
     public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { heading: string; titel: string }
+    @Inject(MAT_DIALOG_DATA) public data: {
+      heading: string;
+      titel: string;
+      content?: string;
+    }
   ) {}
 
   closeDialog(confirmation: boolean): void {

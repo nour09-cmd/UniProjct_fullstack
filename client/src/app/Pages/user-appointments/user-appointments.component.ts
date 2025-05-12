@@ -41,6 +41,7 @@ export class UserAppointmentsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   appoData: any[] = [];
+  barber_email: string = '';
   loading: boolean = true;
   counter: boolean = false;
 
@@ -52,8 +53,8 @@ export class UserAppointmentsComponent implements OnInit {
     await this.getAppos();
   }
   async getAppos() {
-    await this.storeService.subcribe(async () => {
-      const stateUser = this.storeService.getState().appo;
+    await this.storeService.subscribe(async () => {
+      const stateUser = await this.storeService.getState().appo;
       this.appoData = stateUser.appos;
     });
     this.storeService.dispatch(getApposUser());

@@ -121,13 +121,8 @@ export class SignupComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.stepTwoForm.invalid) {
-      this.snackBar.open('Bitte füllen Sie alle Felder aus.', 'X', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['custom-snackbar-werning'],
-      });
+    if (this.stepOneForm.invalid || this.stepTwoForm.invalid) {
+      this.showValidationErrors();
       return;
     }
 
@@ -138,11 +133,16 @@ export class SignupComponent implements OnInit {
 
     try {
       await this.storeService.dispatch(singUp(formData));
-
-      const state = this.storeService.getState().user;
-      this.singUpErorr = state.singUpError || [];
+      this.storeService.subscribe(() => {
+        const state = this.storeService.getState().user;
+        if (state.errors) {
+          this.handleError(state.errors);
+        } else {
+          this.router.navigate(['/login']);
+        }
+      });
     } catch (error) {
-      console.error('Fehler bei der Registrierung:', error);
+      this.handleError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
     }
   }
 
@@ -189,7 +189,7 @@ export class SignupComponent implements OnInit {
 
     try {
       await this.storeService.dispatch(singUp(data));
-      this.storeService.subcribe(() => {
+      this.storeService.subscribe(() => {
         const state = this.storeService.getState().user;
         console.log(state.errors);
         this.singUpErorr = state.errors || [];
@@ -246,5 +246,23 @@ export class SignupComponent implements OnInit {
       return { tooYoung: true };
     }
     return null;
+  }
+
+  private showValidationErrors() {
+    this.snackBar.open('Bitte füllen Sie alle Felder aus.', 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-werning'],
+    });
+  }
+
+  private handleError(errorMessage: string) {
+    this.snackBar.open(errorMessage, 'X', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar-error'],
+    });
   }
 }

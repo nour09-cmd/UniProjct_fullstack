@@ -1,7 +1,9 @@
-<nav
-  class="navbar navbar-expand-lg navbar-dark bg-dark p-4 d-none d-lg-flex justify-content-between"
->
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <img src="assets/logo.svg" alt="Barbershop Logo" />
+    </a>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -9,71 +11,75 @@
       data-bs-target="#navbarToggler"
       aria-controls="navbarToggler"
       aria-expanded="false"
-      aria-label="Toggle navigation"
+      aria-label="Navigation ein-/ausblenden"
     >
       <i class="fas fa-bars"></i>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarToggler">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item">
-          <a
-            class="navbar-brand ms-auto"
-            routerLink="/"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <img src="assets/logo.svg" alt="Logo" />
-          </a>
-        </li>
+      <ul class="navbar-nav me-auto mb-0">
         <li class="nav-item">
           <a
             class="nav-link"
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Home</a
+            aria-label="Zur Startseite"
           >
+            <i class="fas fa-home me-1"></i>
+            Home
+          </a>
         </li>
         <li class="nav-item" *ngIf="isUser">
           <a
             class="nav-link"
             routerLink="/appointmentUser"
             routerLinkActive="active"
-            >Termine</a
+            aria-label="Zu meinen Terminen"
           >
+            <i class="far fa-calendar-alt me-1"></i>
+            Termine
+          </a>
         </li>
         <li class="nav-item" *ngIf="isBarber">
           <a
             class="nav-link"
             routerLink="/appointment"
             routerLinkActive="active"
-            >Dashboard</a
+            aria-label="Zum Dashboard"
           >
+            <i class="fas fa-chart-line me-1"></i>
+            Dashboard
+          </a>
         </li>
       </ul>
 
-      <ng-container *ngIf="!islogedin; else loggedInTemplate">
-        <a href="/login" class="btn btn-light fw-bold mx-3"> Log in </a>
-      </ng-container>
-      <ng-template #loggedInTemplate>
-        <div id="logout_box" class="d-flex align-items-center">
-          <img
-            [src]="userData?.image || 'assets/default-user.png'"
-            alt="User Image"
-            width="50"
-            height="50"
-            class="rounded-circle me-2"
-          />
-          <button
-            type="button"
-            class="btn btn-light fw-bold"
-            (click)="logOut()"
-          >
-            Log out
-          </button>
-        </div>
-      </ng-template>
+      <div class="nav-right">
+        <ng-container *ngIf="!islogedin; else loggedInTemplate">
+          <a href="/login" class="btn btn-light" aria-label="Einloggen">
+            <i class="fas fa-sign-in-alt me-1"></i>
+            Log in
+          </a>
+        </ng-container>
+
+        <ng-template #loggedInTemplate>
+          <div id="logout_box">
+            <img
+              [src]="userData?.image || 'assets/default-user.png'"
+              [alt]="'Profilbild von ' + (userData?.name || 'Benutzer')"
+              loading="lazy"
+            />
+            <button
+              type="button"
+              (click)="logOut()"
+              aria-label="Ausloggen"
+            >
+              <span>Log out</span>
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
 </nav>

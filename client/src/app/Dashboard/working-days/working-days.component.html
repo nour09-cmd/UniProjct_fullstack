@@ -1,30 +1,54 @@
-<div class="container p-4">
-  <div class="row">
-    <div class="col">
-      <p class="title-dacshboard">Wochentage</p>
+<div class="page-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row mb-4">
+      <div class="col">
+        <h1 class="title-dacshboard">
+          <span class="icon-container">
+            <i class="bi bi-calendar-week"></i>
+          </span>
+          Öffnungszeiten
+        </h1>
+        <p class="subtitle">Verwalten Sie hier Ihre Arbeitszeiten und Termineinstellungen</p>
+      </div>
     </div>
-  </div>
-  <div class="container-table">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
-            <table class="table table-image">
+
+    <!-- Main Content Card -->
+    <div class="container-table">
+      <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+        <div class="table-container">
+          <div class="table-responsive">
+            <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Tag</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Arbeitsbeginn</th>
-                  <th scope="col">Arbeitsende</th>
-                  <th scope="col">Dauer der Termine (min)</th>
+                  <th>
+                    <i class="bi bi-calendar-day me-2"></i>
+                    Wochentag
+                  </th>
+                  <th>
+                    <i class="bi bi-toggle-on me-2"></i>
+                    Status
+                  </th>
+                  <th>
+                    <i class="bi bi-clock me-2"></i>
+                    Von
+                  </th>
+                  <th>
+                    <i class="bi bi-clock-history me-2"></i>
+                    Bis
+                  </th>
+                  <th>
+                    <i class="bi bi-stopwatch me-2"></i>
+                    Termindauer
+                  </th>
                 </tr>
               </thead>
               <tbody formArrayName="weekSchedule">
-                <tr
-                  *ngFor="let control of weekSchedule.controls; let i = index"
-                  [formGroupName]="i"
-                >
-                  <td>{{ control.value.day }}</td>
+                <tr *ngFor="let control of weekSchedule.controls; let i = index"
+                    [formGroupName]="i">
+                  <td>
+                    <span class="day-name">{{ control.value.day }}</span>
+                  </td>
                   <td>
                     <app-dropdown-btn
                       [options]="statusOptions"
@@ -34,39 +58,52 @@
                     ></app-dropdown-btn>
                   </td>
                   <td>
-                    <input
-                      type="time"
-                      class="form-control"
-                      formControlName="available_time_from"
-                      placeholder="Arbeitsbeginn"
-                    />
+                    <div class="input-group">
+                      <input
+                        type="time"
+                        class="form-control"
+                        formControlName="available_time_from"
+                        [class.is-invalid]="control.get('available_time_from')?.invalid && control.get('available_time_from')?.touched"
+                      />
+                    </div>
                   </td>
                   <td>
-                    <input
-                      type="time"
-                      class="form-control"
-                      formControlName="available_time_to"
-                      placeholder="Arbeitsende"
-                    />
+                    <div class="input-group">
+                      <input
+                        type="time"
+                        class="form-control"
+                        formControlName="available_time_to"
+                        [class.is-invalid]="control.get('available_time_to')?.invalid && control.get('available_time_to')?.touched"
+                      />
+                    </div>
                   </td>
                   <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      formControlName="appointment_duration"
-                      placeholder="Dauer in Minuten"
-                      min="0"
-                    />
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        class="form-control"
+                        formControlName="appointment_duration"
+                        min="15"
+                        max="240"
+                        step="5"
+                      />
+                      <span class="input-group-text">Min.</span>
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <button type="submit" class="btn btn-primary mt-3">
-              Speichern
-            </button>
-          </form>
+          </div>
         </div>
-      </div>
+
+        <!-- Submit Button -->
+        <div class="submit-btn">
+          <button type="submit">
+            <i class="bi bi-save"></i>
+            Änderungen speichern
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

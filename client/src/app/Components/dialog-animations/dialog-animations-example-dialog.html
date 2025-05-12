@@ -1,6 +1,20 @@
-<h2 mat-dialog-title>{{ data.heading }}</h2>
-<mat-dialog-content> {{ data.titel }} </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="closeDialog(false)">No</button>
-  <button mat-button (click)="closeDialog(true)" cdkFocusInitial>Yes</button>
-</mat-dialog-actions>
+<div class="dialog-container">
+  <h2 mat-dialog-title class="dialog-title">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    {{ data.heading }}
+  </h2>
+  <mat-dialog-content>
+    <p class="dialog-message">{{ data.titel }}</p>
+    <pre class="appointment-details" *ngIf="data.content">{{ data.content }}</pre>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button class="cancel-btn" (click)="closeDialog(false)">
+      <i class="bi bi-x-circle me-2"></i>
+      Abbrechen
+    </button>
+    <button mat-button class="confirm-btn" (click)="closeDialog(true)" cdkFocusInitial>
+      <i class="bi bi-check-circle me-2"></i>
+      Bestätigen
+    </button>
+  </mat-dialog-actions>
+</div>

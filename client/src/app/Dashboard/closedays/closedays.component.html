@@ -1,10 +1,14 @@
-<div class="container p-4">
+<div class="container">
   <div class="row">
     <div class="col">
-      <p class="title-dacshboard">Geschlossene Tage</p>
+      <h1 class="title-dacshboard">
+        <i class="bi bi-calendar-x-fill"></i>
+        Geschlossene Tage
+      </h1>
     </div>
   </div>
-  <div class="radio-btn d-flex justify-content-start">
+
+  <div class="radio-btn">
     <app-radio-button
       [options]="radioOptions"
       [selectedValue]="selectedFilter"
@@ -12,75 +16,94 @@
     ></app-radio-button>
   </div>
 
-  <div *ngIf="selectedFilter === 'deleteDay'">
+  <div *ngIf="selectedFilter === 'deleteDay'" class="fade-in">
     <div class="alert alert-warning">
-      <strong>Hinweis:</strong> Hier können Sie ein Datum löschen, an dem der
-      Laden zuvor als geschlossen markiert wurde. An diesem Tag konnten
-      ursprünglich keine Termine gebucht werden, aber Sie haben jetzt die
-      Möglichkeit, diese Sperrung zu entfernen.
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      <div>
+        <strong>Hinweis:</strong> Hier können Sie ein Datum löschen, an dem der
+        Laden zuvor als geschlossen markiert wurde. An diesem Tag konnten
+        ursprünglich keine Termine gebucht werden, aber Sie haben jetzt die
+        Möglichkeit, diese Sperrung zu entfernen.
+      </div>
     </div>
 
     <div class="container-table">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="table-responsive">
-              <table
-                class="table table-bordered table-striped table-hover shadow-sm rounded"
-              >
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col" class="text-start">Tag</th>
-                    <th scope="col" class="text-center">Löschen</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let day of closedDays | keyvalue; let i = index">
-                    <td class="text-start">{{ closedDays[i].date }}</td>
-                    <td class="text-center">
-                      <button
-                        class="btn btn-danger btn-sm"
-                        (click)="deleteDay(closedDays[i]._id)"
-                      >
-                        Stornieren
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="text-start">
+                <i class="bi bi-calendar-date me-2"></i>Tag
+              </th>
+              <th scope="col" class="text-center">
+                <i class="bi bi-trash me-2"></i>Aktion
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let day of closedDays | keyvalue; let i = index">
+              <td class="text-start">
+                <i class="bi bi-calendar-x me-2 text-danger"></i>
+                {{ closedDays[i].date }}
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteDay(closedDays[i]._id)"
+                >
+                  <i class="bi bi-x-lg me-2"></i>
+                  Stornieren
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="closedDays.length === 0">
+              <td colspan="2" class="text-center text-muted">
+                <i class="bi bi-info-circle me-2"></i>
+                Keine geschlossenen Tage gefunden
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <div *ngIf="selectedFilter === 'addDay'">
-    <div>
-      <div class="alert alert-info">
+  <div *ngIf="selectedFilter === 'addDay'" class="fade-in">
+    <div class="alert alert-info">
+      <i class="bi bi-info-circle-fill"></i>
+      <div>
         <strong>Hinweis:</strong> Hier können Sie ein Datum hinzufügen, an dem
         der Laden geschlossen ist. An diesem Tag können keine Termine gebucht
         werden.
       </div>
-      <form [formGroup]="closedDayForm" (ngSubmit)="createClosedDay()">
-        <div class="mb-3 d-flex justify-content-center w-50">
+    </div>
+
+    <form [formGroup]="closedDayForm" (ngSubmit)="createClosedDay()" class="add-day-form">
+      <div class="mb-3">
+        <div class="form-content">
           <label for="closedDate" class="form-label">
+            <i class="bi bi-calendar-plus me-2"></i>
             Wählen Sie einen Tag aus, an dem der Laden geschlossen ist:
           </label>
-          <input
-            type="date"
-            id="closedDate"
-            class="form-control w-25 mx-3"
-            name="closedDay"
-            formControlName="date"
-            [min]="minDate"
-            required
-          />
+          <div class="input-group">
+            <input
+              type="date"
+              id="closedDate"
+              class="form-control"
+              name="closedDay"
+              formControlName="date"
+              [min]="minDate"
+              required
+            />
+          </div>
         </div>
-        <div class="w-50">
-          <Unsere-Buton classes="black w-25" label="absenden"></Unsere-Buton>
+        <div class="mt-4">
+          <Unsere-Buton
+            classes="black"
+            label="Tag als geschlossen markieren">
+          </Unsere-Buton>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
